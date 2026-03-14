@@ -16,7 +16,7 @@ const Navbar = () => {
   }
 
   return (
-    <div className="w-full fixed bg-white shadow-xl">
+    <div className="w-full fixed bg-white shadow-xl z-50">
       <div className="max-w-[1800px] m-auto px-6 md:px-12 py-4 text-textcolor flex justify-between items-center relative">
         <div className="flex gap-5 lg:gap-20 items-center">
           <h1 className="text-2xl lg:text-3xl font-bold">JOB PORTAL</h1>
