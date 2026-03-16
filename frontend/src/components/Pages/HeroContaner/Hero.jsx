@@ -1,5 +1,10 @@
 // import Image from "../../images/image.webp";
 import Button from "../../Components/buttons/ButtonComponents";
+import BarContainer from "../HeroContaner/BarContainer"
+import Services from "../HeroContaner/Services"
+import CrauselContainer from "../HeroContaner/CrauselContainer"
+import ContactContainer from "../HeroContaner/ContactContainer"
+import FooterContainer from "../HeroContaner/FooterContainer"
 
 const Hero = () => {
   return (
@@ -26,6 +31,11 @@ const Hero = () => {
           </div>
         </div>
       </div>
+      <BarContainer/>
+        <Services/>
+        <CrauselContainer/>
+        <ContactContainer/>
+        <FooterContainer/>
     </>
   );
 };

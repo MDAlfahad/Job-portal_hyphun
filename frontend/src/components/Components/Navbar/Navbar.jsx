@@ -16,7 +16,7 @@ const Navbar = () => {
   }
 
   return (
-    <div className="w-full fixed bg-white shadow-xl z-50">
+    <div className="w-full fixed bg-white border z-40">
       <div className="max-w-[1800px] m-auto px-6 md:px-12 py-4 text-textcolor flex justify-between items-center relative">
         <div className="flex gap-5 lg:gap-20 items-center">
           <h1 className="text-2xl lg:text-3xl font-bold">JOB PORTAL</h1>
@@ -29,13 +29,13 @@ const Navbar = () => {
             </Link>
             <Link
               className="text-textcolor hover:text-secondary md:text-sm lg:text-[16px] transition-all duration-300 active:text-textcolor"
-              to="/sudentdashboard"
+              to="/placement"
             >
               Get placement
             </Link>
             <Link
               className="text-textcolor hover:text-secondary md:text-sm lg:text-[16px] transition-all duration-300 active:text-textcolor"
-              to="/jobpost"
+              to="/jobpage"
             >
               Job
             </Link>
@@ -69,7 +69,7 @@ const Navbar = () => {
          className={`absolute top-full right-5 shadow-lg border border-gray-100 ${isUser ? "opacity-100 translate-y-0" : "max-h-0 opacity-0 -translate-y-0"}`}>
           <div className=" flex flex-col bg-white">
             <a className="px-4 py-2 hover:bg-secondary hover:text-white" href="#">Login</a>
-            <a className="px-4 py-2 hover:bg-secondary hover:text-white" href="#">DashBoard</a>
+            <Link to="companydashboard" className="px-4 py-2 hover:bg-secondary hover:text-white" >DashBoard</Link>
           </div>
         </div>
 
@@ -85,13 +85,13 @@ const Navbar = () => {
           </Link>
           <Link
             className="text-textcolor font-semibold hover:text-white transition-all duration-300 hover:bg-secondary px-4 py-2"
-            to="/sudentdashboard"
+            to="/placement"
           >
             Get placement
           </Link>
           <Link
             className="text-textcolor font-semibold hover:text-white transition-all duration-300 hover:bg-secondary px-4 py-2"
-            to="/jobpost"
+            to="/jobpage"
           >
             Job
           </Link>
