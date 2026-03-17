@@ -4,8 +4,11 @@ import Navbar from "../Components/Navbar/Navbar";
 import Hero from "../Pages/HeroContaner/Hero";
 import JobPage from "../Pages/jobpages/Jobpage";
 import PlacementContainer from "../Pages/Placementpage/PlacementContainer";
-import Companies from "../Pages/Companies/Companies";
-import CompanyDashboard from "../Pages/companyDashbashboard/CompanyDashboard";
+import UserLoginPage from "../Authpages/Userloginpage/UserLoginPage";
+import UserSignupPage from "../Authpages/Userloginpage/UserSignupPage";
+import CompanySignupPage from "../Authpages/Companysignuppage/CompanySignupPage";
+import StudentDashboard from "../Pages/studentDashboard/StudentDashboard";
+import AdminDashboard from "../Pages/AdminDashboard/AdminDashboard"
 
 
 
@@ -18,9 +21,17 @@ const MainRoute = () => {
           <Route path="/" element={<Hero />} />
           <Route path="/placement" element={<PlacementContainer />} />
           <Route path="/jobpage" element={<JobPage/>} />
-          <Route path="/companies" element={<Companies/>} />
+          {/* -----------------login page------------------------------- */}
+          <Route path="/loginpage" element={<UserLoginPage/>}/>
+          {/* --------------- signup page----------------------------- */}
+          <Route path="/signup" element={<UserSignupPage/>}/>
+          <Route path="companySigup" element={<CompanySignupPage/>}/>
           {/* -----------------------------------------CompanyDashboard----------------------------- */}
-          <Route path="/companydashboard" element={<CompanyDashboard/>} />
+          {/* <Route path="/companydashboard" element={<CompanyDashboard/>} /> */}
+          {/* -----------------------------student Dasboard------------------------- */}\
+          <Route path="/studentDashboard" element={<StudentDashboard/>} />
+          <Route path="/admindashboard" element={<AdminDashboard/>} />
+          
         </Routes>
       </Router>
     </>

@@ -1,9 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { UserRound, Bell } from "lucide-react";
 import { HiOutlineBars3BottomRight } from "react-icons/hi2";
 import { useState } from "react";
 
 const Navbar = () => {
+
+  const navigate = useNavigate();
   const [isClick, setIsClick] = useState(false);
 
   const[isUser, setIsUser] = useState(false)
@@ -39,23 +41,17 @@ const Navbar = () => {
             >
               Job
             </Link>
-            <Link
-              className="text-textcolor hover:text-secondary md:text-sm lg:text-[16px] transition-all duration-300 active:text-textcolor"
-              to="/companies"
-            >
-              Companies
-            </Link>
           </div>
         </div>
 
         <div className="flex items-center gap-6">
-          <button className="hidden md:flex items-center gap-1 px-6 py-2 bg-secondary rounded-md text-md font-bold text-white">
+          <button onClick={()=> navigate("/loginpage")} className="hidden md:flex items-center gap-1 px-6 py-2 bg-secondary rounded-md text-md font-bold text-white">
             LOGIN
           </button>
-          <div className="md:block bg-background p-2 rounded-full">
+          <div className="md:block bg-background p-2 rounded-full cursor-pointer border">
             <Bell strokeWidth={1.5} />
           </div>
-          <div className="bg-background p-2 rounded-full">
+          <div className="bg-background p-2 rounded-full cursor-pointer border">
             <UserRound onClick={userclick} strokeWidth={1.5} />
           </div>
           <div className="flex md:hidden">
@@ -68,8 +64,8 @@ const Navbar = () => {
         <div 
          className={`absolute top-full right-5 shadow-lg border border-gray-100 ${isUser ? "opacity-100 translate-y-0" : "max-h-0 opacity-0 -translate-y-0"}`}>
           <div className=" flex flex-col bg-white">
-            <a className="px-4 py-2 hover:bg-secondary hover:text-white" href="#">Login</a>
-            <Link to="companydashboard" className="px-4 py-2 hover:bg-secondary hover:text-white" >DashBoard</Link>
+            <Link to="loginpage" className="px-4 py-2 hover:bg-secondary hover:text-white" href="">Login</Link>
+            <Link to="studentDashboard" className="px-4 py-2 hover:bg-secondary hover:text-white" >DashBoard</Link>
           </div>
         </div>
 
@@ -94,12 +90,6 @@ const Navbar = () => {
             to="/jobpage"
           >
             Job
-          </Link>
-          <Link
-            className="text-textcolor font-semibold hover:text-white transition-all duration-300 hover:bg-secondary px-4 py-2"
-            to="/companies"
-          >
-            Companies
           </Link>
         </div>
       </div>

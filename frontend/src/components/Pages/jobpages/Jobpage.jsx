@@ -82,7 +82,7 @@ const JobPage = () => {
                 Search and Apply to Latest Job Vacancies & Openings in India
               </p>
             </div>
-            <div className="w-full">
+            <div className="w-full flex flex-col gap-4">
                 <JobPageCard/>
                 <JobPageCard/>
                 <JobPageCard/>

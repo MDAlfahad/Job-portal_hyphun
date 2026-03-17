@@ -1,3 +1,4 @@
+import DashboardSidebar from "./Sidebarmenu/DashboardSidebar";
 
 
 const CompanyDashboard =()=>{
@@ -5,12 +6,8 @@ const CompanyDashboard =()=>{
     return(
 
         <>
-        <div>
-            <div>
-                <div>
-                    
-                </div>
-            </div>
+        <div className="pt-20 max-w-[1800px] m-auto px-4 md:px-12 py-6 ">
+           <DashboardSidebar/>
         </div>
         </>
     )
