@@ -6,7 +6,7 @@ const CompanyData = () => {
   const [active, setActive] = useState("green");
   const [open, setOpen] = useState(false);
 
-  const [changevalue, setchangevalue] = useState(false);
+  const [changevalue, setchangevalue] = useState(true);
 
   const value = () => {
     setchangevalue(!changevalue);
@@ -70,53 +70,60 @@ const CompanyData = () => {
           </div>
         )}
 
-        <div className="flex justify-between py-4 ">
-          <h1 className="text-xl md:text-2xl lg:text-4xl font-semibold">
-            Company details
-          </h1>
-
-          <h1
-            onClick={() => setOpen(true)}
-            className="flex gap-1 font-semibold px-3 py-2 bg-secondary rounded-md text-white cursor-pointer"
-          >
-            <UserRound strokeWidth={2.5} />
-            Add+
-          </h1>
-        </div>
-
         {/* Table start here */}
-        <div>
-          <table className="w-full">
-            <thead className="flex w-full bg-secondary text-white rounded-md px-6 py-2">
-              <tr className="flex justify-between w-full text-center">
-                <th>Name</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Status</th>
-                <th>Action</th>
-              </tr>
-            </thead>
 
-            <tbody className="flex w-full px-6 py-2 my-4 rounded-md bg-gray-200">
-              <tr className="flex justify-between w-full">
-                <td className="font-semibold">Simen pvt.Ltd</td>
-                <td>Simen@company.com</td>
-                <td>Company</td>
-
-                <td
-                  onClick={changeto}
-                  style={{ background: active }}
-                  className="font-semibold px-4 py-1 rounded-md text-white cursor-pointer"
-                >
-                  <p onClick={value}>{changevalue ? "active" : "Deactive"}</p>
-                </td>
-
-                <td className="px-2 py-1 rounded-md bg-secondary text-white font-semibold cursor-pointer">
-                  Remove
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <div className=" overflow-y-auto px-4">
+          <div className="flex   justify-between items-center">
+            <h1 className="text-xl md:text-3xl font-semibold py-6">
+              Applicaitons
+            </h1>
+            <div>
+              <h1
+                onClick={() => setOpen(true)}
+                className="flex gap-1 font-semibold px-3 py-2 bg-secondary rounded-md text-white cursor-pointer"
+              >
+                <UserRound strokeWidth={2.5} />
+                Add+
+              </h1>
+            </div>
+          </div>
+          <div className="w-full border rounded-xl overflow-hidden">
+            <table className="w-full">
+              <thead className="bg-gray-300 ">
+                <tr>
+                  <th className="py-4 text-black font-semibold">Name</th>
+                  <th className="py-4 text-black font-semibold">Email</th>
+                  <th className="py-4 text-black font-semibold">Created at</th>
+                  <th className="py-4 text-black font-semibold">Status </th>
+                  <th className="py-4 text-black font-semibold">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="text-center w-full">
+                  <td className="py-4">Techowear</td>
+                  <td className="py-4">Fronetend developer</td>
+                  <td className="py-4">20/12/2024</td>
+                  <td
+                    className="py-4"
+                    onClick={changeto}
+                    style={{ color: active, borderColor: active }}
+                  >
+                    <p
+                      className="border rounded-md py-2 flex items-center justify-center font-semibold"
+                      onClick={value}
+                    >
+                      {changevalue ? "active" : "Deactive"}
+                    </p>
+                  </td>
+                  <td className="py-4">
+                    <p className="border rounded-md py-2 flex items-center justify-center font-semibold bg-secondary">
+                      Delete
+                    </p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </>

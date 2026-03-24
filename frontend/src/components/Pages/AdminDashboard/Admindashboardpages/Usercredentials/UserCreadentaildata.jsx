@@ -1,44 +1,62 @@
+import { Dot, NotebookText } from "lucide-react";
 import { useState } from "react";
 
 const UserCredentialdata = () => {
+  const [changevalue, setchangevalue] = useState(true);
 
-        const[active, setActive] = useState('green');
+  const value = () => {
+    setchangevalue(!changevalue);
+  };
 
-        const changeto= ()=>{
-             setActive(active === "green"? "red": "green")
-        }
+  const [active, setActive] = useState("green");
+
+  const changeto = () => {
+    setActive(active === "green" ? "red" : "green");
+  };
 
   return (
     <>
-      <div className="mt-20 px-6 w-full h-[80vh] overflow-y-auto">
-        <div>
-          <h1 className="text-xl md:text-2xl lg:text-4xl font-semibold my-4">
-            Users Details
+      <div className="mt-20 overflow-y-auto px-4">
+        <div className="">
+          <h1 className="text-xl md:text-3xl font-semibold py-6">
+            Applicaitons
           </h1>
         </div>
-        <div className="flex w-full mt-10">
-          <table className="w-full ">
-            <thead className="flex w-full bg-secondary text-white  rounded-md px-6 py-2" >
-              <tr className="flex justify-between w-full text-center">
-                <th>Name</th>
-                <th>Email</th>
-                <th>role</th>
-                <th>status</th>
-                <th>Action</th>
+        <div className="w-full border rounded-xl overflow-hidden">
+          <table className="w-full">
+            <thead className="bg-gray-300 ">
+              <tr>
+                <th className="py-4 text-black font-semibold">Name</th>
+                <th className="py-4 text-black font-semibold">Email</th>
+                <th className="py-4 text-black font-semibold">Created at</th>
+                <th className="py-4 text-black font-semibold">Status </th>
+                <th className="py-4 text-black font-semibold">Action</th>
               </tr>
             </thead>
-            <tbody className="flex w-fullrounded-md px-6 py-2 my-4 rounded-md bg-gray-200"> 
-                <tr className="flex justify-between w-full ">
-                    <td>Alfahad</td>
-                    <td>alfahadkhan715@gmail.com</td>
-                    <td>User</td>
-                    <td onClick={changeto} style={{background: active}} className="font-semibold bg-primary  px-4 py-1 rounded-md text-white">Active</td>
-                    <td className="px-2 py-1 rounded-md bg-secondary">Delete</td>
-                </tr>
+            <tbody>
+              <tr className="text-center w-full">
+                <td className="py-4">Techowear</td>
+                <td className="py-4">Fronetend developer</td>
+                <td className="py-4">20/12/2024</td>
+                <td className="py-4"
+                onClick={changeto}
+                    style={{ color: active, borderColor: active }}>
+                  <p
+                    className="border rounded-md py-2 flex items-center justify-center font-semibold"
+                    onClick={value}
+                  >
+                     {changevalue ? "active" : "Deactive"}
+                  </p>
+                </td>
+                <td className="py-4">
+                  <p className="border rounded-md py-2 flex items-center justify-center font-semibold bg-secondary">
+                    Delete
+                  </p>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
-        
       </div>
     </>
   );
