@@ -2,11 +2,14 @@
 import Button from "../../Components/buttons/ButtonComponents";
 import BarContainer from "../HeroContaner/BarContainer"
 import Services from "../HeroContaner/Services"
-import CrauselContainer from "../HeroContaner/CrauselContainer"
 import ContactContainer from "../HeroContaner/ContactContainer"
 import FooterContainer from "../HeroContaner/FooterContainer"
+import { useNavigate } from "react-router-dom";
+import CrauselContainer from "./CrauselContainer";
 
 const Hero = () => {
+
+  const navigate = useNavigate();
   return (
     <>
       <div className="w-full max-w-[1800px] m-auto mainbackground ">
@@ -26,7 +29,9 @@ const Hero = () => {
             </p>
           </div>
           <div className="flex  gap-6 justify-center items-center">
-            <Button text="Apply Now" />
+            <Button text="Apply Now" 
+            onClick={() => navigate("/jobpage")}
+              />
             <Button text="Explore"/>
           </div>
         </div>

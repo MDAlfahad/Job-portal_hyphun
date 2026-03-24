@@ -1,42 +1,39 @@
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
-import CrauselCard from '../../Components/Cards/CrauselCard';
+import { MoveLeft, MoveRight } from "lucide-react";
+import CrauselCard from "../../Components/Cards/CrauselCard";
 
 const CrauselContainer = () => {
-  const cards = [1]; 
-  
-  const [current, setCurrent] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-
-  const maxIndex = cards.length - 1;
+  const cards = [1, 2, 3, 4, 5, 6]; 
+  const visibleCards = 3;
+  const maxIndex = cards.length - visibleCards;
 
   const prevSlide = () => {
-    setCurrent(current === 0 ? maxIndex : current - 1);
+    setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
   };
 
   const nextSlide = () => {
-    setCurrent(current === maxIndex ? 0 : current + 1);
+    setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
   };
 
   return (
-    <div className="w-full max-w-[1800px] m-auto px-4 md:px-12 py-40 flex items-center gap-4">
-      
+    <div className="flex items-center justify-center w-full max-w-7xl mx-auto py-10">
       <button 
-        onClick={prevSlide} 
-        className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+        onClick={prevSlide}
+        className="p-2 bg-gray-200 rounded-full mx-2 hover:bg-secondary hover:text-white transition-colors"
       >
-        <ChevronLeft strokeWidth={1.5} size={32} />
+        <MoveLeft size={24} />
       </button>
 
-  
-      <div className="overflow-hidden w-full py-12">
-        <div
-          className="flex transition-transform duration-500 ease-out"
 
-          style={{ transform: `translateX(-${current * 100}%)` }}
+      <div className="overflow-hidden w-full">
+        <div 
+          className="flex transition-transform duration-500 ease-in-out gap-4"
+          style={{ transform: `translateX(-${currentIndex * (100 / visibleCards)}%)` }}
         >
           {cards.map((_, index) => (
-            <div key={index} className="min-w-full px-2">
+            <div key={index} className="min-w-[calc(33.333%-1rem)] flex-shrink-0">
               <CrauselCard />
             </div>
           ))}
@@ -45,11 +42,10 @@ const CrauselContainer = () => {
 
       <button 
         onClick={nextSlide}
-        className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+        className="p-2 bg-gray-200 rounded-full mx-2 hover:bg-secondary hover:text-white transition-colors"
       >
-        <ChevronRight strokeWidth={1.5} size={32} />
+        <MoveRight size={24} />
       </button>
-
     </div>
   );
 };

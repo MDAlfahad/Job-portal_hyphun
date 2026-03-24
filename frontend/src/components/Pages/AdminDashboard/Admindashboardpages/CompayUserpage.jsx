@@ -1,8 +1,11 @@
+import CompanyData from "./companyuserpage/CompanyData"
 
 
 const CompanyUserPage =()=>{
     return(
-        <div className="mt-20">874546</div>
+        <div>
+          <CompanyData/>
+        </div>
     )
 }
 

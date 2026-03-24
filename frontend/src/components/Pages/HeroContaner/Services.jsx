@@ -7,7 +7,7 @@ const Services = () => {
   return (
     <>
       <div className=" w-full md:h-screen lg:h-auto max-w-[1800px] m-auto px-4 md:px-12 py-12 ">
-        <h1 className="text-6xl md:text-7xl text-textcolor font-semibold md:text-bold py-10 "><span className="text-secondary" >Services</span> Provide here</h1>
+        <h1 className="text-4xl md:text-5xl text-textcolor font-semibold md:text-bold py-10 "><span className="text-secondary" >Services</span> Provide here</h1>
         <div className="w-full md:flex justify-between ">
           <Cards
             logo={<HiClipboardList className="text-6xl text-secondary"/>}

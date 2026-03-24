@@ -29,8 +29,7 @@ const ContactContainer = () => {
               <input className="w-full px-4 py-2 border rounded-lg outline-none" type="text" placeholder="Name" />
               <input className="w-full px-4 py-2 border rounded-lg outline-none" type="email" placeholder="Email" />
               <input className="w-full px-4 py-2 border rounded-lg outline-none" type="tel" placeholder="Number" />
-              <textarea className="w-full px-4 py-2 border rounded-lg max-h-[500px] min-h-[100px] outline-none" id="textarea">
-                Your Message
+              <textarea className="w-full px-4 py-2 border rounded-lg max-h-[500px] min-h-[100px] outline-none" id="textarea" placeholder="Your Message">
               </textarea>
               <button className="w-full px-4 py-2 border rounded-xl font-semibold hover:text-white bg-secondary hover:bg-textcolor transition duration-300">Submit</button>
             </form>

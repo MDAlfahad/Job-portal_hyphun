@@ -3,7 +3,9 @@ import Adminsidebar from "./Admindashboardpages/AdminSidebar";
 import Profile from "./Admindashboardpages/AdminPorfilepage";
 import User from "./Admindashboardpages/UserPage"
 import CompanyUser from "./Admindashboardpages/CompayUserpage";
- import JobPostedForm from "./Admindashboardpages/JobPostedFormDetails"
+import JobPostedFromDetails from "./Admindashboardpages/JobPostedFormDetails";
+import FromDeatails from "./Admindashboardpages/FormsDetails"
+
 
 const AdminDashboard = () => {
   const [activePage, setActivePage] = useState("profile");
@@ -12,7 +14,8 @@ const AdminDashboard = () => {
     profile: <Profile />,
     application: <User />,
     CompanyUser: <CompanyUser />,
-    form : <JobPostedForm/>
+    form : <FromDeatails/>,
+    jobposted:<JobPostedFromDetails/>
   };
 
   return (

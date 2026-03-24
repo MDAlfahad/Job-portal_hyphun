@@ -62,7 +62,7 @@ const Navbar = () => {
           </div>
         </div>
         <div 
-         className={`absolute top-full right-5 shadow-lg border border-gray-100 ${isUser ? "opacity-100 translate-y-0" : "max-h-0 opacity-0 -translate-y-0"}`}>
+         className={`absolute top-full right-5 shadow-lg border border-gray-100 ${isUser ? " translate-y-0" : "max-h-0 hidden -translate-y-0"}`}>
           <div className=" flex flex-col bg-white">
             <Link to="loginpage" className="px-4 py-2 hover:bg-secondary hover:text-white" href="">Login</Link>
             <Link to="studentDashboard" className="px-4 py-2 hover:bg-secondary hover:text-white" >DashBoard</Link>
