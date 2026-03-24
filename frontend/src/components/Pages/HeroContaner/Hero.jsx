@@ -17,7 +17,7 @@ const Hero = () => {
           <div>
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold">
               Your Journey Never end, <br />
-              <span className="text-[#FF0000]"> Get Your Job Now</span>
+              <span className="text-secondary"> Get Your Job Now</span>
             </h1>
             <p className="text-sm md:text-lg lg:text-xl py-6">
               The Placement Cell plays a vital role in shaping students’ careers

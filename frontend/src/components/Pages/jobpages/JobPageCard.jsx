@@ -61,7 +61,7 @@ const JobPageCard = () => {
         </div>
 
         <div className="flex gap-4 items-center">
-          <p className="flex items-center gap-2 border bg-pink-100 rounded-full px-2 py-[1px] text-secondary">
+          <p className="flex items-center gap-2 border bg-blue-200 rounded-full px-2 py-[1px] text-secondary">
             <TimerReset strokeWidth={1.5} size={18} />
             Posted at
           </p>
