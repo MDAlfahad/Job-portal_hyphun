@@ -1,7 +1,7 @@
 import { Search } from "lucide-react";
 import PlacementContainerCard from "./PlacementContainerCard";
 import Citydata from "../../../API/cities.json";
-import Underline  from "../../images/line.png";
+import Underline  from "../../images/arrow.png";
 
 const PlacementContainer = () => {
   return (
