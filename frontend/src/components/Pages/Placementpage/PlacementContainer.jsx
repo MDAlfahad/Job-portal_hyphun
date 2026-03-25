@@ -2,11 +2,12 @@ import { Search } from "lucide-react";
 import PlacementContainerCard from "./PlacementContainerCard";
 import Citydata from "../../../API/cities.json";
 import Underline  from "../../images/arrow.png";
+import FooterContainer from "../HeroContaner/FooterContainer";
 
 const PlacementContainer = () => {
   return (
     <>
-      <div className="w-full  max-w-[1800px] m-auto  py-6 md:py-[4rem] z-50">
+      <div className="w-full  max-w-[1800px] m-auto  py-6 md:py-[4rem] z-50 noselect">
         {/* ------------------------------------filter bar--------------------------------------- */}
         <div className="md:flex items-center  border-b-2 px-4 md:px-12 my-12 md:my-0 py-4 justify-between fixed bg-white w-full  max-w-[1800px] m-auto">
           <div className="flex px-1 items-center gap-2 border rounded-md">
@@ -64,6 +65,7 @@ const PlacementContainer = () => {
           </div>
         </div>
       </div>
+      <FooterContainer/>
     </>
   );
 };

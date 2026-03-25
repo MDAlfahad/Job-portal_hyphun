@@ -8,18 +8,19 @@ import { useNavigate } from "react-router-dom";
 import CrauselContainer from "./CrauselContainer";
 
 const Hero = () => {
+  
 
   const navigate = useNavigate();
   return (
     <>
-      <div className="w-full max-w-[1800px] m-auto mainbackground ">
+      <div className="w-full max-w-[1800px] m-auto mainbackground noselect">
         <div className="w-full md:px-4 lg:px-12 py-28 md:py-2 px-4 lg:py-40  text-center flex flex-col justify-center lg:h-auto md:h-[100vh]">
           <div>
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold">
-              Your Journey Never end, <br />
-              <span className="text-secondary"> Get Your Job Now</span>
+             Get Your Job Now, <br />
+              <span className="text-secondary"> Your Journey Never end </span>
             </h1>
-            <p className="text-sm md:text-lg lg:text-xl py-6">
+            <p className="text-sm md:text-lg lg:text-xl py-6 text-textcolor2">
               The Placement Cell plays a vital role in shaping students’ careers
               by acting as a bridge between students and recruiters. It
               organizes campus recruitment drives, internships, skill

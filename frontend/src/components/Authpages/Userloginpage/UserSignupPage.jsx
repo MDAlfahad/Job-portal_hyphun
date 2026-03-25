@@ -8,7 +8,7 @@ const UserLSignupPage = () => {
     const [password, setpassword] = useState('');
   return (
     <>
-      <div className="max-w-[1800px] m-auto md:py-20 px-4 md:px-12 py-6">
+      <div className="max-w-[1800px] m-auto md:py-20 px-4 md:px-12 py-6 noselect">
         <div className="flex justify-center items-center h-[80vh]">
           <form className="shadow-xl p-6 w-[400px] gap- border flex flex-col rounded-xl">
             <div className="flex flex-col items-center">

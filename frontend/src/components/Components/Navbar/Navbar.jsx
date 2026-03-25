@@ -1,4 +1,4 @@
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UserRound, Bell } from "lucide-react";
 import { HiOutlineBars3BottomRight } from "react-icons/hi2";
 import { useState } from "react";
@@ -41,6 +41,7 @@ const Navbar = () => {
             >
               Job
             </Link>
+            <p className="cursor-pointer" onClick={()=>navigate("/companyDashboard")}>Company Dashboard</p>
           </div>
         </div>
 

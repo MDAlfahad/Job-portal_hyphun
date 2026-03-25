@@ -10,8 +10,10 @@ import {
 import Logo from "../../images/jio.png";
 import { useState } from "react";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const JobPageCard = () => {
+  const navigate = useNavigate();
 
     const [Click, setClick] = useState(true);
     const handleclick= ()=>{
@@ -19,7 +21,7 @@ const JobPageCard = () => {
     }
   return (
     <>
-      <div className="w-full flex flex-col gap-4 p-4 shadow-xl rounded-xl border bg-white">
+      <div className="w-full flex flex-col gap-4 p-4 shadow-xl rounded-xl border bg-white" onClick={()=>navigate("/jobpageroute")}>
         <div className="flex justify-between items-center">
           <div className="flex flex-col gap-2">
             <h1 className="text-2xl md:text-3xl font-semibold ">

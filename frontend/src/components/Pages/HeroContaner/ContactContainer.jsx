@@ -4,7 +4,7 @@ import Button from "../../Components/buttons/ButtonComponents"
 const ContactContainer = () => {
   return (
     <>
-      <div className="w-full max-w-[1800px] m-auto md:px-12 px-4  py-4 md:py-20 svgbackground">
+      <div className="w-full max-w-[1800px] m-auto md:px-12 px-4  py-4 md:py-20 svgbackground noselect">
         <div className="md:flex items-center justify-center md:h-[90vh] lg:h-auto ">
           <div className="md:w-1/2 flex flex-col gap-3">
             <h1 className="text-3xl md:text-5xl">Contact Us</h1>

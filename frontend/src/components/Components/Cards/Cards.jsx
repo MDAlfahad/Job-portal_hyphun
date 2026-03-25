@@ -17,7 +17,7 @@ const Cards =(props)=>{
                         {props.p}
                     </p>
                 </div>
-                <button className="px-4 py-2 mt-auto bg-secondary rounded-lg text-white font-bold hover:bg-textcolor">{props.text}</button>
+                <button onClick={props.open} className="px-4 py-2 mt-auto bg-secondary rounded-lg text-white font-bold hover:bg-textcolor">{props.text}</button>
             </div>
         </>
     )

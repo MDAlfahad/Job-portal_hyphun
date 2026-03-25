@@ -4,7 +4,7 @@ import Image from "../../images/company.webp";
 const BarContainer = () => {
   return (
     <>
-      <div className="w-full max-w-[1800px]  m-auto bg-secondary shadow-xl">
+      <div className="w-full max-w-[1800px]  m-auto bg-secondary shadow-xl noselect">
         <div className="w-full md:h-auto md:px-12 px-4 py-4  md:flex items-center md:gap-20 justify-between text-white">
           <div className=" flex items-center gap-12 justify-between bg-white rounded-full px-6 py-3 text-black md:text-white md:bg-transparent">
             <div className="relative flex  ">

@@ -19,7 +19,7 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="w-full max-w-[1800px] m-auto md:h-[100vh] flex">
+    <div className="w-full max-w-[1800px] m-auto md:h-[100vh] flex noselect">
       <Adminsidebar setActivePage={setActivePage} activePage={activePage} />
       <div className="flex-1 ">{pages[activePage]}</div>
     </div>

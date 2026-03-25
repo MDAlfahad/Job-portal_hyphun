@@ -13,7 +13,7 @@ const StudentDashboard = () => {
   };
 
   return (
-    <div className="w-full max-w-[1800px] m-auto md:h-[100vh] flex">
+    <div className="w-full max-w-[1800px] m-auto md:h-[100vh] flex noselect">
       
 
       <StudentSideBar

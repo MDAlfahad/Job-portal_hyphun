@@ -2,11 +2,12 @@ import { Funnel, Search } from "lucide-react";
 import Citydata from "../../../API/cities.json";
 import Button from "../../Components/buttons/ButtonComponents";
 import JobPageCard from "./JobPageCard";
+import FooterContainer from "../HeroContaner/FooterContainer";
 
 const JobPage = () => {
   return (
     <>
-      <div className="w-full max-w-[1800px] m-auto py-20 px-4 md:px-20 ">
+      <div className="w-full max-w-[1800px] m-auto py-20 px-4 md:px-20 noselect">
         <div className="md:flex ">
           {/* -----------------------search filtered area-------------------------- */}
           <div className=" flex flex-col gap-5 items-center overflow-hidden w-full max-w-[400px]  border px-4 py-4 rounded-xl md:h-screen max-h-[80vh] mt-20">
@@ -83,7 +84,7 @@ const JobPage = () => {
               </p>
             </div>
             <div className="w-full flex flex-col gap-4">
-                <JobPageCard/>
+                <JobPageCard />
                 <JobPageCard/>
                 <JobPageCard/>
                 <JobPageCard/>
@@ -94,6 +95,7 @@ const JobPage = () => {
         </div>
         
       </div>
+      <FooterContainer/>
     </>
   );
 };

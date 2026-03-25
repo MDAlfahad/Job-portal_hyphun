@@ -18,7 +18,7 @@ const CrauselContainer = () => {
   };
 
   return (
-    <div className="max-w-[1800px] m-auto px-4 md:px-12 py-6">
+    <div className="max-w-[1800px] m-auto px-4 md:px-12 py-6 noselect">
       <h1 className="text-xl md:text-5xl font-semibold text-center py-10"><span className="text-secondary">Apply now,</span> to start for your carrier</h1>
       <div className="flex items-center justify-center w-full max-w-7xl mx-auto py-10">
         <button

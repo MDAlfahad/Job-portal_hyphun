@@ -7,7 +7,7 @@ const CompanySignupPage = () => {
   const [password, setpassword] = useState("");
   return (
     <>
-      <div className="max-w-[1800px] m-auto  w-full ">
+      <div className="max-w-[1800px] m-auto  w-full noselect">
         <div className="w-full md:h-[100vh] lg:h-auto bg-secondary md:pt-20 md:flex justify-between px-4 md:px-12 items-center overflow-hidden">
           <div>
             <div className="mt-10">
@@ -71,7 +71,7 @@ const CompanySignupPage = () => {
               <input className="px-2 py-2 border rounded-md outline-none text-lg "
                type="tel" 
                placeholder="e.g +91 6260XX XXXX XX"/>
-              <Button text="Sign up" />
+              <Button text="Sign up"/>
             </div>
             <p className="text-sm md:text-[16px] py-4 text-center">
               Already have Account?<Link className="text-secondary" to="/loginpage">Login</Link>
