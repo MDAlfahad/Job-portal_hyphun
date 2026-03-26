@@ -24,6 +24,20 @@ const CompanyForm3 = () => {
             type="text"
             placeholder="Comapny Name"
           />
+          <label htmlFor="jobtype" className="font-semibold " >Job type</label>
+          <select  id="jobtype" className="border outline-none rounded-sm px-2 py-2" required>
+            <option value="select">select</option> 
+            <option value="workFromHome">Work form home</option> 
+            <option value="remote">remote</option>
+            <option value="location">location</option>
+          </select>
+          <label htmlFor="workingtype" className="font-semibold " >Select type</label>
+          <select  id="workingtype" className="border outline-none rounded-sm px-2 py-2" required>
+            <option value="select">select</option> 
+            <option value="workFromHome">Job</option> 
+            <option value="remote">Intership</option>
+            <option value="location">Placement</option>
+          </select>
         <label className="font-semibold " htmlFor="location">
             Select Location
           </label>
