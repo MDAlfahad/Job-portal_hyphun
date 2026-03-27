@@ -2,44 +2,43 @@ import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import Button from "../../Components/buttons/ButtonComponents";
 import { useState } from "react";
-import axios from "axios"
-
-
+import axios from "axios";
 
 const UserLSignupPage = () => {
-
-  const API_CALL = `https://localhost:4000`
+  const API_CALL = `http://localhost:4000`;
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
   });
-  
-  const handleChange = (e) => {
-  setFormData({
-    ...formData,
-    [e.target.name]: e.target.value,
-  });
-};
-  
 
-  const handlEvent= async(e)=>{
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handlEvent = async (e) => {
     e.preventDefault();
 
-    try{
-      const res = await axios.post(`${API_CALL}/register_User`, formData);
-      console.log(res.data)
-    }catch(err){
+    try {
+      const res = await axios.post(`${API_CALL}/api/register_User`, formData);
+      console.log(res.data);
+    } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   const [password, setpassword] = useState("");
   return (
     <>
       <div className="max-w-[1800px] m-auto md:py-20 px-4 md:px-12 py-6 noselect">
         <div className="flex justify-center items-center h-[80vh]">
-          <form className="shadow-xl p-6 w-[400px] gap- border flex flex-col rounded-xl"onSubmit={handlEvent}>
+          <form
+            className="shadow-xl p-6 w-[400px] gap- border flex flex-col rounded-xl"
+            onSubmit={handlEvent}
+          >
             <div className="flex flex-col items-center">
               <p className="flex gap-4 items-center border px-2 py-2 w-full justify-center rounded-md text-md font-semibold text-textcolor">
                 <FcGoogle className="text-2xl md:text-4xl" />
@@ -83,13 +82,12 @@ const UserLSignupPage = () => {
                 placeholder="password contain atleast 6 digits"
                 required
                 name="password"
-                value= {formData.password}
+                value={formData.password}
                 // onChange={(e) => {
                 //   setpassword(e.target.value);
                 // }
                 // }
                 onChange={handleChange}
-                
               />
               {password.length > 0 && (
                 <p style={{ color: password.length < 5 ? "red" : "green" }}>

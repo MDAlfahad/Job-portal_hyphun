@@ -17,6 +17,7 @@ const Navbar = () => {
     setIsUser((show)=> !show)
   }
 
+  
   return (
     <div className="w-full fixed bg-white border z-40">
       <div className="max-w-[1800px] m-auto px-6 md:px-12 py-4 text-textcolor flex justify-between items-center relative">
@@ -41,7 +42,6 @@ const Navbar = () => {
             >
               Job
             </Link>
-            <p className="cursor-pointer" onClick={()=>navigate("/companyDashboard")}>Company Dashboard</p>
           </div>
         </div>
 
