@@ -140,7 +140,6 @@ const JobPageRoute = () => {
             </span>
             <span
               className="border px-2 py-0.5 bg-gray-200 rounded-full text-sm text-secondary font-semibold"
-              text-sm
             >
               <h1>Learn Business Analytics</h1>
             </span>

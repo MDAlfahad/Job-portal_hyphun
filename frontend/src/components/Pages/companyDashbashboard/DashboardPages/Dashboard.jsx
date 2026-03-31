@@ -3,6 +3,8 @@ import { useState } from "react";
 import CompanySidebar from "./CompanySidebar"; 
 import Profile from "../DashboardPages/DashboardProfilePage"
 import Form from "../DashboardPages/DashboardApplicantPage"
+import Dashboardjobpost from "../DashboardPages/Dashboardjobpost";
+
 
 const Dashboard=()=>{
 
@@ -11,6 +13,7 @@ const Dashboard=()=>{
   const pages = {
     profile: <Profile />,
     application : <Form/>,
+    jobpost : <Dashboardjobpost/>
     // savedform: <SavedForm/>
   };
 

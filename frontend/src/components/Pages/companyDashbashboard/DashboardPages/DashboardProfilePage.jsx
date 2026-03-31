@@ -1,3 +1,5 @@
+import JobPostCard from "../companycards/JobPostCard";
+import CompanyDashboard from "../CompanyDashboard";
 import CompanyProfileCard from "./CompanyProfileCard"
 
 
@@ -31,7 +33,7 @@ const DashboardProfilePage = () => {
         <h1 className="text-2xl md:text-4xl py-4 font-semibold border-b-2">
             Job posted details
         </h1>
-
+        <JobPostCard/>
 
         </div>
       </div>

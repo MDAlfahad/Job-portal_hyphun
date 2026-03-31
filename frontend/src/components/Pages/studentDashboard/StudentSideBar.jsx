@@ -6,15 +6,22 @@ import {
   UserRound,
 } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const StudentSideBar = ({ setActivePage, activePage }) => {
-  const [show, setShow] = useState(true);
+  const navigate = useNavigate();
+  // multiple pages routing
 
+  const handlelogout = () => {
+    localStorage.removeItem("role");
+    localStorage.removeItem("token");
+    navigate("/loginpage");
+  };
+
+  const [show, setShow] = useState(true);
   const menuClass = (page) =>
     `flex items-center gap-3 px-4 py-3 cursor-pointer rounded-md transition-all duration-300 ${
-      activePage === page
-        ? "bg-secondary text-white"
-        : "hover:bg-gray-200"
+      activePage === page ? "bg-secondary text-white" : "hover:bg-gray-200"
     }`;
 
   return (
@@ -23,7 +30,6 @@ const StudentSideBar = ({ setActivePage, activePage }) => {
         show ? "w-[250px]" : "w-[50px]"
       }`}
     >
-
       <div className="flex items-center gap-3 px-4 py-5">
         <TextAlignJustify
           strokeWidth={1.5}
@@ -37,10 +43,8 @@ const StudentSideBar = ({ setActivePage, activePage }) => {
         )}
       </div>
 
-
       <div className="flex flex-col h-[80%] justify-between">
         <div className="flex flex-col gap-2">
-
           <div
             className={menuClass("profile")}
             onClick={() => setActivePage("profile")}
@@ -50,7 +54,6 @@ const StudentSideBar = ({ setActivePage, activePage }) => {
             {show && <p>Profile</p>}
           </div>
 
-
           <div
             className={menuClass("application")}
             onClick={() => setActivePage("application")}
@@ -59,7 +62,6 @@ const StudentSideBar = ({ setActivePage, activePage }) => {
             <ClipboardList size={22} />
             {show && <p>Application</p>}
           </div>
-
 
           <div
             className={menuClass("savedform")}
@@ -76,7 +78,7 @@ const StudentSideBar = ({ setActivePage, activePage }) => {
           title={!show ? "Logout" : ""}
         >
           <LogOut size={22} />
-          {show && <p>Logout</p>}
+          {show && <p onClick={handlelogout}>Logout</p>}
         </div>
       </div>
     </div>

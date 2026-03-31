@@ -38,7 +38,7 @@ const MainRoute = () => {
             <Route path="/admindashboard" element={<AdminDashboard />} />
           </Route>
           <Route element={<ProtectedRoute allowedRoles={["company"]} />}>
-            <Route path="/companyDashboard" element={<CompanyDashboard />} />
+            <Route path="/handlenavigate" element={<CompanyDashboard />} />
           </Route>
           <Route path="/jobpostpage" element={<JobPostPage />} />
           <Route path="/DashboardCompany" element={<Dashboard />} />

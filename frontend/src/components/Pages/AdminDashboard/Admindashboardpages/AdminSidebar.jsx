@@ -11,14 +11,25 @@ import { FaUser } from "react-icons/fa";
 import { GiBellShield } from "react-icons/gi";
 import { HiBuildingOffice } from "react-icons/hi2";
 import { SiGoogleforms } from "react-icons/si";
+import { useNavigate } from "react-router-dom";
 
 const AdminSidebar = ({ setActivePage, activePage }) => {
+
+  const navigate = useNavigate();
+
+  //acive side bar
   const [show, setShow] = useState(true);
 
   const menuClass = (page) =>
     `flex items-center gap-3 px-4 py-3 cursor-pointer rounded-md transition-all duration-300 ${
       activePage === page ? "bg-secondary text-white" : "hover:bg-gray-200"
     }`;
+
+    const handlelogut =()=>{
+      localStorage.removeItem("role");
+      localStorage.removeItem("token")
+      navigate("/loginpage")
+    }
 
   return (
     <div
@@ -91,7 +102,7 @@ const AdminSidebar = ({ setActivePage, activePage }) => {
           title={!show ? "Logout" : ""}
         >
           <LogOut size={22} />
-          {show && <p>Logout</p>}
+          {show && <p onClick={handlelogut}>Logout</p>}
         </div>
       </div>
     </div>

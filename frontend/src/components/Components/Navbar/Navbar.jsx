@@ -1,23 +1,30 @@
 import { Link, useNavigate } from "react-router-dom";
 import { UserRound, Bell } from "lucide-react";
 import { HiOutlineBars3BottomRight } from "react-icons/hi2";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Navbar = () => {
-
   const navigate = useNavigate();
+  // ------ toggle button
   const [isClick, setIsClick] = useState(false);
-
-  const[isUser, setIsUser] = useState(false)
-
   const toggle = () => {
     setIsClick((prev) => !prev);
   };
-  const userclick= ()=>{
-    setIsUser((show)=> !show)
-  }
 
-  
+  const [isUser, setIsUser] = useState(false);
+  const userclick = () => {
+    setIsUser((show) => !show);
+  };
+
+  // -----login status------
+  const [role, setRole] = useState(null);
+
+  useEffect(() => {
+    const storedRole = localStorage.getItem("role");
+    setRole(storedRole);
+    
+  }, []);
+
   return (
     <div className="w-full fixed bg-white border z-40">
       <div className="max-w-[1800px] m-auto px-6 md:px-12 py-4 text-textcolor flex justify-between items-center relative">
@@ -46,9 +53,14 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-6">
-          <button onClick={()=> navigate("/loginpage")} className="hidden md:flex items-center gap-1 px-6 py-2 bg-secondary rounded-md text-md font-bold text-white">
-            LOGIN
-          </button>
+          {!role && (
+            <button
+              onClick={() => navigate("/loginpage")}
+              className="hidden md:flex items-center gap-1 px-6 py-2 bg-secondary rounded-md text-md font-bold text-white"
+            >
+              LOGIN
+            </button>
+          )}
           <div className="md:block bg-background p-2 rounded-full cursor-pointer border">
             <Bell strokeWidth={1.5} />
           </div>
@@ -62,11 +74,25 @@ const Navbar = () => {
             />
           </div>
         </div>
-        <div 
-         className={`absolute top-full right-5 shadow-lg border border-gray-100 ${isUser ? " translate-y-0" : "max-h-0 hidden -translate-y-0"}`}>
+        <div
+          className={`absolute top-full right-5 shadow-lg border border-gray-100 ${isUser ? " translate-y-0" : "max-h-0 hidden -translate-y-0"}`}
+        >
           <div className=" flex flex-col bg-white">
-            <Link to="loginpage" className="px-4 py-2 hover:bg-secondary hover:text-white" href="">Login</Link>
-            <Link to="studentDashboard" className="px-4 py-2 hover:bg-secondary hover:text-white" >DashBoard</Link>
+            {!role && (
+              <Link
+                to="loginpage"
+                className="px-4 py-2 hover:bg-secondary hover:text-white"
+                href=""
+              >
+                Login
+              </Link>
+            )}
+            <Link
+              to={role ==='admin'? "/admindashboard" : role==="company"? "/DashboardCompany": "/studentDashboard"}
+              className="px-4 py-2 hover:bg-secondary hover:text-white"
+            >
+              DashBoard
+            </Link>
           </div>
         </div>
 

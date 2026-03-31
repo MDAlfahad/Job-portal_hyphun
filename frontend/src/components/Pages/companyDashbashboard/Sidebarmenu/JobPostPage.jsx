@@ -8,10 +8,6 @@ const JobPostPage =()=>{
 
         <div className="pt-20 max-w-[1800px] w-full m-auto md:px-12 px-6 py-6 flex flex-col items-center justify-center">
             <CompanyForm3/>
-            <Button
-            text="Submit" onclick={()=>{
-                alert("from submited")
-            }}/>
         </div>
     )
 }

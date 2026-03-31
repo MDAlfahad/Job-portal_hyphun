@@ -7,16 +7,31 @@ import {
   UserRound,
 } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { TbFilePencil } from "react-icons/tb";
 
 const CompanySidebar = ({ setActivePage, activePage }) => {
+  const navigate = useNavigate();
+
+  // side bar for active page
   const [show, setShow] = useState(true);
 
   const menuClass = (page) =>
     `flex items-center gap-3 px-4 py-3 cursor-pointer rounded-md transition-all duration-300 ${
-      activePage === page
-        ? "bg-secondary text-white"
-        : "hover:bg-gray-200"
+      activePage === page ? "bg-secondary text-white" : "hover:bg-gray-200"
     }`;
+  //handle jobpost
+
+  const handlenavigate = () => {
+    navigate("/jobpostpage");
+  };
+
+  // handle for logout
+  const handlelogout = () => {
+    localStorage.removeItem("role");
+    localStorage.removeItem("role");
+    navigate("/loginpage");
+  };
 
   return (
     <div
@@ -24,7 +39,6 @@ const CompanySidebar = ({ setActivePage, activePage }) => {
         show ? "w-[250px]" : "w-[50px]"
       }`}
     >
-
       <div className="flex items-center gap-3 px-4 py-5">
         <TextAlignJustify
           strokeWidth={1.5}
@@ -38,19 +52,16 @@ const CompanySidebar = ({ setActivePage, activePage }) => {
         )}
       </div>
 
-
       <div className="flex flex-col h-[80%] justify-between">
         <div className="flex flex-col gap-2">
-
           <div
             className={menuClass("profile")}
             onClick={() => setActivePage("profile")}
             title={!show ? "Profile" : ""}
           >
-           <Send strokeWidth={1.5} />
+            <Send strokeWidth={1.5} />
             {show && <p>Total posts</p>}
           </div>
-
 
           <div
             className={menuClass("application")}
@@ -61,7 +72,16 @@ const CompanySidebar = ({ setActivePage, activePage }) => {
             {show && <p>Application</p>}
           </div>
 
-{/* 
+          <div
+            className={menuClass("jobpost")}
+            title={!show ? "jobpost":""}
+            onClick={() => setActivePage("jobpost")}
+          >
+            <TbFilePencil className="text-2xl text-textcolor" />
+            {show && <p>Post job & internship</p>}
+          </div>
+
+          {/* 
           <div
             className={menuClass("savedform")}
             onClick={() => setActivePage("savedform")}
@@ -77,7 +97,7 @@ const CompanySidebar = ({ setActivePage, activePage }) => {
           title={!show ? "Logout" : ""}
         >
           <LogOut size={22} />
-          {show && <p>Logout</p>}
+          {show && <p onClick={handlelogout}>Logout</p>}
         </div>
       </div>
     </div>

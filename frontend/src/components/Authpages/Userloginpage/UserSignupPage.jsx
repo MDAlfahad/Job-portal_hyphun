@@ -24,7 +24,6 @@ const UserLSignupPage = () => {
 
     try {
       const res = await axios.post(`${API_CALL}/api/register_User`, formData);
-      console.log(res.data);
     } catch (err) {
       console.log(err);
     }

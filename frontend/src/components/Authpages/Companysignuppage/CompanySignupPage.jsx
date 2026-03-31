@@ -2,9 +2,13 @@ import { FcGoogle } from "react-icons/fc";
 import Background from "../../images/background.png";
 import { useState } from "react";
 import Button from "../../Components/buttons/ButtonComponents";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+
+
 const CompanySignupPage = () => {
+
+  const navigate = useNavigate();
   const API_CALL = `http://localhost:4000`;
 
   const [isSignup, setIsSignup] = useState({
@@ -25,12 +29,20 @@ const CompanySignupPage = () => {
     e.preventDefault();
 
     try {
-      const signup = await axios.post(`${API_CALL}/api/register_company`,isSignup)
-      console.log(signup.data)
+      const signup = await axios.post(
+        `${API_CALL}/api/register_company`,
+        isSignup,
+      );
+      console.log(signup.data);
     } catch (err) {
       console.log(err);
     }
   };
+  //navigate page 
+
+  const handlenavigate =()=>{
+    navigate("/loginpage")
+  }
 
   // const [password, setpassword] = useState("");
   return (
@@ -111,7 +123,7 @@ const CompanySignupPage = () => {
                   onChange={handleChange}
                   placeholder="e.g +91 6260XX XXXX XX"
                 />
-                <Button text="Sign up" />
+                <Button text="Sign up" onclick="handlenavigate"/>
               </div>
               <p className="text-sm md:text-[16px] py-4 text-center">
                 Already have Account?
