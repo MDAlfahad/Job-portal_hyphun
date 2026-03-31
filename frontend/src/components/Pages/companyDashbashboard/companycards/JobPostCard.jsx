@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { TfiArrowCircleDown, TfiArrowCircleRight } from "react-icons/tfi";
-const JobPostCard = () => {
+const JobPostCard = ({company, prefrence}) => {
   const [isShow, setIsShow] = useState(false);
 
   const toggleShow = () => {
@@ -13,7 +13,7 @@ const JobPostCard = () => {
         <div className="w-full  border rounded-md overflow-hidden text-white  ">
           <div className="border-b-2 w-full px-12 py-4  flex justify-between bg-secondary">
             <div>
-              <h1 className="text-xl font-semibold">Frontend developer</h1>
+              <h1 className="text-xl font-semibold">{prefrence}</h1>
               <p className="text-sm font-semibold">job type</p>
               <p className="text-lg font-semibold">location</p>
             </div>
@@ -26,7 +26,7 @@ const JobPostCard = () => {
                 {!isShow ? (
                   <TfiArrowCircleRight className="text-2xl" />
                 ) : (
-                 <TfiArrowCircleDown className="text-2xl" />
+                  <TfiArrowCircleDown className="text-2xl" />
                 )}
               </p>
             </div>
@@ -34,20 +34,14 @@ const JobPostCard = () => {
 
           {isShow && (
             <div className=" text-textcolor px-12 py-4 w-full flex flex-col gap-2">
-              <h1 className="px-2 py-2 bg-gray-100 rounded-md">Company name</h1>
-              <h1 className="px-2 py-2 bg-gray-100 rounded-md">select type</h1>
-              <h1 className="px-2 py-2 bg-gray-100 rounded-md">annual ctc</h1>
-              <h1 className="px-2 py-2 bg-gray-100 rounded-md">experience</h1>
-              <h1 className="px-2 py-2 bg-gray-100 rounded-md">applied by</h1>
-              <h1 className="px-2 py-2 bg-gray-100 rounded-md">
-                about this job
-              </h1>
-              <h1 className="px-2 py-2 bg-gray-100 rounded-md">
-                skills required
-              </h1>
-              <h1 className="px-2 py-2 bg-gray-100 rounded-md">
-                about this company
-              </h1>
+              <h1 className="px-2 py-2 rounded-md">{company}</h1>
+              <h1 className="px-2 py-2 rounded-md">select type</h1>
+              <h1 className="px-2 py-2 rounded-md">annual ctc</h1>
+              <h1 className="px-2 py-2 rounded-md">experience</h1>
+              <h1 className="px-2 py-2 rounded-md">applied by</h1>
+              <h1 className="px-2 py-2 rounded-md">about this job</h1>
+              <h1 className="px-2 py-2 rounded-md">skills required</h1>
+              <h1 className="px-2 py-2 rounded-md">about this company</h1>
             </div>
           )}
         </div>
