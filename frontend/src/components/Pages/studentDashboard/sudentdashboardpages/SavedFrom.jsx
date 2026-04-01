@@ -12,7 +12,6 @@ const SavedForm = () => {
         </div>
         <div className="w-full px-5 rounded-xl overflow-hidden">
           <div className="flex flex-col gap-4">
-            <JobPageCard/>
 
           </div>
         </div>
