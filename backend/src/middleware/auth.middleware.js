@@ -68,12 +68,12 @@ router.post("/login_users", (req, res) => {
           return res.status(400).json({ message: "Invalid password" });
 
         const token = jwt.sign(
-          { id: user.user_id, role: user.auth_role },
+          { id: user.user_id, role: user.auth_role,},
           "this_is_jwt_secret",
           { expiresIn: "1h" },
         );
 
-        return res.json({ token, user_role: user.auth_role });
+        return res.json({ token, user_role: user.auth_role,  });
       });
     },
   );

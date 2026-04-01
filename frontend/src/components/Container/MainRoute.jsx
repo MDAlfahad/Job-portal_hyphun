@@ -42,7 +42,7 @@ const MainRoute = () => {
           </Route>
           <Route path="/jobpostpage" element={<JobPostPage />} />
           <Route path="/DashboardCompany" element={<Dashboard />} />
-          <Route path="/jobpageroute" element={<JobPageRoute />} />
+          <Route path="/jobpageroute/:id" element={<JobPageRoute />} />
         </Routes>
       </Router>
     </>

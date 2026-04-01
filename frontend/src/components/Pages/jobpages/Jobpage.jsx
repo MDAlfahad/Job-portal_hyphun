@@ -3,8 +3,22 @@ import Citydata from "../../../API/cities.json";
 import Button from "../../Components/buttons/ButtonComponents";
 import JobPageCard from "./JobPageCard";
 import FooterContainer from "../HeroContaner/FooterContainer";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const JobPage = () => {
+  const API_CALL = `http://localhost:4000`
+
+  const[isData, setIsData] = useState([]);
+
+  useEffect(()=>{
+    fetch(`${API_CALL}/api/jobdata`)
+    .then(res=>res.json())
+    .then(result =>{
+      setIsData(result)
+      console.log(result)
+    });
+  },[])
   return (
     <>
       <div className="w-full max-w-[1800px] m-auto py-20 px-4 md:px-20 noselect">
@@ -84,12 +98,11 @@ const JobPage = () => {
               </p>
             </div>
             <div className="w-full flex flex-col gap-4">
-                <JobPageCard />
-                <JobPageCard/>
-                <JobPageCard/>
-                <JobPageCard/>
-                <JobPageCard/>
-
+                {
+                  isData.map((card)=>(
+                    <JobPageCard key={card.job_id}{...card}/>
+                  ))
+                }
             </div>
           </div>
         </div>

@@ -9,10 +9,10 @@ const CompanyForm3 = () => {
   const API_CALL = `http://localhost:4000`;
 
   const [isForm, setIsForm] = useState({
-    designation: "",
+    desigination: "",
     companyname: "",
-    jobtype: "",
     selecttype: "",
+    jobtype: "",
     location: "",
     startdate: "",
     annualCTC: "",
@@ -57,10 +57,9 @@ const CompanyForm3 = () => {
           </label>
           <input
             className="border outline-none rounded-sm px-2 py-2 "
-            id="designation"
+            id="desigination"
             type="text"
-            name="designation"
-            value={isForm.designation}
+            value={isForm.desigination}
             placeholder="Designation"
             onChange={handleChange}
           />
@@ -79,10 +78,9 @@ const CompanyForm3 = () => {
             Job type
           </label>
           <select
-            id="jobtype"
+            id="selecttype"
             className="border outline-none rounded-sm px-2 py-2"
-            name="jobtype"
-            value={isForm.jobtype}
+            value={isForm.selecttype}
             onChange={handleChange}
             required
           >
@@ -95,9 +93,9 @@ const CompanyForm3 = () => {
             Select type
           </label>
           <select
-            id="selecttype"
+            id="jobtype"
             className="border outline-none rounded-sm px-2 py-2"
-            value={isForm.selecttype}
+            value={isForm.jobtype}
             onChange={handleChange}
             required
           >
