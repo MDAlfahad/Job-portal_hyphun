@@ -1,7 +1,7 @@
 const express = require("express");
 const db = require("../config/db"); //  mysql connection
 const { v4: uuidv4 } = require("uuid");
-const {validate : Uuid} = require("uuid")
+const { validate: Uuid } = require("uuid");
 
 const postjob = express.Router();
 postjob.use(express.json());
@@ -11,13 +11,18 @@ postjob.post("/postjob", (req, res) => {
     desigination,
     companyname,
     jobtype,
-    selecttype,
+    locationtype,
+    worktype,
     location,
     startdate,
     annualCTC,
     experience,
+    certificate,
+    vacancies,
+    joboffering,
     applyby,
     aboutthisjob,
+    requirements,
     skills,
     aboutcompany,
   } = req.body;
@@ -25,22 +30,26 @@ postjob.post("/postjob", (req, res) => {
   const userid = uuidv4();
 
   const sql = `INSERT INTO job_postdata 
-    (job_id, job_desigination, company_name, job_type, job_location, job_workingtype, job_preferences, job_startdate, job_ctc, job_experience, job_lastdate, job_description, job_skills, about_company) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)`;
+    (job_id, job_desigination, company_name,job_location, location_type, job_workingtype, job_type, job_startdate, job_ctc, job_experience,
+    certifications, job_vacancies, job_offering, job_lastdate, job_description, job_requirements job_skills, about_company) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?)`;
 
   const values = [
     userid,
     desigination,
     companyname,
-    jobtype,
     location,
-    jobtype,
-    selecttype,
+    locationtype,
+    worktype,
     startdate,
     annualCTC,
     experience,
+    certificate,
+    vacancies,
+    joboffering,
     applyby,
     aboutthisjob,
+    requirements,
     skills,
     aboutcompany,
   ];

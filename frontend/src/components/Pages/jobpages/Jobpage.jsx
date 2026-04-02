@@ -100,7 +100,7 @@ const JobPage = () => {
             <div className="w-full flex flex-col gap-4">
                 {
                   isData.map((card)=>(
-                    <JobPageCard key={card.job_id}{...card}/>
+                    <JobPageCard key={card} {...card} />
                   ))
                 }
             </div>

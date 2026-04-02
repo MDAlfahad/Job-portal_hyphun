@@ -11,7 +11,6 @@ import Logo from "../../images/jio.png";
 import { useState } from "react";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { formatDistanceToNow } from "date-fns";
 
 
 
@@ -32,10 +31,6 @@ const JobPageCard = ({
     setClick(!Click);
   };
 
- const formattedDate = formatDistanceToNow(
-  new Date(posted_at.replace(" ", "T")),
-  { addSuffix: true }
-);
 
   return (
     <>
@@ -83,7 +78,7 @@ const JobPageCard = ({
         <div className="flex gap-4 items-center">
           <p className="flex items-center gap-2 border bg-blue-200 rounded-full px-2 py-[1px] text-secondary">
             <TimerReset strokeWidth={1.5} size={18} />
-           {formattedDate}
+           {posted_at}
           </p>
           <p className="flex items-center gap-2 border bg-gray-100 rounded-full px-2 py[1px]">
             {" "}

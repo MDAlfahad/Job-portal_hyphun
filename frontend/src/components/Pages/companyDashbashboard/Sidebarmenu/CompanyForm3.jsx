@@ -11,14 +11,19 @@ const CompanyForm3 = () => {
   const [isForm, setIsForm] = useState({
     desigination: "",
     companyname: "",
-    selecttype: "",
     jobtype: "",
+    locationtype: "",
+    worktype: "",
     location: "",
     startdate: "",
     annualCTC: "",
     experience: "",
+    certificate: "",
+    vacancies: "",
+    joboffering: "",
     applyby: "",
     aboutthisjob: "",
+    requirements: "",
     skills: "",
     aboutcompany: "",
   });
@@ -44,7 +49,7 @@ const CompanyForm3 = () => {
   return (
     <>
       <form
-        className="w-[700px] flex flex-col gap-2 items-center py-4 text-textcolor2"
+        className="w-[900px] flex flex-col gap-2 items-center py-4 text-black"
         onSubmit={handlEvent}
       >
         <h1 className="text-xl md:text-4xl font-semibold my-10 text-black">
@@ -74,13 +79,13 @@ const CompanyForm3 = () => {
             placeholder="Comapny Name"
             onChange={handleChange}
           />
-          <label htmlFor="jobtype" className="font-semibold ">
-            Job type
+          <label htmlFor="locationtype" className="font-semibold ">
+            Location Type
           </label>
           <select
-            id="selecttype"
+            id="locationtype"
             className="border outline-none rounded-sm px-2 py-2"
-            value={isForm.selecttype}
+            value={isForm.locationtype}
             onChange={handleChange}
             required
           >
@@ -89,20 +94,34 @@ const CompanyForm3 = () => {
             <option value="remote">remote</option>
             <option value="location">location</option>
           </select>
-          <label htmlFor="selecttype" className="font-semibold ">
-            Select type
+
+          <label htmlFor="jobtype" className="font-semibold ">
+            Job type
           </label>
           <select
             id="jobtype"
             className="border outline-none rounded-sm px-2 py-2"
             value={isForm.jobtype}
             onChange={handleChange}
+          >
+            <option value="select"></option>
+            <option value="workFromHome">Intership</option>
+            <option value="remote">Job</option>
+          </select>
+
+          <label htmlFor="worktype" className="font-semibold ">
+            Work type
+          </label>
+          <select
+            id="worktype"
+            className="border outline-none rounded-sm px-2 py-2"
+            value={isForm.worktype}
+            onChange={handleChange}
             required
           >
             <option value="select"></option>
-            <option value="workFromHome">Job</option>
-            <option value="remote">Intership</option>
-            <option value="location">Placement</option>
+            <option value="workFromHome">Part Time</option>
+            <option value="remote">Full time</option>
           </select>
           <label className="font-semibold " htmlFor="location">
             Select Location
@@ -116,11 +135,16 @@ const CompanyForm3 = () => {
             <option></option>
             {Citydata &&
               Citydata.cities.map((item, index) => (
-                <option key={index} value={item.city} className="px-2 py-2">
-                  {item.city}
+                <option key={index} value={item.City} className="px-2 py-2">
+                  {item.City}
+                  
                 </option>
+                
               ))}
+              
           </select>
+          
+
 
           <label className="font-semibold " htmlFor="startdate">
             Start date
@@ -151,11 +175,48 @@ const CompanyForm3 = () => {
           <input
             className="border outline-none rounded-sm px-2 py-2 "
             type="text"
-            placeholder="experience"
+            placeholder="Experience"
             id="experience"
             value={isForm.experience}
             onChange={handleChange}
           />
+
+          <label className="font-semibold " htmlFor="certificate">
+            Add Certificates
+          </label>
+          <input
+            className="border outline-none rounded-sm px-2 py-2 "
+            type="text"
+            placeholder="Add certificate"
+            id="certificate"
+            value={isForm.certificate}
+            onChange={handleChange}
+          />
+
+          <label className="font-semibold " htmlFor="vacancies">
+            No. of Vacancies
+          </label>
+          <input
+            className="border outline-none rounded-sm px-2 py-2 "
+            type="number"
+            placeholder="No. of vacancies"
+            id="vacancies"
+            value={isForm.vacancies}
+            onChange={handleChange}
+          />
+
+          <label className="font-semibold " htmlFor="joboffering">
+            Job Offer
+          </label>
+          <input
+            className="border outline-none rounded-sm px-2 py-2 "
+            type="number"
+            placeholder="Job offering amount in LPA"
+            id="joboffering"
+            value={isForm.joboffering}
+            onChange={handleChange}
+          />
+
           <label className="font-semibold " htmlFor="applyby">
             Apply By
           </label>
@@ -176,6 +237,18 @@ const CompanyForm3 = () => {
             value={isForm.aboutthisjob}
             onChange={handleChange}
           ></textarea>
+
+          <label className="font-semibold " htmlFor="requirements">
+            Job requirements
+          </label>
+          <textarea
+            className="border outline-none rounded-sm px-2 py-2 min-h-40 max-h-96"
+            id="requirements"
+            value={isForm.requirements}
+            onChange={handleChange}
+          ></textarea>
+
+
           <label className="font-semibold " htmlFor="skills">
             Skills required
           </label>
@@ -199,7 +272,7 @@ const CompanyForm3 = () => {
           ></textarea>
         </div>
         <div>
-          <Button text="Submit" type="submit"/>
+          <Button text="Submit" type="submit" />
         </div>
       </form>
     </>
