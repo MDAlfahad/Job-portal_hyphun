@@ -2,21 +2,29 @@ const express = require("express");
 const db = require("../config/db"); //  mysql connection
 const { v4: uuidv4 } = require("uuid");
 const { validate: Uuid } = require("uuid");
+const { decoded } = require("jsonwebtoken");
+const jobpostauth = require("../middleware/jobpostMiddleware");
+require("dotenv").config();
 
 const postjob = express.Router();
 postjob.use(express.json());
 
-postjob.post("/postjob", (req, res) => {
+// job post
+
+postjob.post("/postjob", jobpostauth, (req, res) => {
+  const user_id = req.user.id;
+  const job_id = uuidv4();
+
   const {
     desigination,
     companyname,
-    jobtype,
     locationtype,
     worktype,
     location,
     startdate,
     annualCTC,
     experience,
+    jobtype,
     certificate,
     vacancies,
     joboffering,
@@ -27,20 +35,19 @@ postjob.post("/postjob", (req, res) => {
     aboutcompany,
   } = req.body;
 
-  const userid = uuidv4();
-
   const sql = `INSERT INTO job_postdata 
-    (job_id, job_desigination, company_name,job_location, location_type, job_workingtype, job_type, job_startdate, job_ctc, job_experience,
-    certifications, job_vacancies, job_offering, job_lastdate, job_description, job_requirements job_skills, about_company) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?)`;
+      (job_id, job_desigination, company_name, job_location, location_type, job_workingtype, job_type, job_startdate, job_ctc, job_experience,
+      certifications, job_vacancies, job_offering, job_lastdate, job_description, job_requirements, job_skills, about_company, user_id) 
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
   const values = [
-    userid,
+    job_id,
     desigination,
     companyname,
     location,
     locationtype,
     worktype,
+    jobtype,
     startdate,
     annualCTC,
     experience,
@@ -52,6 +59,7 @@ postjob.post("/postjob", (req, res) => {
     requirements,
     skills,
     aboutcompany,
+    user_id,
   ];
 
   db.query(sql, values, (err, results) => {
@@ -66,10 +74,25 @@ postjob.post("/postjob", (req, res) => {
     res.status(201).json({
       status: true,
       message: "Job posted successfully",
-      job_id: userid,
+      job_id: job_id,
     });
   });
 });
+
+//job post data fetch sepratley
+
+postjob.get("/jobpostdata", jobpostauth, (req, res)=>{
+  const user_id = req.user.id;
+
+  db.query("SELECT * FROM job_postdata WHERE user_id = ?",
+    [user_id], (err, result)=>{
+      if(err) return res.status(500).json({ message: "DB error" });
+      res.json(result)
+    }
+  )
+})
+
+// job post data fetch
 
 postjob.get("/jobdata", (req, res) => {
   db.query("SELECT * FROM job_postdata", (err, result) => {
@@ -77,6 +100,8 @@ postjob.get("/jobdata", (req, res) => {
     res.json(result);
   });
 });
+
+// fetch job by id 
 postjob.get("/jobdata/:id", (req, res) => {
   const id = req.params.id;
 

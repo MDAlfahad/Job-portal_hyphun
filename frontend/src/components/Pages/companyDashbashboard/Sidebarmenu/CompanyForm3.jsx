@@ -34,12 +34,17 @@ const CompanyForm3 = () => {
       [e.target.id]: e.target.value,
     });
   };
-
+  
   const handlEvent = async (e) => {
     e.preventDefault();
 
     try {
-      const res = await axios.post(`${API_CALL}/api/postjob`, isForm);
+      const token = localStorage.getItem("token");
+      const res = await axios.post(`${API_CALL}/api/postjob`, isForm, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       alert(res.data.message);
     } catch (err) {
       alert(err.response?.data?.message || "Failed to submit data");
@@ -137,14 +142,9 @@ const CompanyForm3 = () => {
               Citydata.cities.map((item, index) => (
                 <option key={index} value={item.City} className="px-2 py-2">
                   {item.City}
-                  
                 </option>
-                
               ))}
-              
           </select>
-          
-
 
           <label className="font-semibold " htmlFor="startdate">
             Start date
@@ -247,7 +247,6 @@ const CompanyForm3 = () => {
             value={isForm.requirements}
             onChange={handleChange}
           ></textarea>
-
 
           <label className="font-semibold " htmlFor="skills">
             Skills required

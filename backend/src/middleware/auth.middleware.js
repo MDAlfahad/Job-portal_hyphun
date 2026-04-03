@@ -69,11 +69,11 @@ router.post("/login_users", (req, res) => {
 
         const token = jwt.sign(
           { id: user.user_id, role: user.auth_role,},
-          "this_is_jwt_secret",
-          { expiresIn: "1h" },
+          process.env.JWT_SECRET,
+          { expiresIn: "1d" },
         );
 
-        return res.json({ token, user_role: user.auth_role,  });
+        return res.json({ token, user_role: user.auth_role, });
       });
     },
   );
