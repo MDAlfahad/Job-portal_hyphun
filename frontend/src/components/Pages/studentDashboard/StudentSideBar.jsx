@@ -15,7 +15,7 @@ const StudentSideBar = ({ setActivePage, activePage }) => {
   const handlelogout = () => {
     localStorage.removeItem("role");
     localStorage.removeItem("token");
-    navigate("/loginpage");
+    navigate("/login-page");
   };
 
   const [show, setShow] = useState(true);

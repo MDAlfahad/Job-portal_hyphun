@@ -39,13 +39,13 @@ const Navbar = () => {
             </Link>
             <Link
               className="text-textcolor hover:text-secondary md:text-sm lg:text-[16px] transition-all duration-300 active:text-textcolor"
-              to="/placement"
+              to="/internships"
             >
-              Get placement
+              Internships
             </Link>
             <Link
               className="text-textcolor hover:text-secondary md:text-sm lg:text-[16px] transition-all duration-300 active:text-textcolor"
-              to="/jobpage"
+              to="/job-page"
             >
               Job
             </Link>
@@ -55,7 +55,7 @@ const Navbar = () => {
         <div className="flex items-center gap-6">
           {!role && (
             <button
-              onClick={() => navigate("/loginpage")}
+              onClick={() => navigate("/login-page")}
               className="hidden md:flex items-center gap-1 px-6 py-2 bg-secondary rounded-md text-md font-bold text-white"
             >
               LOGIN
@@ -80,7 +80,7 @@ const Navbar = () => {
           <div className=" flex flex-col bg-white">
             {!role && (
               <Link
-                to="loginpage"
+                to="login-page"
                 className="px-4 py-2 hover:bg-secondary hover:text-white"
                 href=""
               >
@@ -88,7 +88,7 @@ const Navbar = () => {
               </Link>
             )}
             <Link
-              to={role ==='admin'? "/admindashboard" : role==="company"? "/DashboardCompany": "/studentDashboard"}
+              to={role ==='admin'? "/admin-dashboard" : role==="company"? "/Dashboard-Company": "/student-Dashboard"}
               className="px-4 py-2 hover:bg-secondary hover:text-white"
             >
               DashBoard
@@ -108,13 +108,13 @@ const Navbar = () => {
           </Link>
           <Link
             className="text-textcolor font-semibold hover:text-white transition-all duration-300 hover:bg-secondary px-4 py-2"
-            to="/placement"
+            to="/internships"
           >
             Get placement
           </Link>
           <Link
             className="text-textcolor font-semibold hover:text-white transition-all duration-300 hover:bg-secondary px-4 py-2"
-            to="/jobpage"
+            to="/job-page"
           >
             Job
           </Link>

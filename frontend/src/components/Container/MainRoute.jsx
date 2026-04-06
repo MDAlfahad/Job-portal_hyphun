@@ -23,26 +23,26 @@ const MainRoute = () => {
         <Navbar />
         <Routes>
           <Route path="/" element={<Hero />} />
-          <Route path="/placement" element={<PlacementContainer />} />
-          <Route path="/jobpage" element={<JobPage />} />
+          <Route path="/internships" element={<PlacementContainer />} />
+          <Route path="/job-page" element={<JobPage />} />
           {/* -----------------login page------------------------------- */}
-          <Route path="/loginpage" element={<UserLoginPage />} />
+          <Route path="/login-page" element={<UserLoginPage />} />
           {/* --------------- signup page----------------------------- */}
-          <Route path="/signup" element={<UserSignupPage />} />
-          <Route path="companySigup" element={<CompanySignupPage />} />
+          <Route path="/user-signup" element={<UserSignupPage />} />
+          <Route path="company-signup" element={<CompanySignupPage />} />
           {/* -----------------------------student Dasboard------------------------- */}
           <Route element={<ProtectedRoute allowedRoles={"user"} />}>
-            <Route path="/studentDashboard" element={<StudentDashboard />} />
+            <Route path="/student-Dashboard" element={<StudentDashboard />} />
           </Route>
           <Route element={<ProtectedRoute allowedRoles={["admin"]} />}>
-            <Route path="/admindashboard" element={<AdminDashboard />} />
+            <Route path="/admin-dashboard" element={<AdminDashboard />} />
           </Route>
           <Route element={<ProtectedRoute allowedRoles={["company"]} />}>
             <Route path="/handlenavigate" element={<CompanyDashboard />} />
           </Route>
-          <Route path="/jobpostpage" element={<JobPostPage />} />
-          <Route path="/DashboardCompany" element={<Dashboard />} />
-          <Route path="/jobpageroute/:id" element={<JobPageRoute />} />
+          <Route path="/job-post-page" element={<JobPostPage />} />
+          <Route path="/Dashboard-Company" element={<Dashboard />} />
+          <Route path="/job-page-route/:id" element={<JobPageRoute />} />
         </Routes>
       </Router>
     </>

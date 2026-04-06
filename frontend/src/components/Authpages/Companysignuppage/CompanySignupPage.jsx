@@ -41,7 +41,7 @@ const CompanySignupPage = () => {
   //navigate page 
 
   const handlenavigate =()=>{
-    navigate("/loginpage")
+    navigate("/login-page")
   }
 
   // const [password, setpassword] = useState("");
@@ -127,7 +127,7 @@ const CompanySignupPage = () => {
               </div>
               <p className="text-sm md:text-[16px] py-4 text-center">
                 Already have Account?
-                <Link className="text-secondary" to="/loginpage">
+                <Link className="text-secondary" to="/login-page">
                   Login
                 </Link>
                 <span></span>

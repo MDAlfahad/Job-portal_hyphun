@@ -82,7 +82,7 @@ const FooterContainer = () => {
               <h1 className="text-xl font-semibold text-textcolor">LInks</h1>
               <Link
                 className="hover:text-secondary transition duration-300"
-                to="/loginpage"
+                to="/login-page"
               >
                 Post a Job
               </Link>

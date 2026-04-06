@@ -26,13 +26,13 @@ const CompanyDashboard = () => {
       <div className="pt-20 max-w-[1800px] w-full m-auto md:px-12 px-6 py-6 flex flex-col items-center justify-center noselect">
         <div className="w-full flex gap-6 py-4 border-b-2 ">
           <p className="text-md font-semibold hover:text-secondary cursor-pointer"
-          onClick={()=>navigate("/DashboardCompany")}
+          onClick={()=>navigate("/Dashboard-Company")}
           >
             Dashboard
           </p>
           <p 
           className="text-md font-semibold hover:text-secondary cursor-pointer"
-          onClick={()=> navigate("/jobpostpage")}
+          onClick={()=> navigate("/job-post-page")}
           >
             Job & intership Post
           </p>

@@ -1,7 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-const jobpostauth = (req, res, next) => {
-  console.log("HEADERS:", req.headers); 
+const jobpostauth = (req, res, next) => { 
 
   const authHeader = req.headers["authorization"];
 

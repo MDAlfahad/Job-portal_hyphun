@@ -19,11 +19,12 @@ const UserLoginPage = () => {
         password,
       });
       localStorage.setItem("token", login.data.token);
-      localStorage.setItem("role", login.data.user_role);
+      localStorage.setItem("role", login.data.user.auth_role);
 
-      if (login.data.user_role === "admin") navigate("/admindashboard");
-      else if (login.data.user_role === "company")
-        navigate("/DashboardCompany");
+      const role = login.data.user.auth_role;
+      
+      if (role === "admin") navigate("/admin-dashboard");
+      else if (role === "company") navigate("/Dashboard-Company");
       else {
         navigate("/");
       }
@@ -78,11 +79,11 @@ const UserLoginPage = () => {
               Don't have an account? Create
               <span>
                 ({" "}
-                <Link to="/signup" className="text-secondary">
+                <Link to="/user-signup" className="text-secondary">
                   Student
                 </Link>
                 /
-                <Link to="/companySigup" className="text-secondary">
+                <Link to="/company-signup" className="text-secondary">
                   Company
                 </Link>
                 )

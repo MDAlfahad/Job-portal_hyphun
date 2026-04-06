@@ -37,7 +37,9 @@ const JobPageRoute = () => {
       });
   }, [id]);
   if (!jobs) return <h1>Loding....</h1>;
-  // data formate
+
+
+  // data formatte
   const formattedDate = formatDistanceToNow(
     new Date(jobs.posted_at.replace(" ", "T")),
     { addSuffix: true },
@@ -155,17 +157,9 @@ const JobPageRoute = () => {
               <p>{jobs.job_skills}</p>
             </div>
             <div className="flex flex-col gap-2">
-              <h1>Earn certificates in this skills </h1>
+              <h1 className="font-semibold text-black" >Earn certificates in this skills </h1>
               <div className="flex items-center gap-4">
-                <span className="border px-2 py-0.5 bg-gray-200 rounded-full text-sm text-secondary font-semibold">
-                  <h1>Learn Business Communication</h1>
-                </span>
-                <span className="border px-2 py-0.5 bg-gray-200 rounded-full text-sm text-secondary font-semibold">
-                  <h1>Learn Digital Marketing</h1>
-                </span>
-                <span className="border px-2 py-0.5 bg-gray-200 rounded-full text-sm text-secondary font-semibold">
-                  <h1>Learn Business Analytics</h1>
-                </span>
+                <p>{jobs.certifications}</p>
               </div>
             </div>
             <div className="flex flex-col gap-2">

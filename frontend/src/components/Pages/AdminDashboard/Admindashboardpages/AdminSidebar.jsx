@@ -28,7 +28,7 @@ const AdminSidebar = ({ setActivePage, activePage }) => {
     const handlelogut =()=>{
       localStorage.removeItem("role");
       localStorage.removeItem("token")
-      navigate("/loginpage")
+      navigate("/login-page")
     }
 
   return (

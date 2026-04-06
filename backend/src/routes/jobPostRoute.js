@@ -64,7 +64,6 @@ postjob.post("/postjob", jobpostauth, (req, res) => {
 
   db.query(sql, values, (err, results) => {
     if (err) {
-      console.error("Database error:", err);
       return res.status(500).json({
         status: false,
         message: "Server error",

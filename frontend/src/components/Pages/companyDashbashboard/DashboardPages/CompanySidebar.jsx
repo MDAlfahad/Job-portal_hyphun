@@ -23,14 +23,14 @@ const CompanySidebar = ({ setActivePage, activePage }) => {
   //handle jobpost
 
   const handlenavigate = () => {
-    navigate("/jobpostpage");
+    navigate("/job-post-page");
   };
 
   // handle for logout
   const handlelogout = () => {
     localStorage.removeItem("role");
     localStorage.removeItem("role");
-    navigate("/loginpage");
+    navigate("/login-page");
   };
 
   return (

@@ -100,7 +100,7 @@ const UserLSignupPage = () => {
             <p className="text-sm md:text-[16px] py-4 text-center">
               Already have Account?
               <span>
-                <Link to="/loginpage" className="text-secondary">
+                <Link to="/login-page" className="text-secondary">
                   {" "}
                   Login
                 </Link>

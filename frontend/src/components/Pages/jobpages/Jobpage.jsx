@@ -16,7 +16,6 @@ const JobPage = () => {
     .then(res=>res.json())
     .then(result =>{
       setIsData(result)
-      console.log(result)
     });
   },[])
   return (
@@ -100,7 +99,7 @@ const JobPage = () => {
             <div className="w-full flex flex-col gap-4">
                 {
                   isData.map((card)=>(
-                    <JobPageCard key={card} {...card} />
+                    <JobPageCard key={card.id} {...card} />
                   ))
                 }
             </div>

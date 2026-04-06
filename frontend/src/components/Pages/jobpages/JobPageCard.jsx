@@ -11,8 +11,7 @@ import Logo from "../../images/jio.png";
 import { useState } from "react";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { Link } from "react-router-dom";
-
-
+import { formatDistanceToNow } from "date-fns";
 
 const JobPageCard = ({
   job_id,
@@ -30,6 +29,10 @@ const JobPageCard = ({
   const handleclick = () => {
     setClick(!Click);
   };
+  const formattedate = formatDistanceToNow(
+    new Date(posted_at.replace(" ", "T")),
+    {addSuffix: true}, 
+  );
 
 
   return (
@@ -38,7 +41,7 @@ const JobPageCard = ({
         <div className="flex justify-between items-center">
           <div className="flex flex-col gap-2">
             <h1 className="text-2xl md:text-3xl font-semibold ">
-              { job_desigination}
+              {job_desigination}
             </h1>
             <div className="flex items-center md:gap-10 gap-2">
               <p className="text-textcolor2">{company_name}</p>
@@ -52,7 +55,7 @@ const JobPageCard = ({
             <img src={Logo} width={100} alt="" />
           </div>
         </div>
-        <Link to={`/jobpageroute/${job_id}`}>
+        <Link to={`/job-page-route/${job_id}`}>
           <div className="flex flex-col gap-2">
             <div className="flex gap-4 items-center">
               <p className="text-[14px] font-semibold text-textcolor flex gap-2 items-center">
@@ -78,7 +81,7 @@ const JobPageCard = ({
         <div className="flex gap-4 items-center">
           <p className="flex items-center gap-2 border bg-blue-200 rounded-full px-2 py-[1px] text-secondary">
             <TimerReset strokeWidth={1.5} size={18} />
-           {posted_at}
+            {formattedate}
           </p>
           <p className="flex items-center gap-2 border bg-gray-100 rounded-full px-2 py[1px]">
             {" "}
