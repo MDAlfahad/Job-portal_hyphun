@@ -1,8 +1,8 @@
 const express = require("express");
 const authRoute = require("../src/middleware/auth.middleware");
 const jobpost = require("./routes/jobPostRoute");
-const userRouter = require("./routes/userDetails");
-const jobdata = require("./routes/jobData");
+const userRouter = require("./routes/userDetailsRoute");
+const jobdata = require("./routes/jobDataRoute");
 const cors = require("cors");
 
 const app = express();

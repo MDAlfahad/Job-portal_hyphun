@@ -9,6 +9,7 @@ import {
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TbFilePencil } from "react-icons/tb";
+import useAuthStore from "../../../../Store/userAuth";
 
 const CompanySidebar = ({ setActivePage, activePage }) => {
   const navigate = useNavigate();
@@ -27,9 +28,9 @@ const CompanySidebar = ({ setActivePage, activePage }) => {
   };
 
   // handle for logout
+   const logout = useAuthStore((state)=> state.logout);
   const handlelogout = () => {
-    localStorage.removeItem("role");
-    localStorage.removeItem("role");
+    logout()
     navigate("/login-page");
   };
 
@@ -81,23 +82,15 @@ const CompanySidebar = ({ setActivePage, activePage }) => {
             {show && <p>Post job & internship</p>}
           </div>
 
-          {/* 
-          <div
-            className={menuClass("savedform")}
-            onClick={() => setActivePage("savedform")}
-            title={!show ? "Saved Forms" : ""}
-          >
-            <Bookmark size={22} />
-            {show && <p>Saved</p>}
-          </div> */}
         </div>
 
         <div
+        onClick={handlelogout}
           className="flex items-center gap-3 px-4 py-3 cursor-pointer hover:bg-gray-200 rounded-md"
           title={!show ? "Logout" : ""}
         >
-          <LogOut size={22} />
-          {show && <p onClick={handlelogout}>Logout</p>}
+          <LogOut size={22} />  
+          {show && <p >Logout</p>}
         </div>
       </div>
     </div>

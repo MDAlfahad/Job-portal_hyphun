@@ -2,11 +2,13 @@ import { useState } from "react";
 import Citydata from "../../../../API/cities.json";
 import axios from "axios";
 import Button from "../../../Components/buttons/ButtonComponents";
+import useAuthStore from "../../../../Store/userAuth";
 
 const CompanyForm3 = () => {
   //routing job post data;
 
   const API_CALL = `http://localhost:4000`;
+  const{user} = useAuthStore();
 
   const [isForm, setIsForm] = useState({
     desigination: "",
@@ -80,7 +82,7 @@ const CompanyForm3 = () => {
             className="border outline-none rounded-sm px-2 py-2 "
             type="text"
             id="companyname"
-            value={isForm.companyname}
+            value={user.user_name}
             placeholder="Comapny Name"
             onChange={handleChange}
           />

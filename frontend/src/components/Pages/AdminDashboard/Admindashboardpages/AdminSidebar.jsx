@@ -12,6 +12,7 @@ import { GiBellShield } from "react-icons/gi";
 import { HiBuildingOffice } from "react-icons/hi2";
 import { SiGoogleforms } from "react-icons/si";
 import { useNavigate } from "react-router-dom";
+import useAuthStore from "../../../../Store/userAuth";
 
 const AdminSidebar = ({ setActivePage, activePage }) => {
 
@@ -19,6 +20,7 @@ const AdminSidebar = ({ setActivePage, activePage }) => {
 
   //acive side bar
   const [show, setShow] = useState(true);
+  const logout = useAuthStore((state)=> state.logout) 
 
   const menuClass = (page) =>
     `flex items-center gap-3 px-4 py-3 cursor-pointer rounded-md transition-all duration-300 ${
@@ -26,8 +28,7 @@ const AdminSidebar = ({ setActivePage, activePage }) => {
     }`;
 
     const handlelogut =()=>{
-      localStorage.removeItem("role");
-      localStorage.removeItem("token")
+      logout()
       navigate("/login-page")
     }
 

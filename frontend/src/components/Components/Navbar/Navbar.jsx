@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { UserRound, Bell } from "lucide-react";
 import { HiOutlineBars3BottomRight } from "react-icons/hi2";
 import { useState, useEffect } from "react";
+import useAuthStore from "../../../Store/userAuth";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -16,14 +17,10 @@ const Navbar = () => {
     setIsUser((show) => !show);
   };
 
-  // -----login status------
-  const [role, setRole] = useState(null);
+  // -----login status---
 
-  useEffect(() => {
-    const storedRole = localStorage.getItem("role");
-    setRole(storedRole);
-    
-  }, []);
+  const { user, isAuthenticated } = useAuthStore();
+  const role = user?.auth_role;
 
   return (
     <div className="w-full fixed bg-white border z-40">
@@ -53,7 +50,7 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-6">
-          {!role && (
+          {!isAuthenticated && (
             <button
               onClick={() => navigate("/login-page")}
               className="hidden md:flex items-center gap-1 px-6 py-2 bg-secondary rounded-md text-md font-bold text-white"
@@ -78,21 +75,29 @@ const Navbar = () => {
           className={`absolute top-full right-5 shadow-lg border border-gray-100 ${isUser ? " translate-y-0" : "max-h-0 hidden -translate-y-0"}`}
         >
           <div className=" flex flex-col bg-white">
-            {!role && (
+            {!isAuthenticated ? (
               <Link
-                to="login-page"
+                to="/login-page"
                 className="px-4 py-2 hover:bg-secondary hover:text-white"
-                href=""
+                onClick={() => setIsUser(false)}
               >
                 Login
               </Link>
+            ) : (
+              <Link
+                to={
+                  role === "admin"
+                    ? "/admin-dashboard"
+                    : role === "company"
+                      ? "/Dashboard-Company"
+                      : "/student-Dashboard"
+                }
+                className="px-4 py-2 hover:bg-secondary hover:text-white"
+                onClick={() => setIsClick(false)}
+              >
+                DashBoard
+              </Link>
             )}
-            <Link
-              to={role ==='admin'? "/admin-dashboard" : role==="company"? "/Dashboard-Company": "/student-Dashboard"}
-              className="px-4 py-2 hover:bg-secondary hover:text-white"
-            >
-              DashBoard
-            </Link>
           </div>
         </div>
 

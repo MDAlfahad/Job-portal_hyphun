@@ -1,7 +1,20 @@
 import { UserRoundPen } from "lucide-react";
 import AdminProfileCard from "./adminprofilepagecard/AdminPorfilecard";
+import useAuthStore from "../../../../Store/userAuth";
+import useJobStore from "../../../../Store/jobStore";
+import { useEffect } from "react";
 
 const AdminProfilePage = () => {
+
+  const {user, token} = useAuthStore();
+  const {jobs, fetchjobs} = useJobStore();
+
+   useEffect(() => {
+      if (token &&user?.auth_role) {
+        fetchjobs(token, user.auth_role);
+      }
+    }, [token, user?.auth_role, fetchjobs]);
+  
   return (
     <>
       <div className="bg-gray-100 w-full h-[100vh] overflow-y-auto px-6 py-6">
@@ -9,7 +22,7 @@ const AdminProfilePage = () => {
           <div className="flex justify-between items-center ">
             <AdminProfileCard 
             heading="Total user"
-            number="100+"
+            number={user?.length || 0}
             text="Toal Active user"/>
             <AdminProfileCard
             heading="Total Companies"
@@ -21,7 +34,7 @@ const AdminProfilePage = () => {
             text="Toal forms"/>
             <AdminProfileCard
             heading="Total Job posted"
-            number="100+"
+            number={jobs?.length > 0 ? jobs.length : "0"}
             text="Toal posted job"/>
           </div>
           <div className="my-4 border px-6 py-6 bg-white rounded-xl shadow-lg">
@@ -35,15 +48,15 @@ const AdminProfilePage = () => {
             <div className="flex  gap-20 px-2">
               <div>
                 <p className="text-md text-textcolor2">Name</p>
-                <p className="text-lg font-semibold p-1">Alfahad khan</p>
+                <p className="text-lg font-semibold p-1">{user?.user_name || "Loading...."}</p>
               </div>
               <div>
                 <p className="text-md text-textcolor2">Email</p>
-                <p className="text-lg font-semibold p-1">alfahadkhan715@gamil.com</p>
+                <p className="text-lg font-semibold p-1">{user?.user_email || "Loading...."}</p>
               </div>
               <div>
-                <p className="text-md text-textcolor2">Phone number</p>
-                <p className="text-lg font-semibold p-1">+91 6260379325</p>
+                <p className="text-md text-textcolor2">Admin </p>
+                <p className="text-lg font-semibold p-1">{user?.auth_role || "Loading...."}</p>
               </div>
             </div>
           </div>

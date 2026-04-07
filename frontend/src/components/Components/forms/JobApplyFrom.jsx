@@ -41,8 +41,8 @@ const JobApplyForm = ({ className, onClose }) => {
 
   return (
     <div className="fixed top-0 left-0 w-full h-full bg-black/40 backdrop-blur-sm overflow-y-auto z-50">
-      <div className="min-h-full flex justify-center items-start pt-10 pb-10">
-        <div className="flex flex-col gap-2 bg-white w-[1100px] border  rounded-lg ">
+      <div className="min-h-full flex justify-center items-start pt-10 pb-10 ">
+        <div className="flex flex-col gap-2 bg-white w-[1100px] border  rounded-lg overflow-hidden ">
           <div className="flex justify-between py-6 bg-gray-100 border-b p-8 items-center">
             <h1 className="text-xl md:text-3xl text-black ml-60 font-semibold">
               Applying to {isJobData.job_desigination} {isJobData.job_type}

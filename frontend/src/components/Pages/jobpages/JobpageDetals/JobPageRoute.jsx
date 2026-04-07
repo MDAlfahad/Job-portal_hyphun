@@ -13,48 +13,63 @@ import Button from "../../../Components/buttons/ButtonComponents";
 import { IoBookmark, IoBookmarkOutline } from "react-icons/io5";
 import Footer from "../../HeroContaner/FooterContainer";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { formatDistanceToNow } from "date-fns";
 import JobApplyForm from "../../../Components/forms/JobApplyFrom";
+import useJobStore from "../../../../Store/jobStore";
+import userAuth from "../../../../Store/userAuth";
 
 const JobPageRoute = () => {
   const API_CALL = `http://localhost:4000`;
   const { id } = useParams();
-  const [jobs, setJobs] = useState(null);
+  const [job, setJob] = useState(null);
   const [ischange, setischange] = useState(true);
   const [isApply, setIsApply] = useState(false);
+  const navigate = useNavigate();
 
+  //zustand store
+  const { jobs: alljobs, fetchjobs } = useJobStore();
+  const { user } = userAuth();
+
+  // job postAPI
   useEffect(() => {
-    fetch(`${API_CALL}/api/jobdata/${id}`)
-      .then((res) => res.json())
-      .then((result) => {
-        setJobs(result);
-      })
-      .catch((error) => {
-        console.error("Fetch error:", error);
-        setJobs(null);
-      });
-  }, [id]);
-  if (!jobs) return <h1>Loding....</h1>;
+    const cahched_job = alljobs.find(
+      (item) => String(item.job_id || item.id) === String(id),
+    );
 
+    if (cahched_job) {
+      setJob(cahched_job);
+    } else {
+      fetch(`${API_CALL}/api/jobdata/${id}`)
+        .then((res) => res.json())
+        .then((result) => {
+          setJob(result);
+        })
+        .catch((error) => {
+          console.error("Fetch error:", error);
+          setJob(null);
+        });
+    }
+  }, [id, alljobs]);
+  if (!job) return <h1>Loding....</h1>;
 
   // data formatte
   const formattedDate = formatDistanceToNow(
-    new Date(jobs.posted_at.replace(" ", "T")),
+    new Date(job.posted_at.replace(" ", "T")),
     { addSuffix: true },
   );
 
   return (
     <>
       {/* // Apply from  */}
-      {isApply && <JobApplyForm onClose={()=> setIsApply(false)}  />}
+      {isApply && <JobApplyForm onClose={() => setIsApply(false)} />}
 
       {/* //job post details  */}
       <div className={isApply ? "blur pointer-events-none" : ""}>
         <div className="w-full max-w-[1800px] m-auto flex flex-col items-center pt-20 text-textcolor2 relative">
           <h1 className="text-2xl md:text-4xl font-semibold pt-10 text-black ">
-            {jobs.job_desigination}
+            {job.job_desigination}
           </h1>
 
           <div className="border w-[1000px] p-6 rounded-md flex flex-col gap-4 my-20 ">
@@ -62,16 +77,16 @@ const JobPageRoute = () => {
               <TrendingUp
                 strokeWidth={1.5}
                 size={16}
-                className="text-secondary"  
+                className="text-secondary"
               />
               <p className="text-md">Actively hiring</p>
             </div>
             <div className="flex justify-between items-center">
               <div className="flex flex-col ">
                 <h1 className="text-gray-800 font-semibold text-xl ">
-                  {jobs.job_desigination}
+                  {job.job_desigination}
                 </h1>
-                <p className="text-sm">{jobs.company_name}</p>
+                <p className="text-sm">{job.company_name}</p>
               </div>
               <div>
                 <p>company logo</p>
@@ -80,7 +95,7 @@ const JobPageRoute = () => {
 
             <div className="flex gap-1 items-center">
               <MapPin strokeWidth={1.5} size={16} />
-              <h1>Bhilai, Chhattisgarh</h1>
+              <h1>{job.job_location}</h1>
             </div>
             <div className="flex items-center justify-between">
               <div className="text-center">
@@ -88,28 +103,28 @@ const JobPageRoute = () => {
                   <CalendarClock strokeWidth={1.5} size={16} />
                   <h1> Start Date</h1>
                 </span>
-                <p>{jobs.job_startdate}</p>
+                <p>{job.job_startdate}</p>
               </div>
               <div className="text-center">
                 <span className="flex items-center gap-1">
                   <IndianRupee strokeWidth={1.5} size={16} />
                   <h1>CTC (annual)</h1>
                 </span>
-                <p>{jobs.job_ctc}</p>
+                <p>{job.job_ctc}</p>
               </div>
               <div className="text-center">
                 <span className="flex items-center gap-1">
                   <Briefcase strokeWidth={1.5} size={16} />
                   <h1>Experience</h1>
                 </span>
-                <p>{jobs.job_experience}</p>
+                <p>{job.job_experience}</p>
               </div>
               <div className="text-center">
                 <span className="flex items-center gap-1">
                   <CalendarClock strokeWidth={1.5} size={16} />
                   <h1>Apply by</h1>
                 </span>
-                <p>{jobs.Job_lastdate}</p>
+                <p>{job.Job_lastdate}</p>
               </div>
             </div>
             <div className="flex gap-4 items-center">
@@ -118,7 +133,7 @@ const JobPageRoute = () => {
                 <p>{formattedDate}</p>
               </span>
               <span className="bg-gray-200 px-4 py-0.5 rounded-full">
-                {jobs.job_type}
+                {job.job_type}
               </span>
             </div>
             <div className="flex justify-between items-center ">
@@ -139,7 +154,11 @@ const JobPageRoute = () => {
                     )}
                   </p>
                 </div>
-                <Button text="Apply now" onClick={() => setIsApply(!isApply)} />
+                
+                  <Button
+                    text="Apply now"
+                    onClick={() => user? setIsApply(!isApply): navigate("/login-page")}
+                  />
               </div>
             </div>
             <hr />
@@ -148,18 +167,20 @@ const JobPageRoute = () => {
                 About this job
               </h1>
               <p>Key Responsibilities</p>
-              <div>{jobs.job_description}</div>
+              <div>{job.job_description}</div>
             </div>
             <div>
               <h1 className="text-md font-semibold text-black">
                 Skills required
               </h1>
-              <p>{jobs.job_skills}</p>
+              <p>{job.job_skills}</p>
             </div>
             <div className="flex flex-col gap-2">
-              <h1 className="font-semibold text-black" >Earn certificates in this skills </h1>
+              <h1 className="font-semibold text-black">
+                Earn certificates in this skills{" "}
+              </h1>
               <div className="flex items-center gap-4">
-                <p>{jobs.certifications}</p>
+                <p>{job.certifications}</p>
               </div>
             </div>
             <div className="flex flex-col gap-2">
@@ -170,7 +191,7 @@ const JobPageRoute = () => {
               </p>
               <div>
                 <h1 className="text-black font-semibold">Salary</h1>
-                <p>Annual CTC: {jobs.job_ctc}</p>
+                <p>Annual CTC: {job.job_ctc}</p>
               </div>
               <div>
                 <h1 className="text-black font-semibold">Number of opening</h1>
@@ -179,10 +200,10 @@ const JobPageRoute = () => {
             </div>
             <div>
               <h1 className="text-black font-semibold">About (company name)</h1>
-              <p>{jobs.about_company}</p>
+              <p>{job.about_company}</p>
             </div>
             <div className="flex justify-center">
-              <Button text="Apply Now" onClick={()=> setIsApply(!isApply)} />
+              <Button text="Apply Now" onClick={() => user? setIsApply(!isApply) : navigate("/login-page")} />
             </div>
           </div>
         </div>

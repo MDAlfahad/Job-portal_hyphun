@@ -74,7 +74,7 @@ router.post("/login_users", (req, res) => {
         );
         const { user_id, user_password, ...safeUser } = user;
 
-        return res.json({ token, role: user.auth_role, user: safeUser });
+         res.json({ token,user:safeUser});
       });
     },
   );

@@ -7,14 +7,15 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useAuthStore from "../../../Store/userAuth";
 
 const StudentSideBar = ({ setActivePage, activePage }) => {
   const navigate = useNavigate();
   // multiple pages routing
 
+  const logout = useAuthStore((state) => state.logout);
   const handlelogout = () => {
-    localStorage.removeItem("role");
-    localStorage.removeItem("token");
+    logout();
     navigate("/login-page");
   };
 

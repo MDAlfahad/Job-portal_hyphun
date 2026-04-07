@@ -3,21 +3,16 @@ import Citydata from "../../../API/cities.json";
 import Button from "../../Components/buttons/ButtonComponents";
 import JobPageCard from "./JobPageCard";
 import FooterContainer from "../HeroContaner/FooterContainer";
-import { useState } from "react";
+
 import { useEffect } from "react";
+import useJobStore from "../../../Store/jobStore";
 
 const JobPage = () => {
-  const API_CALL = `http://localhost:4000`
+  const { jobs, fetchjobs } = useJobStore();
 
-  const[isData, setIsData] = useState([]);
-
-  useEffect(()=>{
-    fetch(`${API_CALL}/api/jobdata`)
-    .then(res=>res.json())
-    .then(result =>{
-      setIsData(result)
-    });
-  },[])
+  useEffect(() => {
+    fetchjobs();
+  }, [fetchjobs]);
   return (
     <>
       <div className="w-full max-w-[1800px] m-auto py-20 px-4 md:px-20 noselect">
@@ -29,8 +24,16 @@ const JobPage = () => {
               Filter
             </h1>
             <div className="flex items-center w-full border overflow-hidden">
-              <input className="w-full px-2 py-2 outline-none "type="search" placeholder="e.g Frontend Developer, Bhilai" />
-              <Search strokeWidth={2} size={23} className="bg-secondary h-full w-10 p-2 text-white"/>
+              <input
+                className="w-full px-2 py-2 outline-none "
+                type="search"
+                placeholder="e.g Frontend Developer, Bhilai"
+              />
+              <Search
+                strokeWidth={2}
+                size={23}
+                className="bg-secondary h-full w-10 p-2 text-white"
+              />
             </div>
             <div>
               <div className="flex flex-col ">
@@ -91,23 +94,23 @@ const JobPage = () => {
           {/* --------------------job posted area--------------------------- */}
           <div className="flex flex-col md:px-10 items-center w-full overflow-y-auto h-[80vh] md:h-screen">
             <div className="text-center py-6">
-              <h1 className="text-2xl md:text-3xl font-semibold"> 100+ Job posted</h1>
+              <h1 className="text-2xl md:text-3xl font-semibold">
+                {" "}
+                100+ Job posted
+              </h1>
               <p className="text-sm md:text-lg">
                 Search and Apply to Latest Job Vacancies & Openings in India
               </p>
             </div>
             <div className="w-full flex flex-col gap-4">
-                {
-                  isData.map((card)=>(
-                    <JobPageCard key={card.id} {...card} />
-                  ))
-                }
+              {jobs.map((card) => (
+                <JobPageCard key={card.id} {...card} />
+              ))}
             </div>
           </div>
         </div>
-        
       </div>
-      <FooterContainer/>
+      <FooterContainer />
     </>
   );
 };

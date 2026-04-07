@@ -3,6 +3,8 @@ import { FcGoogle } from "react-icons/fc";
 import Button from "../../Components/buttons/ButtonComponents";
 import { useState } from "react";
 import axios from "axios";
+import useAuthStore from "../../../Store/userAuth";
+
 
 const UserLoginPage = () => {
   const API_CALL = `http://localhost:4000`;
@@ -10,6 +12,7 @@ const UserLoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const setAuth = useAuthStore((state)=> state.setAuth)
 
   const handlelogin = async (e) => {
     e.preventDefault();
@@ -18,13 +21,13 @@ const UserLoginPage = () => {
         email,
         password,
       });
-      localStorage.setItem("token", login.data.token);
-      localStorage.setItem("role", login.data.user.auth_role);
 
-      const role = login.data.user.auth_role;
+      const{token, user} = login.data;
+
+      setAuth(user, token);
       
-      if (role === "admin") navigate("/admin-dashboard");
-      else if (role === "company") navigate("/Dashboard-Company");
+      if (user.auth_role === "admin") navigate("/admin-dashboard");
+      else if (user.auth_role === "company") navigate("/Dashboard-Company");
       else {
         navigate("/");
       }
