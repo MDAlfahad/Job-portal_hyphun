@@ -5,7 +5,7 @@ const app = express();
 app.use(express.json());
 const userauth = express.Router();
 
-userauth.post("/user-count", (req, res) => {
+userauth.get("/user-count", (req, res) => {
   db.query(
     "SELECT auth_role, COUNT(*) as count FROM user_logindata GROUP BY auth_role",
     (err, result) => {
@@ -17,7 +17,9 @@ userauth.post("/user-count", (req, res) => {
         admin: 0,
       };
       result.forEach((item) => {
-        stats[item.auth_role] = item.count;
+        if (stats.hasOwnProperty(item.auth_role)) {
+            stats[item.auth_role] = item.count;
+        }
       });
       res.json(stats);
     },

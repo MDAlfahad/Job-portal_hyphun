@@ -3,16 +3,20 @@ import AdminProfileCard from "./adminprofilepagecard/AdminPorfilecard";
 import useAuthStore from "../../../../Store/userAuth";
 import useJobStore from "../../../../Store/jobStore";
 import { useEffect } from "react";
+import useAdminStore from "../../../../Store/adminStore";
 
 const AdminProfilePage = () => {
 
   const {user, token} = useAuthStore();
   const {jobs, fetchjobs} = useJobStore();
+  const{adminStats,fetchAdminStats} = useAdminStore();
 
    useEffect(() => {
       if (token &&user?.auth_role) {
         fetchjobs(token, user.auth_role);
       }
+      fetchAdminStats();
+      
     }, [token, user?.auth_role, fetchjobs]);
   
   return (
@@ -22,7 +26,7 @@ const AdminProfilePage = () => {
           <div className="flex justify-between items-center ">
             <AdminProfileCard 
             heading="Total user"
-            number={user?.length || 0}
+            number={adminStats?.user || 0}
             text="Toal Active user"/>
             <AdminProfileCard
             heading="Total Companies"
