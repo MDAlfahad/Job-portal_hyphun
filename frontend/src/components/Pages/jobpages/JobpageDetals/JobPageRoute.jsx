@@ -30,7 +30,7 @@ const JobPageRoute = () => {
   //zustand store
   const { jobs: alljobs, fetchjobs } = useJobStore();
   const { user } = userAuth();
-  const {id} = useParams()
+  const { id } = useParams();
 
   // job postAPI
   useEffect(() => {
@@ -51,16 +51,15 @@ const JobPageRoute = () => {
           setJob(null);
         });
     }
-  }, [id,  alljobs]);
+  }, [id, alljobs]);
   if (!job) return <h1>Loding....</h1>;
 
   // data formatte
   const formattedDate = job?.posted_at
-  ? formatDistanceToNow(
-      new Date(job.posted_at.replace(" ", "T")),
-      { addSuffix: true }
-    )
-  : "Date unavailable";
+    ? formatDistanceToNow(new Date(job.posted_at.replace(" ", "T")), {
+        addSuffix: true,
+      })
+    : "Date unavailable";
 
   return (
     <>
@@ -69,117 +68,119 @@ const JobPageRoute = () => {
 
       {/* //job post details  */}
       <div className={isApply ? "blur pointer-events-none" : ""}>
-        <div className="w-full max-w-[1800px] m-auto flex flex-col items-center pt-20 text-textcolor2 relative">
+        <div className="w-full max-w-[1800px] m-auto flex flex-col items-center pt-20 bg-gray-200 text-textcolor2 relative">
           <h1 className="text-2xl md:text-4xl font-semibold pt-10 text-black ">
             {job.job_desigination}
           </h1>
 
-          <div className="border w-[1000px] p-6 rounded-md flex flex-col gap-4 my-20 ">
-            <div className="border rounded-sm px-2 py-1 w-40 flex gap-2 items-center justify-center">
-              <TrendingUp
-                strokeWidth={1.5}
-                size={16}
-                className="text-secondary"
-              />
-              <p className="text-md">Actively hiring</p>
-            </div>
-            <div className="flex justify-between items-center">
-              <div className="flex flex-col ">
-                <h1 className="text-gray-800 font-semibold text-xl ">
-                  {job.job_desigination}
-                </h1>
-                <p className="text-sm">{job.company_name}</p>
-              </div>
-              <div>
-                <p>company logo</p>
-              </div>
-            </div>
-
-            <div className="flex gap-1 items-center">
-              <MapPin strokeWidth={1.5} size={16} />
-              <h1>{job.job_location}</h1>
-            </div>
-            <div className="flex items-center justify-between">
-              <div className="text-center">
-                <span className="flex items-center gap-1">
-                  <CalendarClock strokeWidth={1.5} size={16} />
-                  <h1> Start Date</h1>
-                </span>
-                <p>{job.job_startdate}</p>
-              </div>
-              <div className="text-center">
-                <span className="flex items-center gap-1">
-                  <IndianRupee strokeWidth={1.5} size={16} />
-                  <h1>CTC (annual)</h1>
-                </span>
-                <p>{job.job_ctc}</p>
-              </div>
-              <div className="text-center">
-                <span className="flex items-center gap-1">
-                  <Briefcase strokeWidth={1.5} size={16} />
-                  <h1>Experience</h1>
-                </span>
-                <p>{job.job_experience}</p>
-              </div>
-              <div className="text-center">
-                <span className="flex items-center gap-1">
-                  <CalendarClock strokeWidth={1.5} size={16} />
-                  <h1>Apply by</h1>
-                </span>
-                <p>{job.Job_lastdate}</p>
-              </div>
-            </div>
-            <div className="flex gap-4 items-center">
-              <span className="bg-gray-200 px-4 py-0.5 rounded-full flex items-center gap-1">
-                <TimerReset strokeWidth={1.5} size={16} />
-                <p>{formattedDate}</p>
-              </span>
-              <span className="bg-gray-200 px-4 py-0.5 rounded-full">
-                {job.job_type}
-              </span>
-            </div>
-            <div className="flex justify-between items-center ">
-              <div className="flex gap-2 items-center">
-                <span className="p-0.5 rounded-full bg-orange-500">
-                  <Zap strokeWidth={2} size={16} />
-                </span>
-                <p>Be the early applicant</p>
-              </div>
-              <div className="flex items-center gap-6">
-                <div className="flex gap-4 items-center">
-                  <Share2 strokeWidth={1.5} />
-                  <p onClick={() => setischange(!ischange)}>
-                    {ischange ? (
-                      <IoBookmarkOutline size={22} />
-                    ) : (
-                      <IoBookmark size={22} className="text-secondary" />
-                    )}
-                  </p>
-                </div>
-
-                <Button
-                  text="Apply now"
-                  onClick={() =>
-                    user ? setIsApply(!isApply) : navigate("/login-page")
-                  }
+          <div className="border w-[1100px] p-6 rounded-xl flex flex-col gap-4 my-10 border-gray-200">
+            <div className="flex flex-col gap-2 bg-white p-4 rounded-xl">
+              <div className="border rounded-sm px-2 py-1 w-40 flex gap-2 items-center justify-center ">
+                <TrendingUp
+                  strokeWidth={1.5}
+                  size={16}
+                  className="text-secondary"
                 />
+                <p className="text-md">Actively hiring</p>
+              </div>
+              <div className="flex justify-between items-center">
+                <div className="flex flex-col ">
+                  <h1 className="text-gray-800 font-semibold text-xl ">
+                    {job.job_desigination}
+                  </h1>
+                  <p className="text-sm">{job.company_name}</p>
+                </div>
+                <div>
+                  <p>company logo</p>
+                </div>
+              </div>
+
+              <div className="flex gap-1 items-center">
+                <MapPin strokeWidth={1.5} size={16} />
+                <h1>{job.job_location}</h1>
+              </div>
+              <div className="flex items-center justify-between">
+                <div className="text-center">
+                  <span className="flex items-center gap-1">
+                    <CalendarClock strokeWidth={1.5} size={16} />
+                    <h1> Start Date</h1>
+                  </span>
+                  <p>{job.job_startdate}</p>
+                </div>
+                <div className="text-center">
+                  <span className="flex items-center gap-1">
+                    <IndianRupee strokeWidth={1.5} size={16} />
+                    <h1>CTC (annual)</h1>
+                  </span>
+                  <p>{job.job_ctc}</p>
+                </div>
+                <div className="text-center">
+                  <span className="flex items-center gap-1">
+                    <Briefcase strokeWidth={1.5} size={16} />
+                    <h1>Experience</h1>
+                  </span>
+                  <p>{job.job_experience}</p>
+                </div>
+                <div className="text-center">
+                  <span className="flex items-center gap-1">
+                    <CalendarClock strokeWidth={1.5} size={16} />
+                    <h1>Apply by</h1>
+                  </span>
+                  <p>{job.Job_lastdate}</p>
+                </div>
+              </div>
+              <div className="flex gap-4 items-center">
+                <span className="bg-gray-200 px-4 py-0.5 rounded-full flex items-center gap-1">
+                  <TimerReset strokeWidth={1.5} size={16} />
+                  <p>{formattedDate}</p>
+                </span>
+                <span className="bg-gray-200 px-4 py-0.5 rounded-full">
+                  {job.job_type}
+                </span>
+              </div>
+              <div className="flex justify-between items-center ">
+                <div className="flex gap-2 items-center">
+                  <span className="p-0.5 rounded-full bg-orange-500">
+                    <Zap strokeWidth={2} size={16} />
+                  </span>
+                  <p>Be the early applicant</p>
+                </div>
+                <div className="flex items-center gap-6">
+                  <div className="flex gap-4 items-center">
+                    <Share2 strokeWidth={1.5} />
+                    <p onClick={() => setischange(!ischange)}>
+                      {ischange ? (
+                        <IoBookmarkOutline size={22} />
+                      ) : (
+                        <IoBookmark size={22} className="text-secondary" />
+                      )}
+                    </p>
+                  </div>
+
+                  <Button
+                    text="Apply now"
+                    onClick={() =>
+                      user ? setIsApply(!isApply) : navigate("/login-page")
+                    }
+                  />
+                </div>
               </div>
             </div>
             <hr />
-            <div className="flex flex-col gap-2 ">
+            <div className="flex flex-col gap-2 bg-white p-4 rounded-xl">
               <h1 className="text-xl font-semibold text-black">
                 About this job
               </h1>
               <p>Key Responsibilities</p>
               <div>{job.job_description}</div>
             </div>
-            <div>
+            <div className="p-4 bg-white rounded-xl">
               <h1 className="text-md font-semibold text-black">
                 Skills required
               </h1>
               <p>{job.job_skills}</p>
             </div>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 p-4 bg-white rounded-xl">
               <h1 className="font-semibold text-black">
                 Earn certificates in this skills{" "}
               </h1>
@@ -187,7 +188,7 @@ const JobPageRoute = () => {
                 <p>{job.certifications}</p>
               </div>
             </div>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 p-4 bg-white rounded-xl">
               <h1 className="font-semibold text-black">Who can apply</h1>
               <p>
                 Only those candidates can apply who: <br />
@@ -202,7 +203,7 @@ const JobPageRoute = () => {
                 <p>20</p>
               </div>
             </div>
-            <div>
+            <div className="p-4 rounded-xl bg-white flex flex-col gap-2">
               <h1 className="text-black font-semibold">About (company name)</h1>
               <p>{job.about_company}</p>
             </div>

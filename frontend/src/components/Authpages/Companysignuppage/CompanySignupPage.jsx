@@ -4,11 +4,19 @@ import { useState } from "react";
 import Button from "../../Components/buttons/ButtonComponents";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { AiOutlineEyeInvisible, AiTwotoneEye } from "react-icons/ai";
 
 
 const CompanySignupPage = () => {
 
   const navigate = useNavigate();
+
+  const[show, setshow] = useState(false);
+  const showPassword = ()=>{
+    setshow(!show)
+  }
+
+
   const API_CALL = `http://localhost:4000`;
 
   const [isSignup, setIsSignup] = useState({
@@ -103,9 +111,10 @@ const CompanySignupPage = () => {
                   required
                 />
                 <label htmlFor="password">Password</label>
-                <input
-                  className="px-2 py-2 border rounded-md outline-none text-lg "
-                  type="password"
+                <span className="flex px-2 border rounded-lg items-center">
+                  <input
+                  className="px-2 py-2 outline-none text-lg w-full"
+                  type={!show ? "password": "text"}
                   id="password"
                   required
                   name="password"
@@ -113,6 +122,8 @@ const CompanySignupPage = () => {
                   value={isSignup.password}
                   onChange={handleChange}
                 />
+                <p onClick={showPassword}>{!show ? <AiOutlineEyeInvisible size={22}/> : <AiTwotoneEye size={22}/>}</p>
+                </span>
 
                 <label htmlFor="number">Mobile number</label>
                 <input

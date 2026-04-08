@@ -1,4 +1,5 @@
 import { NotebookText } from "lucide-react";
+import { SlNotebook } from "react-icons/sl";
 
 
 const StudentForms=()=>{
@@ -10,7 +11,7 @@ const StudentForms=()=>{
             </div>
             <div className="w-full border rounded-xl overflow-hidden">
                 <table className="w-full">
-                    <thead className="bg-gray-300 ">
+                    <thead className="bg-white border">
                         <tr>
                             <th className="py-4 text-black font-semibold">Company</th>
                             <th className="py-4 text-black font-semibold">Profile</th>
@@ -20,12 +21,12 @@ const StudentForms=()=>{
                         </tr>
                     </thead>
                     <tbody>
-                        <tr className="text-center w-full">
+                        <tr className="text-center w-full bg-white border">
                            <td className="py-4">Techowear</td>
                            <td className="py-4">Fronetend developer</td>
                            <td className="py-4">20/12/2024</td>
                            <td className="py-4"><p className="border rounded-full py-1">Pending</p></td>
-                           <td className="py-4 items-center flex justify-center"><NotebookText strokeWidth={2} size={24} className="text-secondary"/></td>
+                           <td className="py-4 items-center flex justify-center"><SlNotebook size={22} className="text-blue-400 "/></td>
                         </tr>
                     </tbody>
                 </table>

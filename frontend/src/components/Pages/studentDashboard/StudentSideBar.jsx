@@ -21,8 +21,8 @@ const StudentSideBar = ({ setActivePage, activePage }) => {
 
   const [show, setShow] = useState(true);
   const menuClass = (page) =>
-    `flex items-center gap-3 px-4 py-3 cursor-pointer rounded-md transition-all duration-300 ${
-      activePage === page ? "bg-secondary text-white" : "hover:bg-gray-200"
+    `flex items-center gap-3 px-4 py-3 cursor-pointer  transition-all duration-300 ${
+      activePage === page ? "bg-secondary text-white" : "hover:bg-blue-100"
     }`;
 
   return (

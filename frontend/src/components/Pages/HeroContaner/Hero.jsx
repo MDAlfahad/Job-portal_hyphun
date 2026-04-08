@@ -31,9 +31,8 @@ const Hero = () => {
           </div>
           <div className="flex  gap-6 justify-center items-center">
             <Button text="Apply Now" 
-            onClick={() => navigate("/jobpage")}
+            onClick={() => navigate("/job-page")}
               />
-            <Button text="Explore"/>
           </div>
         </div>
       </div>

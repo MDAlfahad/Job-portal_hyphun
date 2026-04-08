@@ -23,16 +23,24 @@ const FooterContainer = () => {
               alfahadkhan715@gmail.com
             </a>
             <div className=" flex gap-4">
-              <span className="p-1.5 rounded-full text-xl md:text-3xl hover:scale-105 hover:bg-secondary text-textcolor hover:text-white transition duration-500">
+              <span
+              title="instagram"
+               className="p-1.5 rounded-full text-xl md:text-3xl hover:scale-105 hover:bg-secondary text-textcolor hover:text-white transition duration-500">
                 <FaInstagram />
               </span>
-              <span className="p-1.5 rounded-full text-xl md:text-3xl hover:scale-105 hover:bg-secondary text-textcolor hover:text-white transition duration-500">
+              <span
+              title="facebook"
+               className="p-1.5 rounded-full text-xl md:text-3xl hover:scale-105 hover:bg-secondary text-textcolor hover:text-white transition duration-500">
                 <FaFacebook />
               </span>
-              <span className="p-1.5 rounded-full text-xl md:text-3xl hover:scale-105 hover:bg-secondary text-textcolor hover:text-white transition duration-500">
+              <span
+              title="linkedin"
+              className="p-1.5 rounded-full text-xl md:text-3xl hover:scale-105 hover:bg-secondary text-textcolor hover:text-white transition duration-500">
                 <FaLinkedin />
               </span>
-              <span className="p-1.5 rounded-full text-xl md:text-3xl hover:scale-105 hover:bg-secondary text-textcolor hover:text-white transition duration-500">
+              <span
+              title="twitter"
+               className="p-1.5 rounded-full text-xl md:text-3xl hover:scale-105 hover:bg-secondary text-textcolor hover:text-white transition duration-500">
                 <FaTwitter />
               </span>
             </div>
@@ -44,6 +52,7 @@ const FooterContainer = () => {
               />
               <a
                 href="#"
+                title="click to subscribe!"
                 className="px-4 py-2 bg-textcolor text-white hover:bg-secondary transition duration-300"
               >
                 Subscribe

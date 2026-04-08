@@ -1,5 +1,5 @@
 import { ConciergeBell, SquarePen, X } from "lucide-react";
-import Logo from "../../../images/background.png";
+import Logo from "../../../images/image.webp";
 import Button from "../../../Components/buttons/ButtonComponents";
 import { useState } from "react";
 import axios from "axios";
@@ -10,9 +10,9 @@ const StudentProfilePage = () => {
 
   const [EditShow, EditSetShow] = useState(false);
   const [editbio, seteditbio] = useState(false);
-  const {user} = useAuthStore();
+  const { user } = useAuthStore();
 
-  const[showData, setShowData] = useState([]);
+  const [showData, setShowData] = useState([]);
 
   const [isData, setIsData] = useState({
     name: "",
@@ -36,10 +36,9 @@ const StudentProfilePage = () => {
     }
   };
 
-
   return (
     <>
-      <div className="mt-16 mx-10  h-[80vh]  overflow-y-auto relative">
+      <div className="mt-20 mx-10 relative ">
         {/* edit profile card  */}
         {EditShow && (
           <div className="flex w-96 flex-col gap-4 absolute border p-4 rounded-xl bg-white top-32 right-1/3 shadow-xl    ">
@@ -63,7 +62,6 @@ const StudentProfilePage = () => {
                 name="name"
                 value={isData.name}
                 placeholder="Your Name"
-             
                 onChange={handleChange}
               />
               {/* sidabled the emai upadation  */}
@@ -82,7 +80,6 @@ const StudentProfilePage = () => {
                 name="contact"
                 value={isData.contact}
                 placeholder="Your Phone number"
-                
                 onChange={handleChange}
               />
               <input
@@ -91,7 +88,6 @@ const StudentProfilePage = () => {
                 name="address"
                 value={isData.address}
                 placeholder="Address"
-               
                 onChange={handleChange}
               />
               <Button text="Save profile" />
@@ -102,7 +98,7 @@ const StudentProfilePage = () => {
         {/* edit bio  */}
 
         {editbio && (
-          <div className="flex w-96 flex-col gap-4 absolute border p-4 rounded-xl bg-white top-72 right-1/3 shadow-xl    ">
+          <div className="flex w-96 flex-col gap-4 absolute border p-4 rounded-xl bg-white top-72 right-1/3 shadow-xl  ">
             <div className="flex justify-between items-center">
               <h1 className="text-lg font-semibold">Edit Bio</h1>
               <span
@@ -125,64 +121,67 @@ const StudentProfilePage = () => {
           </div>
         )}
         {/* profile  */}
-        <h1 className="text-2xl md:text-4xl font-semibold py-4">
-          Edit Profile
+        <h1 className="text-2xl md:text-4xl font-semibold py-10">
+          Profile <span className="text-secondary"> {user.user_name}</span>
         </h1>
-        <div className="bg-white rounded-2xl p-6">
-          <div className="w-full flex p-6">
-            <div className="rounded-full w-[150px] h-[150px] overflow-hidden border object-cover">
+        <div>
+          <div className="w-full flex p-12 bg-white rounded-xl justify-around ">
+            <div className="flex flex-col items-center gap-2">
+              <div className=" w-[150px] h-[150px] overflow-hidden bg-gray-200 rounded-lg object-cover">
               <img width={200} height={200} src={Logo} alt="" />
             </div>
             <div>
               <input type="file" id="file" hidden />
               <label
-                className="mx-10 mt-6 border px-2 py-1 rounded-md"
+                className="text-md font-medium border border-black px-2 py-1 rounded-md"
                 htmlFor="file"
               >
                 Upload new photo
               </label>
             </div>
-          </div>
-          <hr className="my-6" />
-          <div className="border rounded-xl p-6 ">
-            {/* profile  */}
-            <div className=" flex items-center justify-between">
-              <h1 className="text-xl font-semibold">Personal Info</h1>
-              <span
-                className="flex items-center gap-2 border rounded-md p-1 cursor-pointer"
-                onClick={() => EditSetShow(!EditShow)}
-              >
-                <SquarePen strokeWidth={1.5} size={18} /> <p>Edit</p>
-              </span>
             </div>
-            <div className="flex gap-8 items-center mt-6">
-              <div>
-                <label className="text-textcolor2" htmlFor="name">
-                  Name
-                </label>
-                <p>{user?.user_name}</p>
+            <div>
+              {/* profile  */}
+              <div className=" flex items-center justify-between mt-12 mb-6">
+                <h1 className="text-xl font-semibold">Personal Info</h1>
+                
+                <span
+                  className="flex items-center gap-2 border rounded-md p-1 cursor-pointer "
+                  onClick={() => EditSetShow(!EditShow)}
+                >
+                  <SquarePen strokeWidth={1.5} size={18} /> <p>Edit</p>
+                </span>
               </div>
-              <div>
-                <label className="text-textcolor2" htmlFor="email">
-                  Email
-                </label>
-                <p>{user?.user_email}</p>
-              </div>
-              <div>
-                <label className="text-textcolor2" htmlFor="phone">
-                  Phone
-                </label>
-                <p>(+91) {user?.user_contact}</p>
-              </div>
-              <div>
-                <label className="text-textcolor2" htmlFor="address">
-                  Address
-                </label>
-                <p>{user?.user_address}</p>
+              <div className="flex gap-8 items-center ">
+                <div>
+                  <label className="text-textcolor2" htmlFor="name">
+                    Name
+                  </label>
+                  <p>{user?.user_name}</p>
+                </div>
+                <div>
+                  <label className="text-textcolor2" htmlFor="email">
+                    Email
+                  </label>
+                  <p>{user?.user_email}</p>
+                </div>
+                <div>
+                  <label className="text-textcolor2" htmlFor="phone">
+                    Phone
+                  </label>
+                  <p>(+91) {user?.user_contact}</p>
+                </div>
+                <div>
+                  <label className="text-textcolor2" htmlFor="address">
+                    Address
+                  </label>
+                  <p>{user?.user_address}</p>
+                </div>
               </div>
             </div>
           </div>
-          <div className="border rounded-xl p-6 my-6">
+
+          <div className="border rounded-xl p-12 my-6 bg-white">
             <div className="flex justify-between">
               <h1 className="text-lg font-semibold">Bio</h1>
               <span

@@ -76,7 +76,7 @@ const JobApplyForm = ({ className, onClose }) => {
         alert("Application submitted successfully!");
         onClose();
       } else {
-      
+       
         alert("Failed to submit application.");
       }
     } catch (error) {

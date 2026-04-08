@@ -3,8 +3,14 @@ import { FcGoogle } from "react-icons/fc";
 import Button from "../../Components/buttons/ButtonComponents";
 import { useState } from "react";
 import axios from "axios";
+import { AiOutlineEyeInvisible, AiTwotoneEye } from "react-icons/ai";
+
 
 const UserLSignupPage = () => {
+  const[show, setshow] = useState(false);
+  const showPassword = ()=>{
+    setshow(!show)
+  }
   const API_CALL = `http://localhost:4000`;
   const [formData, setFormData] = useState({
     name: "",
@@ -74,9 +80,10 @@ const UserLSignupPage = () => {
                 required
               />
               <label htmlFor="password">Password</label>
-              <input
-                className="px-2 py-2 border rounded-md outline-none text-lg "
-                type="password"
+              <span className="px-2 border rounded-md flex items-center">
+                <input
+                className="px-2 py-2  outline-none text-lg w-full"
+                type={!show? "password" :"text"}
                 id="password"
                 placeholder="password contain atleast 6 digits"
                 required
@@ -95,6 +102,8 @@ const UserLSignupPage = () => {
                     : "strong password !"}
                 </p>
               )}
+             <p onClick={showPassword}> {!show? <AiOutlineEyeInvisible size={22}/> : <AiTwotoneEye size={22}/>}</p>
+              </span>
               <Button text="Sign up" />
             </div>
             <p className="text-sm md:text-[16px] py-4 text-center">
