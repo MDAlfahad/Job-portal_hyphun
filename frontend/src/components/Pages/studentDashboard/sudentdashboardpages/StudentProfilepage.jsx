@@ -4,17 +4,18 @@ import Button from "../../../Components/buttons/ButtonComponents";
 import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
+import useAuthStore from "../../../../Store/userAuth";
 const StudentProfilePage = () => {
   const API_CALL = `http://localhost:4000`;
 
   const [EditShow, EditSetShow] = useState(false);
   const [editbio, seteditbio] = useState(false);
+  const {user} = useAuthStore();
 
   const[showData, setShowData] = useState([]);
 
   const [isData, setIsData] = useState({
     name: "",
-    email: "",
     contact: "",
     address: "",
   });
@@ -35,15 +36,6 @@ const StudentProfilePage = () => {
     }
   };
 
-  useEffect(() => {
-    fetch(`${API_CALL}/api/user-data`)
-      .then((res) => res.json())
-      .then((result) => {
-        setShowData(result);
-      })
-      .catch((err)=> console.log(err))
-      
-  }, []);
 
   return (
     <>
@@ -74,7 +66,8 @@ const StudentProfilePage = () => {
              
                 onChange={handleChange}
               />
-              <input
+              {/* sidabled the emai upadation  */}
+              {/* <input
                 className="px-2 py-2 border rounded-md"
                 type="text"
                 name="email"
@@ -82,7 +75,7 @@ const StudentProfilePage = () => {
                 placeholder="Your Email"
               
                 onChange={handleChange}
-              />
+              /> */}
               <input
                 className="px-2 py-2 border rounded-md"
                 type="tel"
@@ -167,25 +160,25 @@ const StudentProfilePage = () => {
                 <label className="text-textcolor2" htmlFor="name">
                   Name
                 </label>
-                <p>{showData[0]?.user_name}</p>
+                <p>{user?.user_name}</p>
               </div>
               <div>
                 <label className="text-textcolor2" htmlFor="email">
                   Email
                 </label>
-                <p>{showData[0]?.user_email}</p>
+                <p>{user?.user_email}</p>
               </div>
               <div>
                 <label className="text-textcolor2" htmlFor="phone">
                   Phone
                 </label>
-                <p>(+91) {showData[0]?.user_contact}</p>
+                <p>(+91) {user?.user_contact}</p>
               </div>
               <div>
                 <label className="text-textcolor2" htmlFor="address">
                   Address
                 </label>
-                <p>{showData[0]?.user_address}</p>
+                <p>{user?.user_address}</p>
               </div>
             </div>
           </div>

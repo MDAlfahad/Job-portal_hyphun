@@ -22,7 +22,6 @@ import userAuth from "../../../../Store/userAuth";
 
 const JobPageRoute = () => {
   const API_CALL = `http://localhost:4000`;
-  const { id } = useParams();
   const [job, setJob] = useState(null);
   const [ischange, setischange] = useState(true);
   const [isApply, setIsApply] = useState(false);
@@ -31,6 +30,7 @@ const JobPageRoute = () => {
   //zustand store
   const { jobs: alljobs, fetchjobs } = useJobStore();
   const { user } = userAuth();
+  const {id} = useParams()
 
   // job postAPI
   useEffect(() => {
@@ -51,14 +51,16 @@ const JobPageRoute = () => {
           setJob(null);
         });
     }
-  }, [id, alljobs]);
+  }, [id,  alljobs]);
   if (!job) return <h1>Loding....</h1>;
 
   // data formatte
-  const formattedDate = formatDistanceToNow(
-    new Date(job.posted_at.replace(" ", "T")),
-    { addSuffix: true },
-  );
+  const formattedDate = job?.posted_at
+  ? formatDistanceToNow(
+      new Date(job.posted_at.replace(" ", "T")),
+      { addSuffix: true }
+    )
+  : "Date unavailable";
 
   return (
     <>
@@ -154,11 +156,13 @@ const JobPageRoute = () => {
                     )}
                   </p>
                 </div>
-                
-                  <Button
-                    text="Apply now"
-                    onClick={() => user? setIsApply(!isApply): navigate("/login-page")}
-                  />
+
+                <Button
+                  text="Apply now"
+                  onClick={() =>
+                    user ? setIsApply(!isApply) : navigate("/login-page")
+                  }
+                />
               </div>
             </div>
             <hr />
@@ -203,7 +207,12 @@ const JobPageRoute = () => {
               <p>{job.about_company}</p>
             </div>
             <div className="flex justify-center">
-              <Button text="Apply Now" onClick={() => user? setIsApply(!isApply) : navigate("/login-page")} />
+              <Button
+                text="Apply Now"
+                onClick={() =>
+                  user ? setIsApply(!isApply) : navigate("/login-page")
+                }
+              />
             </div>
           </div>
         </div>

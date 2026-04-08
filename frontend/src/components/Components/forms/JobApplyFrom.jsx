@@ -12,13 +12,30 @@ import { FiUpload } from "react-icons/fi";
 import { useParams } from "react-router-dom";
 import Button from "../buttons/ButtonComponents";
 import { formatDistanceStrict, formatDistanceToNow } from "date-fns";
+import useJobStore from "../../../Store/jobStore";
+import useAuthStore from "../../../Store/userAuth";
 
 const JobApplyForm = ({ className, onClose }) => {
   const API_CALL = `http://localhost:4000`;
   const { id } = useParams();
   const [isJobData, setIsJobData] = useState(null);
+  const { jobs } = useJobStore();
+  const { user, token } = useAuthStore();
+
+  // --- NEW: Form State ---
+  const [availability, setAvailability] = useState("");
+  const [travel, setTravel] = useState("");
+  const [experience, setExperience] = useState("");
+  const [resume, setResume] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
+    const cahched_job = jobs.find((job) => String(job.job_id || job.id) === String(id));
+
+    if (cahched_job) {
+      setIsJobData(cahched_job);
+    }
+
     fetch(`${API_CALL}/api/jobdata/${id}`)
       .then((res) => res.json())
       .then((data) => {
@@ -30,14 +47,52 @@ const JobApplyForm = ({ className, onClose }) => {
       });
   }, [id]);
 
-  if (!isJobData) return <h1>Loading...</h1>;
+  // --- NEW: Form Submission Handler ---
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!resume) return alert("Please upload your resume!");
+    if (!availability || !travel || !experience) return alert("Please fill all fields!");
 
-  //time formatte
+    setIsSubmitting(true);
+
+    const formData = new FormData();
+    formData.append("jobId", id);
+    formData.append("userId", user?.id || ""); 
+    formData.append("availability", availability);
+    formData.append("travel", travel);
+    formData.append("experience", experience);
+    formData.append("resume", resume);
+
+    try {
+      const response = await fetch(`${API_CALL}/api/apply-form`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData, 
+      });
+
+      if (response.ok) {
+        alert("Application submitted successfully!");
+        onClose();
+      } else {
+      
+        alert("Failed to submit application.");
+      }
+    } catch (error) {
+      console.error("Submission error:", error);
+      alert("An error occurred during submission.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  if (!isJobData) return <h1>Loading...</h1>;
 
   const formattedDate = formatDistanceToNow(
     new Date(isJobData.posted_at.replace(" ", "T")),
-    {addSuffix: true},
-  )
+    { addSuffix: true },
+  );
 
   return (
     <div className="fixed top-0 left-0 w-full h-full bg-black/40 backdrop-blur-sm overflow-y-auto z-50">
@@ -47,10 +102,12 @@ const JobApplyForm = ({ className, onClose }) => {
             <h1 className="text-xl md:text-3xl text-black ml-60 font-semibold">
               Applying to {isJobData.job_desigination} {isJobData.job_type}
             </h1>
-            <X color="black" onClick={onClose} />
+            <X color="black" className="cursor-pointer" onClick={onClose} />
           </div>
+          
+          {/* ... (Middle section displaying job details remains exactly the same) ... */}
           <div className="flex flex-col gap-2 p-8">
-            <div className="flex     items-center justify-between">
+            <div className="flex items-center justify-between">
               <div className="flex flex-col ">
                 <h1 className="text-gray-800 font-semibold text-xl ">
                   {isJobData.job_desigination}
@@ -126,28 +183,46 @@ const JobApplyForm = ({ className, onClose }) => {
               </div>
             </div>
           </div>
-          <form action="submit" className="flex flex-col gap-2 p-8 border-t">
+
+          {/* --- NEW: Form with Values and onChange --- */}
+          <form onSubmit={handleSubmit} className="flex flex-col gap-2 p-8 border-t">
             <h1 className="text-lg md:text-xl font-semibold text-black">
               Apply Now
             </h1>
             <h1 className="text-sm md:text-[16px] font-semibold text-black">
-              Comfirm your avaiability
+              Confirm your availability
             </h1>
             <div className="flex flex-col gap-2 border py-4 px-2 rounded-xl bg-gray-200">
-              <span className="flex gap-2 items-center text-[16px]">
-                <input type="radio" />{" "}
-                <p>Yes, Iam avalible to join immediately</p>
-              </span>
-              <span className="flex gap-2 items-center text-[16px]">
-                <input type="radio" />{" "}
-                <p>No, talk and select the date of joiing</p>
-              </span>
-              <span className="flex gap-2 items-center text-[16px]">
-                <input type="radio" />{" "}
-                <p>other, please specify your avaiability</p>
-              </span>
+              <label className="flex gap-2 items-center text-[16px] cursor-pointer">
+                <input 
+                  type="radio" 
+                  name="availability" 
+                  value="immediate" 
+                  onChange={(e) => setAvailability(e.target.value)} 
+                />
+                <p>Yes, I am available to join immediately</p>
+              </label>
+              <label className="flex gap-2 items-center text-[16px] cursor-pointer">
+                <input 
+                  type="radio" 
+                  name="availability" 
+                  value="later" 
+                  onChange={(e) => setAvailability(e.target.value)} 
+                />
+                <p>No, talk and select the date of joining</p>
+              </label>
+              <label className="flex gap-2 items-center text-[16px] cursor-pointer">
+                <input 
+                  type="radio" 
+                  name="availability" 
+                  value="other" 
+                  onChange={(e) => setAvailability(e.target.value)} 
+                />
+                <p>Other, please specify your availability</p>
+              </label>
             </div>
-            <div className="flex flex-col gap-2">
+            
+            <div className="flex flex-col gap-2 mt-4">
               <h1 className="text-sm md:text-[16px] font-semibold text-black">
                 Additional questions
               </h1>
@@ -156,41 +231,70 @@ const JobApplyForm = ({ className, onClose }) => {
                 responsibilities?
               </p>
               <div className="flex flex-col border bg-gray-200 py-4 px-2 rounded-xl">
-                <span>
-                  <input type="radio" /> Yes
-                </span>
-                <span>
-                  <input type="radio" /> No
-                </span>
+                <label className="flex gap-2 items-center cursor-pointer">
+                  <input 
+                    type="radio" 
+                    name="travel" 
+                    value="yes" 
+                    onChange={(e) => setTravel(e.target.value)} 
+                  /> Yes
+                </label>
+                <label className="flex gap-2 items-center cursor-pointer">
+                  <input 
+                    type="radio" 
+                    name="travel" 
+                    value="no" 
+                    onChange={(e) => setTravel(e.target.value)} 
+                  /> No
+                </label>
               </div>
               <div className="flex flex-col gap-2 py-2">
                 <p className="text-black font-semibold text-[16px]">
-                  How many months of experience do you have
+                  How many months of experience do you have?
                 </p>
                 <input
                   type="number"
+                  min="0"
+                  value={experience}
+                  onChange={(e) => setExperience(e.target.value)}
                   placeholder="Enter numeric value"
-                  className="outline-none border p-2 rounded-md w-48"
+                  className="outline-none border p-2 rounded-md w-48 bg-white"
                 />
               </div>
             </div>
-            <div className="flex flex-col gap-2 border  rounded-xl p-2">
+
+            <div className="flex flex-col gap-2 border rounded-xl p-4 mt-2">
               <h1 className="text-md md:text-lg text-black font-semibold">
                 Upload resume
               </h1>
               <div>
                 <label
                   htmlFor="file"
-                  className="border-2 border-black border-dotted p-2 rounded-md flex items-center md:text-lg font-semibold text-black gap-2 w-48 justify-center"
+                  className="border-2 border-black border-dotted p-4 rounded-md flex items-center md:text-lg font-semibold text-black gap-2 w-48 justify-center cursor-pointer hover:bg-gray-50"
                 >
                   <FiUpload />
-                  Upload file
+                  {resume ? "File Selected" : "Upload file"}
                 </label>
-                <input type="file" id="file" hidden />
+                <input 
+                  type="file" 
+                  id="file" 
+                  accept=".pdf,.doc,.docx"
+                  onChange={(e) => setResume(e.target.files[0])} 
+                  hidden 
+                />
+                {resume && <p className="text-sm mt-2 text-green-600">{resume.name}</p>}
               </div>
             </div>
+
             <div className="flex py-4 justify-center">
-                <Button text="Submit"/>
+                {/* Changed to use native button to pass the onSubmit, or you can adjust your Button component to accept type="submit" */}
+                <button 
+                  type="submit" 
+                  disabled={isSubmitting}
+                  className="px-6 py-2 bg-black text-white rounded-md disabled:bg-gray-400"
+                >
+                  {isSubmitting ? "Submitting..." : "Submit"}
+                </button>
             </div>
           </form>
         </div>

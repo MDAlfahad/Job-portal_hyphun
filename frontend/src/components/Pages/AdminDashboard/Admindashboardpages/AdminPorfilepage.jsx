@@ -6,7 +6,6 @@ import { useEffect } from "react";
 import useAdminStore from "../../../../Store/adminStore";
 
 const AdminProfilePage = () => {
-
   const {user, token} = useAuthStore();
   const {jobs, fetchjobs} = useJobStore();
   const{adminStats,fetchAdminStats} = useAdminStore();
@@ -30,11 +29,11 @@ const AdminProfilePage = () => {
             text="Toal Active user"/>
             <AdminProfileCard
             heading="Total Companies"
-            number="100+"
+            number={adminStats.company || 0}
             text="Toal Active Companies"/>
             <AdminProfileCard
             heading="Total forms"
-            number="100+"
+            number={0}
             text="Toal forms"/>
             <AdminProfileCard
             heading="Total Job posted"

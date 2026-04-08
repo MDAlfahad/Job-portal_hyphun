@@ -5,6 +5,7 @@ const userRouter = require("./routes/userDetailsRoute");
 const jobdata = require("./routes/jobDataRoute");
 const cors = require("cors");
 const userauth = require("./routes/authRote");
+const applyForm = require("./routes/formApply");
 
 const app = express();
 app.use(express.json());
@@ -16,5 +17,7 @@ app.use("/api", jobpost);
 app.use("/api", userRouter);
 app.use("/api", jobdata);
 app.use("/api", userauth);
+app.use("/api", applyForm);
+
 
 module.exports = app;
