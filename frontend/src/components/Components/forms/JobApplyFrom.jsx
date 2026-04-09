@@ -29,6 +29,8 @@ const JobApplyForm = ({ className, onClose }) => {
   const [resume, setResume] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  
+
   useEffect(() => {
     const cahched_job = jobs.find((job) => String(job.job_id || job.id) === String(id));
 
@@ -46,7 +48,6 @@ const JobApplyForm = ({ className, onClose }) => {
         setIsJobData(null);
       });
   }, [id]);
-
   // --- NEW: Form Submission Handler ---
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -57,7 +58,9 @@ const JobApplyForm = ({ className, onClose }) => {
 
     const formData = new FormData();
     formData.append("jobId", id);
-    formData.append("userId", user?.id || ""); 
+    formData.append("userId", user?.user_id || ""); 
+    formData.append("companyname", isJobData.company_name || "")
+    formData.append("jobdesigination", isJobData.job_desigination || "")
     formData.append("availability", availability);
     formData.append("travel", travel);
     formData.append("experience", experience);
@@ -125,7 +128,7 @@ const JobApplyForm = ({ className, onClose }) => {
               </span>
               <span className="flex items-center gap-2 text-sm text-textcolor2">
                 <HomeIcon size={16} />
-                {isJobData.job_preferences}
+                {isJobData.job_location}
               </span>
               <span className="flex items-center gap-2 text-sm text-textcolor2">
                 <Calendar size={16} />3 months

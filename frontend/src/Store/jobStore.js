@@ -1,38 +1,65 @@
 import { create } from "zustand";
 import axios from "axios";
 
+const API_BASE = "http://localhost:4000";
+
 const useJobStore = create((set, get) => ({
   jobs: [],
   loading: false,
+  error: null,
   isFetch: false,
 
-  // fetch jobs
-
-  fetchjobs: async (token, role) => {
+  // FETCH JOBS
+  fetchJobs: async (token, role) => {
     const { jobs, isFetch } = get();
+
     if (isFetch && jobs.length > 0) {
-      console.log("Using cached data");
+      console.log("Using cached jobs");
       return;
     }
-    set({ loading: true });
+
     try {
-      const API = (token && role !== "admin" )? "/api/jobpostdata" : "/api/jobdata";
-      const res = await axios(`http://localhost:4000${API}`, {
-        ...(token && role !== "admin"  &&{
+      set({
+        loading: true,
+        error: null,
+      });
+
+      const isCompanyUser = token && role !== "admin";
+
+      const endpoint = isCompanyUser
+        ? "/api/jobpostdata"
+        : "/api/jobdata";
+
+      const res = await axios.get(`${API_BASE}${endpoint}`, {
+        ...(isCompanyUser && {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }),
       });
+
       set({
         jobs: res.data,
         isFetch: true,
+        loading: false,
       });
+
     } catch (err) {
-      console.log("Error in Fetching Jobs, err");
+      console.error("Error Fetching Jobs:", err);
+
+      set({
+        error: err.response?.data?.message || "Failed to fetch jobs",
+        loading: false,
+      });
     }
   },
-  clearJobs: () => set({ jobs: [], isFetch: false }),
+
+  clearJobs: () =>
+    set({
+      jobs: [],
+      isFetch: false,
+      error: null,
+    }),
 }));
 
 export default useJobStore;

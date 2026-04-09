@@ -1,18 +1,17 @@
 const express = require("express");
 const db = require("../config/db");
 
-const app = express();
-app.use(express.json());
-
 const jobdata = express.Router();
 
-jobdata.get("/jobdata", (req, res) => {
-  db.query("SELECT * FROM job_postdata", (err, result) => {
-    if (err) {
-      return res.status(500).json({ message: "server err" });
-    }
-    res.send(result);
-  });
+jobdata.get("/jobdata", async (req, res) => {
+  try {
+    const [result] = await db.query("SELECT * FROM job_postdata");
+
+    res.status(200).json(result);
+  } catch (err) {
+    console.error("Database Error:", err);
+    res.status(500).json({ message: "Server Error" });
+  }
 });
 
 module.exports = jobdata;

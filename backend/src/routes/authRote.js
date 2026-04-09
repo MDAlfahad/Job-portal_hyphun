@@ -1,29 +1,43 @@
 const express = require("express");
 const db = require("../config/db");
-const { resource } = require("../app");
-const app = express();
-app.use(express.json());
+
 const userauth = express.Router();
 
-userauth.get("/user-count", (req, res) => {
-  db.query(
-    "SELECT auth_role, COUNT(*) as count FROM user_logindata GROUP BY auth_role",
-    (err, result) => {
-      if (err) return res.status(500).json({ error: "Database Error" });
+// GET USER ROLE COUNTS
+userauth.get("/user-count", async (req, res) => {
+  try {
+    const [result] = await db.query(
+      `
+      SELECT auth_role, COUNT(*) as count
+      FROM user_logindata
+      GROUP BY auth_role
+      `,
+    );
 
-      const stats = {
-        user: 0,
-        company: 0,
-        admin: 0,
-      };
-      result.forEach((item) => {
-        if (stats.hasOwnProperty(item.auth_role)) {
-            stats[item.auth_role] = item.count;
-        }
-      });
-      res.json(stats);
-    },
-  );
+    const stats = {
+      user: 0,
+      company: 0,
+      admin: 0,
+    };
+
+    result.forEach((item) => {
+      if (stats.hasOwnProperty(item.auth_role)) {
+        stats[item.auth_role] = item.count;
+      }
+    });
+
+    res.status(200).json({
+      success: true,
+      stats,
+    });
+  } catch (err) {
+    console.error("User Count Error:", err);
+
+    res.status(500).json({
+      success: false,
+      error: "Database Error",
+    });
+  }
 });
 
 module.exports = userauth;

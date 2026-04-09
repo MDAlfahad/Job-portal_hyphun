@@ -1,49 +1,85 @@
 const express = require("express");
 const db = require("../config/db");
+const jobpostauth = require("../middleware/jobpostMiddleware");
+
 const userRouter = express.Router();
-const app = express();
-const { v4: uuidv4 } = require("uuid");
 
-app.use(express.json());
 
-//send user_details to server
+// UPDATE LOGGED-IN USER DETAILS
+userRouter.post("/user-details", jobpostauth, async (req, res) => {
+  try {
+    const user_id = req.user.id;
 
-userRouter.post("/user-details", (req, res) => {
-  const { user_id, name, contact, address } = req.body;
+    const { name, contact, address } = req.body;
 
-  db.query(
-    `
-  UPDATE user_logindata 
-  SET 
-    user_name = ?, 
-    user_phone = ?, 
-    user_address = ?
-  WHERE user_id = ?
-`,
-    [name, contact, address, user_id],
-    (err, result) => {
-      if (err) {
-        console.log(err);
-        return res.status(500).json({ message: "server err" });
-      }
-      res.status(200).json({
-        message: "User updated successfully",
-        result,
-      });
-    },
-  );
+    const [result] = await db.query(
+      `
+      UPDATE user_logindata 
+      SET 
+        user_name = ?, 
+        user_phone = ?, 
+        user_address = ?
+      WHERE user_id = ?
+      `,
+      [name, contact, address, user_id]
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "User updated successfully",
+      affectedRows: result.affectedRows,
+    });
+
+  } catch (err) {
+    console.error("User Update Error:", err);
+
+    res.status(500).json({
+      success: false,
+      message: "Server Error",
+    });
+  }
 });
 
-// getting user_details from server
 
-// userRouter.get("/user-data", (req, res) => {
-//   try {
-//     db.query("SELECT * FROM user_details", (err, result) => {
-//       res.json(result);
-//     });
-//   } catch (err) {
-//     res.status(501).json({ message: "server err" });
-//   }
-// });
+// GET LOGGED-IN USER DETAILS
+userRouter.get("/user-data", jobpostauth, async (req, res) => {
+  try {
+    const user_id = req.user.id;
+
+    const [result] = await db.query(
+      `
+      SELECT 
+        user_id,
+        user_name,
+        user_email,
+        user_phone,
+        user_address
+      FROM user_logindata
+      WHERE user_id = ?
+      `,
+      [user_id]
+    );
+
+    if (result.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      user: result[0],
+    });
+
+  } catch (err) {
+    console.error("Fetch User Error:", err);
+
+    res.status(500).json({
+      success: false,
+      message: "Server Error",
+    });
+  }
+});
 
 module.exports = userRouter;
