@@ -1,4 +1,4 @@
-import { NotebookText } from "lucide-react";
+
 import { SlNotebook } from "react-icons/sl";
 import userJobApplicaiton from "../../../../Store/userJobApplicaiton";
 import { useEffect } from "react";
@@ -40,7 +40,7 @@ const StudentForms = () => {
                 <tr className="text-center w-full bg-white border">
                   <td className="py-4">{item.company_name}</td>
                   <td className="py-4">{item.job_desigination}</td>
-                  <td className="py-4">{item.applied_at}</td>
+                  <td className="py-4">{item.applied_at ? new Date(item.applied_at).toLocaleDateString() : "N/A"}</td>
                   <td className="py-4">
                     <p className="border rounded-full py-1">{item.status}</p>
                   </td>

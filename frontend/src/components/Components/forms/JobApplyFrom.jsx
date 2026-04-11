@@ -11,7 +11,7 @@ import { FaRupeeSign, FaSuitcase, FaSuitcaseRolling } from "react-icons/fa";
 import { FiUpload } from "react-icons/fi";
 import { useParams } from "react-router-dom";
 import Button from "../buttons/ButtonComponents";
-import { formatDistanceStrict, formatDistanceToNow } from "date-fns";
+import { formatDistanceStrict, formatDistanceToNow, isDate } from "date-fns";
 import useJobStore from "../../../Store/jobStore";
 import useAuthStore from "../../../Store/userAuth";
 
@@ -58,13 +58,18 @@ const JobApplyForm = ({ className, onClose }) => {
 
     const formData = new FormData();
     formData.append("jobId", id);
-    formData.append("userId", user?.user_id || ""); 
+    formData.append("username", user?.user_name || "")
+    formData.append("useremail", user?.user_email || "")
+    formData.append("userId", user?.user_id || "");
+    formData.append("companyId", isJobData.user_id || "") 
     formData.append("companyname", isJobData.company_name || "")
     formData.append("jobdesigination", isJobData.job_desigination || "")
     formData.append("availability", availability);
     formData.append("travel", travel);
     formData.append("experience", experience);
     formData.append("resume", resume);
+
+    console.log(isJobData.company_id)
 
     try {
       const response = await fetch(`${API_CALL}/api/apply-form`, {

@@ -20,6 +20,7 @@ const userJobApplicaiton = create((set, get) => ({
           Authorization: `Bearer ${token}`,
         },
       });
+       
       
       set({
         applications: res.data.applications,

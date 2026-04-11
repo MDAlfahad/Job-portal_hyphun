@@ -1,11 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import useCompanyApplications from "../../../../Store/companyApplicationStore";
+import { ExternalLink, Trash2 } from "lucide-react";
 
 const DashboardApplicantPage = () => {
   const [changevalue, setchangevalue] = useState(true);
-
+  const { applications, fetchCompanyApplications } = useCompanyApplications();
   const value = () => {
     setchangevalue(!changevalue);
   };
+  useEffect(() => {
+    fetchCompanyApplications();
+  }, []);
+
+  console.log(applications);
 
   return (
     <>
@@ -27,29 +34,46 @@ const DashboardApplicantPage = () => {
                   </th>
                   <th className="py-4 text-black font-semibold">Designation</th>
                   <th className="py-4 text-black font-semibold">Apply Date </th>
+                  <th className="py-4 text-black font-semibold">Resume </th>
                   <th className="py-4 text-black font-semibold">Review </th>
+                  <th className="py-4 text-black font-semibold">Status </th>
                   <th className="py-4 text-black font-semibold">Action</th>
                 </tr>
               </thead>
               <tbody>
-                <tr className="text-center w-full">
-                  <td className="py-4">Techowear</td>
-                  <td className="py-4">Fronetend developer</td>
-                  <td className="py-4">20/12/2024</td>
-                  <td>
-                    <p
-                      className="border rounded-md py-2 flex items-center justify-center font-semibold"
-                      onClick={value}
-                    >
-                      Review
-                    </p>
-                  </td>
-                  <td className="py-4">
-                    <p className="border rounded-md py-2 flex items-center justify-center font-semibold bg-secondary">
-                      Delete
-                    </p>
-                  </td>
-                </tr>
+                {applications.map((item, index) => (
+                  <tr
+                    key={item.id || index}
+                    className="text-center w-full bg-white border"
+                  >
+                    <td className="py-4">{item.user_name}</td>
+                    <td className="py-4">{item.job_desigination}</td>
+                    <td className="py-4">
+                      {item.applied_at
+                        ? new Date(item.applied_at).toLocaleDateString()
+                        : "N/A"}
+                    </td>
+                    <td>
+                      <a
+                        href={`http://localhost:4000/${applications.resume_path}`}
+                        target="_blank"
+                      >
+                        View Resume
+                      </a>
+                    </td>
+                    <td className="flex items-center justify-center gap-2">
+                      Application{" "}
+                      <ExternalLink size={16} className="text-secondary" />
+                    </td>
+                    <td className="py-4">
+                      <p className="border rounded-full py-1">{item.status}</p>
+                    </td>
+
+                    <td className="py-4 items-center flex justify-center">
+                      <Trash2 size={22} />
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>

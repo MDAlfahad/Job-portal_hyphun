@@ -1,3 +1,0 @@
-id,name,email,password,created_at,role,status
-1,Md alfahad,alfahadkhan715@gmail.com,$2b$10$mFpolSXNJ5pdDavaVm6r4.JWdnfyhI6kgXR4lGf97iLYPo3CldoLi,2026-02-25 16:46:15,user,1
-2,admin,admin@gmail.com,$2b$10$mFpolSXNJ5pdDavaVm6r4.JWdnfyhI6kgXR4lGf97iLYPo3CldoLi,2026-02-25 16:59:08,admin,1

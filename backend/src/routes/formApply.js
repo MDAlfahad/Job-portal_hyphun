@@ -65,7 +65,7 @@ const uploadMiddleware = (req, res, next) => {
 
 applyForm.post("/apply-form", uploadMiddleware, async (req, res) => {
   try {
-    const { jobId, userId, companyname, jobdesigination, availability, travel, experience } = req.body;
+    const { jobId, userId,username,companyId, useremail, companyname, jobdesigination, availability, travel, experience } = req.body;
 
     if (!jobId || !userId) {
       if (req.file) fs.unlinkSync(req.file.path);
@@ -76,15 +76,20 @@ applyForm.post("/apply-form", uploadMiddleware, async (req, res) => {
       return res.status(400).json({ message: "Please upload a resume." });
     }
     const resumePath = req.file.filename;
+    
+
 
     const sqlQuery = `
-        INSERT INTO job_applications (job_id, company_name, job_desigination, student_id, availability, travel, experience, resume_path) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO job_applications (job_id, company_name, user_name,company_id, user_email, job_desigination, student_id, availability, travel, experience, resume_path) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `;
 
     const values = [
       jobId,
       companyname,
+      username, 
+      companyId,
+      useremail,
       jobdesigination,
       userId,
       availability,
@@ -119,10 +124,13 @@ applyForm.post("/apply-form", uploadMiddleware, async (req, res) => {
 applyForm.get("/my-applications", authMiddleware, async (req, res) => {
   try {
     const studentId = req.user.id;
+    
 
     const page = Math.max(1, Number(req.query.page) || 1);
     const limit = Math.min(50, Math.max(1, Number(req.query.limit) || 10));
     const offset = (page - 1) * limit;
+    
+ 
 
     const [rows] = await db.execute(
       `
@@ -131,6 +139,7 @@ applyForm.get("/my-applications", authMiddleware, async (req, res) => {
     ja.company_name,
     ja.job_desigination,
     ja.applied_at,
+    ja.resume_path,
     ja.status
   FROM job_applications ja
   JOIN job_postdata j ON ja.job_id = j.job_id
@@ -152,4 +161,42 @@ applyForm.get("/my-applications", authMiddleware, async (req, res) => {
     res.status(500).json({ message: "Failed to fetch applications" });
   }
 });
+
+//company applicaiton
+
+applyForm.get("/company-applications", authMiddleware, async (req, res) => {
+  try {
+    const companyId = req.user.id;
+
+    const [rows] = await db.execute(
+      `
+      SELECT 
+        application_id,
+        company_name,
+        user_name, 
+        user_email,
+        job_desigination,
+        applied_at,
+        resume_path,
+        status,
+        student_id
+      FROM job_applications
+      WHERE company_id = ?
+      ORDER BY applied_at DESC
+      `,
+      [companyId]
+    );
+
+    res.status(200).json({
+      success: true,
+      applications: rows,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Failed to fetch company applications" });
+  }
+});
+
+
+
 module.exports = applyForm;

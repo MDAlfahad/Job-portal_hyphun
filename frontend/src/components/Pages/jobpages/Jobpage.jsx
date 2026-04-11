@@ -8,11 +8,11 @@ import { useEffect } from "react";
 import useJobStore from "../../../Store/jobStore";
 
 const JobPage = () => {
-  const { jobs, fetchjobs } = useJobStore();
+  const { jobs, fetchJobs } = useJobStore();
 
   useEffect(() => {
-    fetchjobs();
-  }, [fetchjobs]);
+    fetchJobs();
+  }, [fetchJobs]);
   return (
     <>
       <div className="w-full max-w-[1800px] m-auto py-20 px-4 md:px-20 noselect">

@@ -3,16 +3,18 @@ import { useEffect } from "react";
 import WorkingMen from "../../../images/workingman.png";
 import useAuthStore from "../../../../Store/userAuth";
 import useJobStore from "../../../../Store/jobStore";
+import userJobApplicaiton from "../../../../Store/userJobApplicaiton";
 
 const DashboardProfilePage = () => {
   const { user, token } = useAuthStore();
-  const { jobs, fetchjobs } = useJobStore();
+  const { jobs, fetchJobs } = useJobStore();
+
 
   useEffect(() => {
     if (token) {
-      fetchjobs(token);
+      fetchJobs(token);
     }
-  }, [token, fetchjobs]);
+  }, [token, fetchJobs]);
 
   return (
     <>
