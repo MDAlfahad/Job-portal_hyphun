@@ -19,8 +19,15 @@ const storage = multer.diskStorage({
     cb(null, uploadDir);
   },
   filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, uniqueSuffix + path.extname(file.originalname).toLowerCase());
+    const ext = path.extname(file.originalname).toLowerCase();
+
+    const baseName = path
+      .basename(file.originalname, ext)
+      .replace(/\s+/g, "_")
+      .replace(/[^\w\-]/g, "")
+      .toLowerCase();
+    const uniqueName = `${baseName}_${Date.now()}${ext}`;
+    cb(null, uniqueName);
   },
 });
 
@@ -65,7 +72,18 @@ const uploadMiddleware = (req, res, next) => {
 
 applyForm.post("/apply-form", uploadMiddleware, async (req, res) => {
   try {
-    const { jobId, userId,username,companyId, useremail, companyname, jobdesigination, availability, travel, experience } = req.body;
+    const {
+      jobId,
+      userId,
+      username,
+      companyId,
+      useremail,
+      companyname,
+      jobdesigination,
+      availability,
+      travel,
+      experience,
+    } = req.body;
 
     if (!jobId || !userId) {
       if (req.file) fs.unlinkSync(req.file.path);
@@ -76,8 +94,6 @@ applyForm.post("/apply-form", uploadMiddleware, async (req, res) => {
       return res.status(400).json({ message: "Please upload a resume." });
     }
     const resumePath = req.file.filename;
-    
-
 
     const sqlQuery = `
         INSERT INTO job_applications (job_id, company_name, user_name,company_id, user_email, job_desigination, student_id, availability, travel, experience, resume_path) 
@@ -87,7 +103,7 @@ applyForm.post("/apply-form", uploadMiddleware, async (req, res) => {
     const values = [
       jobId,
       companyname,
-      username, 
+      username,
       companyId,
       useremail,
       jobdesigination,
@@ -124,13 +140,10 @@ applyForm.post("/apply-form", uploadMiddleware, async (req, res) => {
 applyForm.get("/my-applications", authMiddleware, async (req, res) => {
   try {
     const studentId = req.user.id;
-    
 
     const page = Math.max(1, Number(req.query.page) || 1);
     const limit = Math.min(50, Math.max(1, Number(req.query.limit) || 10));
     const offset = (page - 1) * limit;
-    
- 
 
     const [rows] = await db.execute(
       `
@@ -184,7 +197,7 @@ applyForm.get("/company-applications", authMiddleware, async (req, res) => {
       WHERE company_id = ?
       ORDER BY applied_at DESC
       `,
-      [companyId]
+      [companyId],
     );
 
     res.status(200).json({
@@ -196,7 +209,5 @@ applyForm.get("/company-applications", authMiddleware, async (req, res) => {
     res.status(500).json({ message: "Failed to fetch company applications" });
   }
 });
-
-
 
 module.exports = applyForm;
