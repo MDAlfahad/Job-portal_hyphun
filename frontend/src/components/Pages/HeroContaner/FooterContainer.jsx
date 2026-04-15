@@ -25,22 +25,22 @@ const FooterContainer = () => {
             <div className=" flex gap-4">
               <span
               title="instagram"
-               className="p-1.5 rounded-full text-xl md:text-3xl hover:scale-105 hover:bg-secondary text-textcolor hover:text-white transition duration-500">
+               className="p-1.5 rounded-full text-xl md:text-3xl hover:scale-105 hover:text-secondary text-textcolor  transition duration-500">
                 <FaInstagram />
               </span>
               <span
               title="facebook"
-               className="p-1.5 rounded-full text-xl md:text-3xl hover:scale-105 hover:bg-secondary text-textcolor hover:text-white transition duration-500">
+               className="p-1.5 rounded-full text-xl md:text-3xl hover:scale-105 hover:text-secondary text-textcolor transition duration-500">
                 <FaFacebook />
               </span>
               <span
               title="linkedin"
-              className="p-1.5 rounded-full text-xl md:text-3xl hover:scale-105 hover:bg-secondary text-textcolor hover:text-white transition duration-500">
+              className="p-1.5 rounded-full text-xl md:text-3xl hover:scale-105 hover:text-secondary text-textcolor  transition duration-500">
                 <FaLinkedin />
               </span>
               <span
               title="twitter"
-               className="p-1.5 rounded-full text-xl md:text-3xl hover:scale-105 hover:bg-secondary text-textcolor hover:text-white transition duration-500">
+               className="p-1.5 rounded-full text-xl md:text-3xl hover:scale-105 hover:text-secondary text-textcolor  transition duration-500">
                 <FaTwitter />
               </span>
             </div>
