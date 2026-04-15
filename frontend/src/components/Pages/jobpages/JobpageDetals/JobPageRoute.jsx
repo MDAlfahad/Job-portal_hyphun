@@ -12,9 +12,8 @@ import {
 import Button from "../../../Components/buttons/ButtonComponents";
 import { IoBookmark, IoBookmarkOutline } from "react-icons/io5";
 import Footer from "../../HeroContaner/FooterContainer";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useEffect } from "react";
 import { formatDistanceToNow } from "date-fns";
 import JobApplyForm from "../../../Components/forms/JobApplyFrom";
 import useJobStore from "../../../../Store/jobStore";
@@ -27,34 +26,30 @@ const JobPageRoute = () => {
   const [isApply, setIsApply] = useState(false);
   const navigate = useNavigate();
 
-  //zustand store
-  const { jobs: alljobs, fetchjobs } = useJobStore();
+  const { jobs: alljobs } = useJobStore();
   const { user } = userAuth();
   const { id } = useParams();
 
-  // job postAPI
   useEffect(() => {
-    const cahched_job = alljobs.find(
-      (item) => String(item.job_id || item.id) === String(id),
+    const cached_job = alljobs.find(
+      (item) => String(item.job_id || item.id) === String(id)
     );
 
-    if (cahched_job) {
-      setJob(cahched_job);
+    if (cached_job) {
+      setJob(cached_job);
     } else {
       fetch(`${API_CALL}/api/jobdata/${id}`)
         .then((res) => res.json())
-        .then((result) => {
-          setJob(result);
-        })
+        .then((result) => setJob(result))
         .catch((error) => {
           console.error("Fetch error:", error);
           setJob(null);
         });
     }
   }, [id, alljobs]);
-  if (!job) return <h1>Loding....</h1>;
 
-  // data formatte
+  if (!job) return <h1 className="text-center py-20">Loading...</h1>;
+
   const formattedDate = job?.posted_at
     ? formatDistanceToNow(new Date(job.posted_at.replace(" ", "T")), {
         addSuffix: true,
@@ -63,99 +58,110 @@ const JobPageRoute = () => {
 
   return (
     <>
-      {/* // Apply from  */}
+      {/* APPLY FORM */}
       {isApply && <JobApplyForm onClose={() => setIsApply(false)} />}
 
-      {/* //job post details  */}
+      {/* MAIN */}
       <div className={isApply ? "blur pointer-events-none" : ""}>
-        <div className="w-full max-w-[1800px] m-auto flex flex-col items-center pt-20 bg-gray-200 text-textcolor2 relative">
-          <h1 className="text-2xl md:text-4xl font-semibold pt-10 text-black ">
+        <div className="w-full max-w-[1800px] m-auto flex flex-col items-center pt-16 md:pt-20 px-2 md:px-0 bg-gray-200 text-textcolor2">
+
+          {/* TITLE */}
+          <h1 className="text-xl sm:text-2xl md:text-4xl font-semibold pt-6 md:pt-10 text-black text-center px-2">
             {job.job_desigination}
           </h1>
 
-          <div className="border w-[1100px] p-6 rounded-xl flex flex-col gap-4 my-10 border-gray-200">
+          {/* MAIN CARD */}
+          <div className="border w-full max-w-[1100px] p-4 md:p-6 rounded-xl flex flex-col gap-4 my-6 md:my-10 border-gray-200">
+
+            {/* HEADER */}
             <div className="flex flex-col gap-2 bg-white p-4 rounded-xl">
-              <div className="border rounded-sm px-2 py-1 w-40 flex gap-2 items-center justify-center ">
-                <TrendingUp
-                  strokeWidth={1.5}
-                  size={16}
-                  className="text-secondary"
-                />
-                <p className="text-md">Actively hiring</p>
+
+              <div className="border rounded-sm px-2 py-1 w-fit flex gap-2 items-center">
+                <TrendingUp size={16} className="text-secondary" />
+                <p className="text-sm md:text-md">Actively hiring</p>
               </div>
-              <div className="flex justify-between items-center">
-                <div className="flex flex-col ">
-                  <h1 className="text-gray-800 font-semibold text-xl ">
+
+              <div className="flex flex-col md:flex-row justify-between md:items-center gap-4">
+                <div>
+                  <h1 className="text-gray-800 font-semibold text-lg md:text-xl">
                     {job.job_desigination}
                   </h1>
                   <p className="text-sm">{job.company_name}</p>
                 </div>
-                <div>
-                  <p>company logo</p>
-                </div>
+                <div className="text-sm text-gray-500">Company Logo</div>
               </div>
 
-              <div className="flex gap-1 items-center">
-                <MapPin strokeWidth={1.5} size={16} />
+              <div className="flex gap-1 items-center text-sm md:text-base">
+                <MapPin size={16} />
                 <h1>{job.job_location}</h1>
               </div>
-              <div className="flex items-center justify-between">
+
+              {/* DETAILS GRID */}
+              <div className="grid grid-cols-2 md:flex justify-between gap-4 text-sm md:text-base">
+
                 <div className="text-center">
-                  <span className="flex items-center gap-1">
-                    <CalendarClock strokeWidth={1.5} size={16} />
-                    <h1> Start Date</h1>
+                  <span className="flex items-center gap-1 justify-center">
+                    <CalendarClock size={16} />
+                    <h1>Start Date</h1>
                   </span>
                   <p>{job.job_startdate}</p>
                 </div>
+
                 <div className="text-center">
-                  <span className="flex items-center gap-1">
-                    <IndianRupee strokeWidth={1.5} size={16} />
-                    <h1>CTC (annual)</h1>
+                  <span className="flex items-center gap-1 justify-center">
+                    <IndianRupee size={16} />
+                    <h1>CTC</h1>
                   </span>
                   <p>{job.job_ctc}</p>
                 </div>
+
                 <div className="text-center">
-                  <span className="flex items-center gap-1">
-                    <Briefcase strokeWidth={1.5} size={16} />
+                  <span className="flex items-center gap-1 justify-center">
+                    <Briefcase size={16} />
                     <h1>Experience</h1>
                   </span>
                   <p>{job.job_experience}</p>
                 </div>
+
                 <div className="text-center">
-                  <span className="flex items-center gap-1">
-                    <CalendarClock strokeWidth={1.5} size={16} />
+                  <span className="flex items-center gap-1 justify-center">
+                    <CalendarClock size={16} />
                     <h1>Apply by</h1>
                   </span>
                   <p>{job.Job_lastdate}</p>
                 </div>
               </div>
-              <div className="flex gap-4 items-center">
-                <span className="bg-gray-200 px-4 py-0.5 rounded-full flex items-center gap-1">
-                  <TimerReset strokeWidth={1.5} size={16} />
+
+              {/* TAGS */}
+              <div className="flex flex-wrap gap-2 md:gap-4 items-center text-sm">
+                <span className="bg-gray-200 px-3 py-1 rounded-full flex items-center gap-1">
+                  <TimerReset size={16} />
                   <p>{formattedDate}</p>
                 </span>
-                <span className="bg-gray-200 px-4 py-0.5 rounded-full">
+                <span className="bg-gray-200 px-3 py-1 rounded-full">
                   {job.job_type}
                 </span>
               </div>
-              <div className="flex justify-between items-center ">
+
+              {/* ACTIONS */}
+              <div className="flex flex-col md:flex-row gap-4 md:justify-between md:items-center">
+
                 <div className="flex gap-2 items-center">
-                  <span className="p-0.5 rounded-full bg-orange-500">
-                    <Zap strokeWidth={2} size={16} />
+                  <span className="p-1 rounded-full bg-orange-500">
+                    <Zap size={16} />
                   </span>
-                  <p>Be the early applicant</p>
+                  <p className="text-sm">Be the early applicant</p>
                 </div>
-                <div className="flex items-center gap-6">
-                  <div className="flex gap-4 items-center">
-                    <Share2 strokeWidth={1.5} />
-                    <p onClick={() => setischange(!ischange)}>
-                      {ischange ? (
-                        <IoBookmarkOutline size={22} />
-                      ) : (
-                        <IoBookmark size={22} className="text-secondary" />
-                      )}
-                    </p>
-                  </div>
+
+                <div className="flex items-center justify-between md:justify-end gap-4 w-full md:w-auto">
+                  <Share2 size={18} />
+                  <p onClick={() => setischange(!ischange)}>
+                    {ischange ? (
+                      <IoBookmarkOutline size={22} />
+                    ) : (
+                      <IoBookmark size={22} className="text-secondary" />
+                    )}
+                  </p>
 
                   <Button
                     text="Apply now"
@@ -166,47 +172,52 @@ const JobPageRoute = () => {
                 </div>
               </div>
             </div>
+
             <hr />
-            <div className="flex flex-col gap-2 bg-white p-4 rounded-xl">
-              <h1 className="text-xl font-semibold text-black">
+
+            {/* ABOUT */}
+            <div className="bg-white p-4 rounded-xl">
+              <h1 className="text-lg md:text-xl font-semibold text-black">
                 About this job
               </h1>
-              <p>Key Responsibilities</p>
-              <div>{job.job_description}</div>
-            </div>
-            <div className="p-4 bg-white rounded-xl">
-              <h1 className="text-md font-semibold text-black">
-                Skills required
-              </h1>
-              <p>{job.job_skills}</p>
-            </div>
-            <div className="flex flex-col gap-2 p-4 bg-white rounded-xl">
-              <h1 className="font-semibold text-black">
-                Earn certificates in this skills{" "}
-              </h1>
-              <div className="flex items-center gap-4">
-                <p>{job.certifications}</p>
-              </div>
-            </div>
-            <div className="flex flex-col gap-2 p-4 bg-white rounded-xl">
-              <h1 className="font-semibold text-black">Who can apply</h1>
-              <p>
-                Only those candidates can apply who: <br />
-                1. have minimum 1 years of experience
+              <p className="mt-2 text-sm md:text-base break-words">
+                {job.job_description}
               </p>
-              <div>
-                <h1 className="text-black font-semibold">Salary</h1>
-                <p>Annual CTC: {job.job_ctc}</p>
-              </div>
-              <div>
-                <h1 className="text-black font-semibold">Number of opening</h1>
-                <p>20</p>
-              </div>
             </div>
-            <div className="p-4 rounded-xl bg-white flex flex-col gap-2">
-              <h1 className="text-black font-semibold">About (company name)</h1>
-              <p>{job.about_company}</p>
+
+            {/* SKILLS */}
+            <div className="p-4 bg-white rounded-xl">
+              <h1 className="font-semibold text-black">Skills required</h1>
+              <p className="text-sm md:text-base">{job.job_skills}</p>
             </div>
+
+            {/* CERTIFICATIONS */}
+            <div className="p-4 bg-white rounded-xl">
+              <h1 className="font-semibold text-black">
+                Earn certificates in this skills
+              </h1>
+              <p className="text-sm md:text-base">{job.certifications}</p>
+            </div>
+
+            {/* EXTRA */}
+            <div className="p-4 bg-white rounded-xl">
+              <h1 className="font-semibold text-black">Who can apply</h1>
+              <p className="text-sm md:text-base">
+                Only those candidates can apply who:
+                <br />1. have minimum 1 years of experience
+              </p>
+              <p className="mt-2">Salary: {job.job_ctc}</p>
+            </div>
+
+            {/* COMPANY */}
+            <div className="p-4 bg-white rounded-xl">
+              <h1 className="font-semibold text-black">
+                About (company name)
+              </h1>
+              <p className="text-sm md:text-base">{job.about_company}</p>
+            </div>
+
+            {/* APPLY BUTTON */}
             <div className="flex justify-center">
               <Button
                 text="Apply Now"
@@ -223,4 +234,5 @@ const JobPageRoute = () => {
     </>
   );
 };
+
 export default JobPageRoute;

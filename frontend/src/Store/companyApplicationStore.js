@@ -24,7 +24,6 @@ const useCompanyApplications = create((set) => ({
         }
       );
 
-      console.log("COMPANY APPLICATIONS:", res.data);
 
       set({
         applications: res.data.applications,

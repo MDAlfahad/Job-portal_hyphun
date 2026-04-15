@@ -6,6 +6,7 @@ import ContactContainer from "../HeroContaner/ContactContainer"
 import FooterContainer from "../HeroContaner/FooterContainer"
 import { useNavigate } from "react-router-dom";
 import CrauselContainer from "./CrauselContainer";
+import StillThink from "./StillThink";
 
 const Hero = () => {
   
@@ -14,13 +15,13 @@ const Hero = () => {
   return (
     <>
       <div className="w-full max-w-[1800px] m-auto mainbackground noselect">
-        <div className="w-full md:px-4 lg:px-12 py-28 md:py-2 px-4 lg:py-40  text-center flex flex-col justify-center lg:h-auto md:h-[100vh]">
-          <div>
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold">
+        <div className="w-full md:px-4 lg:px-12 py-28 md:py-10 px-4 text-center flex flex-col justify-center  lg:h-auto">
+          <div className="flex flex-col items-center py-20">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold pt-28">
              Get Your Job Now, <br />
               <span className="text-secondary"> Your Journey Never end </span>
             </h1>
-            <p className="text-sm md:text-lg lg:text-xl py-6 text-textcolor2">
+            <p className="text-sm md:text-[16px] py-6 text-textcolor2 max-w-[900px]">
               The Placement Cell plays a vital role in shaping students’ careers
               by acting as a bridge between students and recruiters. It
               organizes campus recruitment drives, internships, skill
@@ -28,16 +29,18 @@ const Hero = () => {
               and career counseling sessions to prepare students for the
               professional world.
             </p>
-          </div>
-          <div className="flex  gap-6 justify-center items-center">
+            <div className="flex  gap-6 justify-center items-center">
             <Button text="Apply Now" 
             onClick={() => navigate("/job-page")}
               />
           </div>
+          </div>
+          
         </div>
       </div>
       <BarContainer/>
         <Services/>
+        <StillThink/>
         <CrauselContainer/>
         <ContactContainer/>
         <FooterContainer/>

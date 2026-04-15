@@ -101,9 +101,10 @@ const AdminSidebar = ({ setActivePage, activePage }) => {
         <div
           className="flex items-center gap-3 px-4 py-3 cursor-pointer hover:bg-gray-200 rounded-md"
           title={!show ? "Logout" : ""}
+          onClick={handlelogut}
         >
           <LogOut size={22} />
-          {show && <p onClick={handlelogut}>Logout</p>}
+          {show && <p >Logout</p>}
         </div>
       </div>
     </div>

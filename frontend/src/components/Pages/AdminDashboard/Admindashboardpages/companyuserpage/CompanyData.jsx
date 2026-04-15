@@ -1,12 +1,18 @@
 import { UserRound, X } from "lucide-react";
 import { useState } from "react";
 import Button from "../../../../Components/buttons/ButtonComponents";
+import userDetaiilStore from "../../../../../Store/userDetailsStore";
+import { useEffect } from "react";
 
 const CompanyData = () => {
   const [active, setActive] = useState("green");
   const [open, setOpen] = useState(false);
-
+  const { companies, fetchCompanies, Loading } = userDetaiilStore();
   const [changevalue, setchangevalue] = useState(true);
+
+  useEffect(() => {
+    fetchCompanies();
+  }, []);
 
   const value = () => {
     setchangevalue(!changevalue);
@@ -99,28 +105,32 @@ const CompanyData = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr className="text-center w-full">
-                  <td className="py-4">Techowear</td>
-                  <td className="py-4">Fronetend developer</td>
-                  <td className="py-4">20/12/2024</td>
-                  <td
-                    className="py-4"
-                    onClick={changeto}
-                    style={{ color: active, borderColor: active }}
-                  >
-                    <p
-                      className="border rounded-md py-2 flex items-center justify-center font-semibold"
-                      onClick={value}
+                {companies.map((company) => (
+                  <tr className="text-center w-full" key={company.user_id}>
+                    <td className="py-4">{company.user_name}</td>
+                    <td className="py-4">{company.user_email}</td>
+                    <td className="py-4">
+                      {new Date(company.created_at).toLocaleDateString()}
+                    </td>
+                    <td
+                      className="py-4"
+                      onClick={changeto}
+                      style={{ color: active, borderColor: active }}
                     >
-                      {changevalue ? "active" : "Deactive"}
-                    </p>
-                  </td>
-                  <td className="py-4">
-                    <p className="border rounded-md py-2 flex items-center justify-center font-semibold bg-secondary">
-                      Delete
-                    </p>
-                  </td>
-                </tr>
+                      <p
+                        className="border rounded-md py-2 flex items-center justify-center font-semibold"
+                        onClick={value}
+                      >
+                        {changevalue ? "active" : "Deactive"}
+                      </p>
+                    </td>
+                    <td className="py-4">
+                      <p className="border rounded-md py-2 flex items-center justify-center font-semibold bg-secondary">
+                        Delete
+                      </p>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>

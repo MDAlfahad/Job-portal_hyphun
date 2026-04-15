@@ -6,63 +6,92 @@ import { useEffect } from "react";
 import useAdminStore from "../../../../Store/adminStore";
 
 const AdminProfilePage = () => {
-  const {user, token} = useAuthStore();
-  const {jobs, fetchjobs} = useJobStore();
-  const{adminStats,fetchAdminStats} = useAdminStore();
+  const { user, token } = useAuthStore();
+  const { jobs, fetchJobs } = useJobStore();
+  const { adminStats, fetchAdminStats } = useAdminStore();
 
-   useEffect(() => {
-      if (token &&user?.auth_role) {
-        fetchjobs(token, user.auth_role);
-      }
-      fetchAdminStats();
-      
-    }, [token, user?.auth_role, fetchjobs]);
-  
+  useEffect(() => {
+    if (token && user?.auth_role) {
+      fetchJobs(token, user.auth_role);
+    }
+    fetchAdminStats();
+  }, [token, user?.auth_role, fetchJobs]);
+
   return (
     <>
-      <div className="bg-gray-100 w-full h-[100vh] overflow-y-auto px-6 py-6">
-        <div className="mt-20  px-6 py-4 rounded-xl">
-          <div className="flex justify-between items-center ">
-            <AdminProfileCard 
-            heading="Total user"
-            number={adminStats?.user || 0}
-            text="Toal Active user"/>
+      {/* 🔥 responsive height + padding */}
+      <div className="bg-gray-100 w-full min-h-[100vh] overflow-y-auto px-4 md:px-6 py-4 md:py-6">
+        
+        <div className="mt-16 md:mt-20 px-2 md:px-6 py-4 rounded-xl">
+          
+          {/* 🔥 CARDS SECTION */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            
             <AdminProfileCard
-            heading="Total Companies"
-            number={adminStats.company || 0}
-            text="Toal Active Companies"/>
+              heading="Total user"
+              number={adminStats?.user || 0}
+              text="Toal Active user"
+            />
+
             <AdminProfileCard
-            heading="Total forms"
-            number={0}
-            text="Toal forms"/>
+              heading="Total Companies"
+              number={adminStats.company || 0}
+              text="Toal Active Companies"
+            />
+
             <AdminProfileCard
-            heading="Total Job posted"
-            number={jobs?.length > 0 ? jobs.length : "0"}
-            text="Toal posted job"/>
+              heading="Total forms"
+              number={0}
+              text="Toal forms"
+            />
+
+            <AdminProfileCard
+              heading="Total Job posted"
+              number={jobs?.length > 0 ? jobs.length : "0"}
+              text="Toal posted job"
+            />
           </div>
-          <div className="my-4 border px-6 py-6 bg-white rounded-xl shadow-lg">
-            <div className="flex justify-between py-1 items-center">
-              <h1 className="text-xl md:text-3xl">Profile</h1>
-              <span className="flex  items-center gap-2 border px-1 py-1 rounded-lg">
+
+          {/* 🔥 PROFILE SECTION */}
+          <div className="my-4 border px-4 md:px-6 py-4 md:py-6 bg-white rounded-xl shadow-lg">
+            
+            {/* HEADER */}
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 py-1">
+              <h1 className="text-lg sm:text-xl md:text-3xl">Profile</h1>
+
+              <span className="flex items-center gap-2 border px-2 py-1 rounded-lg cursor-pointer">
                 <UserRoundPen strokeWidth={1.5} />
                 <p>Edit</p>
               </span>
             </div>
-            <div className="flex  gap-20 px-2">
+
+            {/* 🔥 USER INFO */}
+            <div className="flex flex-col md:flex-row gap-4 md:gap-20 px-2 mt-4">
+              
               <div>
-                <p className="text-md text-textcolor2">Name</p>
-                <p className="text-lg font-semibold p-1">{user?.user_name || "Loading...."}</p>
+                <p className="text-sm md:text-md text-textcolor2">Name</p>
+                <p className="text-base md:text-lg font-semibold p-1 break-words">
+                  {user?.user_name || "Loading...."}
+                </p>
               </div>
+
               <div>
-                <p className="text-md text-textcolor2">Email</p>
-                <p className="text-lg font-semibold p-1">{user?.user_email || "Loading...."}</p>
+                <p className="text-sm md:text-md text-textcolor2">Email</p>
+                <p className="text-base md:text-lg font-semibold p-1 break-words">
+                  {user?.user_email || "Loading...."}
+                </p>
               </div>
+
               <div>
-                <p className="text-md text-textcolor2">Admin </p>
-                <p className="text-lg font-semibold p-1">{user?.auth_role || "Loading...."}</p>
+                <p className="text-sm md:text-md text-textcolor2">Admin</p>
+                <p className="text-base md:text-lg font-semibold p-1 break-words">
+                  {user?.auth_role || "Loading...."}
+                </p>
               </div>
+
             </div>
           </div>
+
         </div>
       </div>
     </>

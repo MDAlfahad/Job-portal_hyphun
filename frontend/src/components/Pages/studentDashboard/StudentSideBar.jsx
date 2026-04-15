@@ -19,7 +19,7 @@ const StudentSideBar = ({ setActivePage, activePage }) => {
     navigate("/login-page");
   };
 
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
   const menuClass = (page) =>
     `flex items-center gap-3 px-4 py-3 cursor-pointer  transition-all duration-300 ${
       activePage === page ? "bg-secondary text-white" : "hover:bg-blue-100"
@@ -51,7 +51,7 @@ const StudentSideBar = ({ setActivePage, activePage }) => {
             onClick={() => setActivePage("profile")}
             title={!show ? "Profile" : ""}
           >
-            <UserRound size={22} />
+            <UserRound size={22} strokeWidth={1}/>
             {show && <p>Profile</p>}
           </div>
 
@@ -60,7 +60,7 @@ const StudentSideBar = ({ setActivePage, activePage }) => {
             onClick={() => setActivePage("application")}
             title={!show ? "applicaton" : ""}
           >
-            <ClipboardList size={22} />
+            <ClipboardList size={22} strokeWidth={1}/>
             {show && <p>Application</p>}
           </div>
 
@@ -69,7 +69,7 @@ const StudentSideBar = ({ setActivePage, activePage }) => {
             onClick={() => setActivePage("savedform")}
             title={!show ? "Saved Forms" : ""}
           >
-            <Bookmark size={22} />
+            <Bookmark size={22} strokeWidth={1}/>
             {show && <p>Saved</p>}
           </div>
         </div>
@@ -77,9 +77,10 @@ const StudentSideBar = ({ setActivePage, activePage }) => {
         <div
           className="flex items-center gap-3 px-4 py-3 cursor-pointer hover:bg-gray-200 rounded-md"
           title={!show ? "Logout" : ""}
+          onClick={handlelogout}
         >
-          <LogOut size={22} />
-          {show && <p onClick={handlelogout}>Logout</p>}
+          <LogOut size={22} strokeWidth={1}/>
+          {show && <p >Logout</p>}
         </div>
       </div>
     </div>

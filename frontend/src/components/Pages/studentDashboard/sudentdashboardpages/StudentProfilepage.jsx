@@ -38,7 +38,7 @@ const StudentProfilePage = () => {
 
   return (
     <>
-      <div className="mt-20 mx-10 relative ">
+      <div className=" mt-10 md:mt-20 md:mx-10 relative">
         {/* edit profile card  */}
         {EditShow && (
           <div className="flex w-96 flex-col gap-4 absolute border p-4 rounded-xl bg-white top-32 right-1/3 shadow-xl    ">
@@ -125,8 +125,8 @@ const StudentProfilePage = () => {
           Profile <span className="text-secondary"> {user.user_name}</span>
         </h1>
         <div>
-          <div className="w-full flex p-12 bg-white rounded-xl justify-around ">
-            <div className="flex flex-col items-center gap-2">
+          <div className="w-full md:flex px-6 py-2 md:p-12 bg-white rounded-md md:rounded-xl justify-around ">
+            <div className="flex flex-col items-center gap-2 ">
               <div className=" w-[150px] h-[150px] overflow-hidden bg-gray-200 rounded-lg object-cover">
               <img width={200} height={200} src={Logo} alt="" />
             </div>
@@ -142,7 +142,7 @@ const StudentProfilePage = () => {
             </div>
             <div>
               {/* profile  */}
-              <div className=" flex items-center justify-between mt-12 mb-6">
+              <div className=" flex items-center justify-between mt-4 md:mt-12 mb-2 md:mb-6">
                 <h1 className="text-xl font-semibold">Personal Info</h1>
                 
                 <span
@@ -152,7 +152,7 @@ const StudentProfilePage = () => {
                   <SquarePen strokeWidth={1.5} size={18} /> <p>Edit</p>
                 </span>
               </div>
-              <div className="flex gap-8 items-center ">
+              <div className="md:flex gap-8 items-center ">
                 <div>
                   <label className="text-textcolor2" htmlFor="name">
                     Name
@@ -181,7 +181,7 @@ const StudentProfilePage = () => {
             </div>
           </div>
 
-          <div className="border rounded-xl p-12 my-6 bg-white">
+          <div className="border rounded-xl py-4 px-4 md:p-12 my-6 bg-white">
             <div className="flex justify-between">
               <h1 className="text-lg font-semibold">Bio</h1>
               <span

@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { UserRound, Bell } from "lucide-react";
 import { HiOutlineBars3BottomRight } from "react-icons/hi2";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import useAuthStore from "../../../Store/userAuth";
 
 const Navbar = () => {
@@ -23,7 +23,7 @@ const Navbar = () => {
   const role = user?.auth_role;
 
   return (
-    <div className="w-full fixed bg-white border z-40">
+    <div className="w-full fixed bg-white border z-50">
       <div className="max-w-[1800px] m-auto px-6 md:px-12 py-4 text-textcolor flex justify-between items-center relative">
         <div className="flex gap-5 lg:gap-20 items-center">
           <h1 className="text-2xl lg:text-3xl font-bold">JOB PORTAL</h1>

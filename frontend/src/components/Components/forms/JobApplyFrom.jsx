@@ -105,10 +105,10 @@ const JobApplyForm = ({ className, onClose }) => {
   return (
     <div className="fixed top-0 left-0 w-full h-full bg-black/40 backdrop-blur-sm overflow-y-auto z-50">
       <div className="min-h-full flex justify-center items-start pt-10 pb-10 ">
-        <div className="flex flex-col gap-2 bg-white w-[1100px] border  rounded-lg overflow-hidden ">
+        <div className="flex flex-col gap-2 bg-white md:w-[1100px] border  rounded-lg overflow-hidden ">
           <div className="flex justify-between py-6 bg-gray-100 border-b p-8 items-center">
-            <h1 className="text-xl md:text-3xl text-black ml-60 font-semibold">
-              Applying to {isJobData.job_desigination} {isJobData.job_type}
+            <h1 className="text-xl md:text-3xl text-black md:ml-72  font-semibold">
+              Applying to {isJobData.job_desigination}
             </h1>
             <X color="black" className="cursor-pointer" onClick={onClose} />
           </div>
@@ -139,20 +139,24 @@ const JobApplyForm = ({ className, onClose }) => {
                 <Calendar size={16} />3 months
               </span>
             </div>
-            <div className="flex gap-6">
-              <span className="flex gap-2 text-sm items-center px-2 py-0.5 bg-green-200 text-green-500 rounded-full">
+            <div className="md:flex gap-6">
+             <div className="flex gap-6">
+               <span className="flex gap-2 text-sm items-center px-2 py-0.5 bg-green-200 text-green-500 rounded-full">
                 <History size={16} strokeWidth={1.5} />{formattedDate}
               </span>
               <span className="flex gap-2 text-sm items-center px-2 py-0.5 bg-orange-200 text-orange-800 rounded-full">
                 <FaSuitcase size={16} strokeWidth={1.5} />
                 Job Offring upto 6LPA
               </span>
-              <span className="flex gap-2 text-sm items-center px-2 py-0.5 rounded-full bg-gray-100 border-0.5">
+             </div>
+             <div className="flex gap-6  mt-4">
+               <span className="flex gap-2 text-sm items-center px-2 py-0.5 rounded-full border  bg-gray-100 border-0.5">
                 {isJobData.job_type}
               </span>
-              <span className="flex gap-2 text-sm items-center px-2 py-0.5 rounded-full bg-gray-100 border-0.5">
+              <span className="flex gap-2 text-sm items-center px-2 py-0.5 rounded-full border bg-gray-100 border-0.5">
                 vacancies
               </span>
+             </div>
             </div>
 
             <div className="flex flex-col gap-4 py-4">
@@ -271,11 +275,11 @@ const JobApplyForm = ({ className, onClose }) => {
               </div>
             </div>
 
-            <div className="flex flex-col gap-2 border rounded-xl p-4 mt-2">
+            <div className="flex flex-col gap-2 justify-center items-center border rounded-xl p-4 mt-2">
               <h1 className="text-md md:text-lg text-black font-semibold">
                 Upload resume
               </h1>
-              <div>
+              <div className=" ">
                 <label
                   htmlFor="file"
                   className="border-2 border-black border-dotted p-4 rounded-md flex items-center md:text-lg font-semibold text-black gap-2 w-48 justify-center cursor-pointer hover:bg-gray-50"

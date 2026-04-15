@@ -53,7 +53,8 @@ userRouter.get("/user-data", jobpostauth, async (req, res) => {
         user_name,
         user_email,
         user_phone,
-        user_address
+        user_address,
+        auth_role
       FROM user_logindata
       WHERE user_id = ?
       `,
@@ -81,5 +82,66 @@ userRouter.get("/user-data", jobpostauth, async (req, res) => {
     });
   }
 });
+
+// GETTIN SEPARATE USER DATA ROM DB 
+userRouter.get("/all-users", async (req, res) => {
+  try {
+    const [users] = await db.query(`
+      SELECT 
+        user_id,
+        user_name,
+        user_email,
+        user_phone,
+        user_address,
+        auth_role,
+        created_at
+      FROM user_logindata
+      WHERE auth_role = 'user'
+    `);
+
+    res.status(200).json({
+      success: true,
+      users,
+    });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      success: false,
+      message: "Server Error",
+    });
+  }
+});
+
+
+userRouter.get("/all-companies", async (req, res) => {
+  try {
+    const [companies] = await db.query(`
+      SELECT 
+        user_id,
+        user_name,
+        user_email,
+        user_phone,
+        user_address,
+        auth_role,
+        created_at
+      FROM user_logindata
+      WHERE auth_role = 'company'
+    `);
+
+    res.status(200).json({
+      success: true,
+      companies,
+    });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      success: false,
+      message: "Server Error",
+    });
+  }
+});
+
 
 module.exports = userRouter;

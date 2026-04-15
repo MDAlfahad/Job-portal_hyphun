@@ -1,6 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import useCompanyApplications from "../../../../Store/companyApplicationStore";
 
 const FormsDetails = () => {
+    const{applications, fetchCompanyApplications} = useCompanyApplications();
+    
+    useEffect(()=>{
+        fetchCompanyApplications();
+    }, [])
 
    const[active, setActive] = useState('green');
 
@@ -25,13 +31,15 @@ const FormsDetails = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr className="text-center w-full">
-                           <td className="py-4">Techowear</td>
+                        {applications.map((application)=>(
+                            <tr className="text-center w-full">
+                           <td className="py-4">myself</td>
                            <td className="py-4">Fronetend developer</td>
                            <td className="py-4">20/12/2024</td>
                            <td className="py-4"><p className="border rounded-md py-2 flex items-center justify-center font-semibold"  onClick={changeto} style={{color: active, borderColor:active}}>pending</p></td>
                            <td className="py-4"><p className="border rounded-md py-2 flex items-center justify-center font-semibold bg-secondary text-white"  >review</p></td>
                         </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>
