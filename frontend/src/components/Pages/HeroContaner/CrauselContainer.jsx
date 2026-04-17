@@ -44,11 +44,11 @@ const CrauselContainer = () => {
   }, []);
 
   return (
-    <div className="max-w-[1800px] m-auto px-4 md:px-12 py-10">
+    <div className="max-w-[1800px] m-auto px-4 md:px-12  md:py-4">
       
       {/* Heading */}
-      <h1 className="text-2xl md:text-5xl font-semibold text-center mb-8">
-        <span className="text-secondary">Apply now,</span> to start your career
+      <h1 className="text-2xl md:text-5xl font-semibold text-center py-20">
+        <span className="text-secondary ">Apply now,</span> to start your career
       </h1>
 
       <div className="flex items-center justify-center w-full max-w-7xl mx-auto">
@@ -74,7 +74,7 @@ const CrauselContainer = () => {
             {data.map((item) => (
               <div
                 key={item.id}
-                className="flex-shrink-0 w-full sm:w-1/2 lg:w-1/3"
+                className="flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 "
               >
                 <CrauselCard {...item} />
               </div>

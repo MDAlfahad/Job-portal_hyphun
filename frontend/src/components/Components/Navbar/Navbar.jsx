@@ -36,15 +36,16 @@ const Navbar = () => {
             </Link>
             <Link
               className="text-textcolor hover:text-secondary md:text-sm lg:text-[16px] transition-all duration-300 active:text-textcolor"
-              to="/internships"
-            >
-              Internships
-            </Link>
-            <Link
-              className="text-textcolor hover:text-secondary md:text-sm lg:text-[16px] transition-all duration-300 active:text-textcolor"
               to="/job-page"
             >
               Job
+            </Link>
+
+            <Link
+              className="text-textcolor hover:text-secondary md:text-sm lg:text-[16px] transition-all duration-300 active:text-textcolor"
+              to="/contact"
+            >
+              Contact
             </Link>
           </div>
         </div>

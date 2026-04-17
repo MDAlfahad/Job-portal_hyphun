@@ -2,7 +2,6 @@ import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 import Navbar from "../Components/Navbar/Navbar";
 import Hero from "../Pages/HeroContaner/Hero";
 import JobPage from "../Pages/jobpages/Jobpage";
-import PlacementContainer from "../Pages/Placementpage/PlacementContainer";
 import UserLoginPage from "../Authpages/Userloginpage/UserLoginPage";
 import UserSignupPage from "../Authpages/Userloginpage/UserSignupPage";
 import CompanySignupPage from "../Authpages/Companysignuppage/CompanySignupPage";
@@ -15,6 +14,7 @@ import ScrollTopTop from "../ScrollToTop";
 import JobPageRoute from "../Pages/jobpages/JobpageDetals/JobPageRoute";
 import ProtectedRoute from "../../protectetroutes/ProtectedRoute";
 import NotFound404 from "../404NotFound/NotFound404";
+import ContactPage from "../Pages/ContactPage/ContactPage";
 
 const MainRoute = () => {
   return (
@@ -24,8 +24,9 @@ const MainRoute = () => {
       <Routes>
         {/* --- Public Routes --- */}
         <Route path="/" element={<Hero />} />
-        <Route path="/internships" element={<PlacementContainer />} />
         <Route path="/job-page" element={<JobPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+
         <Route path="/login-page" element={<UserLoginPage />} />
         <Route path="/user-signup" element={<UserSignupPage />} />
         <Route path="/company-signup" element={<CompanySignupPage />} />

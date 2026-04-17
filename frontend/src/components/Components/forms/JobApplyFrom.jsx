@@ -113,7 +113,6 @@ const JobApplyForm = ({ className, onClose }) => {
             <X color="black" className="cursor-pointer" onClick={onClose} />
           </div>
           
-          {/* ... (Middle section displaying job details remains exactly the same) ... */}
           <div className="flex flex-col gap-2 p-8">
             <div className="flex items-center justify-between">
               <div className="flex flex-col ">
@@ -141,19 +140,19 @@ const JobApplyForm = ({ className, onClose }) => {
             </div>
             <div className="md:flex gap-6">
              <div className="flex gap-6">
-               <span className="flex gap-2 text-sm items-center px-2 py-0.5 bg-green-200 text-green-500 rounded-full">
+               <span className="flex gap-2 rounded-full items-center px-2 bg-green-200 text-green-500 ">
                 <History size={16} strokeWidth={1.5} />{formattedDate}
               </span>
-              <span className="flex gap-2 text-sm items-center px-2 py-0.5 bg-orange-200 text-orange-800 rounded-full">
+              <span className="flex text-sm items-center gap-2 px-2 bg-orange-200 text-orange-800 rounded-full">
                 <FaSuitcase size={16} strokeWidth={1.5} />
                 Job Offring upto 6LPA
               </span>
              </div>
              <div className="flex gap-6  mt-4">
-               <span className="flex gap-2 text-sm items-center px-2 py-0.5 rounded-full border  bg-gray-100 border-0.5">
+               <span className="flex  text-sm items-center px-2  rounded-full border  bg-gray-100 border-0.5">
                 {isJobData.job_type}
               </span>
-              <span className="flex gap-2 text-sm items-center px-2 py-0.5 rounded-full border bg-gray-100 border-0.5">
+              <span className="flex text-sm items-center px-2  rounded-full border bg-gray-100 border-0.5">
                 vacancies
               </span>
              </div>
@@ -165,13 +164,13 @@ const JobApplyForm = ({ className, onClose }) => {
               </h1>
               <div>
                 <h1 className="text-black font-semibold">Role Overview</h1>
-                <p className="text-sm md:text-[16px] text-textcolor2">
+                <p className="text-sm md:text-[14px] text-textcolor2">
                   {isJobData.job_description}
                 </p>
               </div>
               <div>
                 <h1 className="text-black font-semibold">Requirements</h1>
-                <p className="text-sm md:text-[16px] text-textcolor2">
+                <p className="text-sm md:text-[14px] text-textcolor2">
                   Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odit
                   error obcaecati quidem nobis, possimus beatae ipsum aliquam
                   ipsa, enim ullam molestiae quae aspernatur. Odio alias velit
@@ -191,12 +190,11 @@ const JobApplyForm = ({ className, onClose }) => {
                 <h1 className="text-md md:text-xl font-semibold text-black">
                   About {isJobData.company_name}
                 </h1>
-                <p className="text-textcolor2">{isJobData.about_company}</p>
+                <p className="text-textcolor2 text-[14px]" >{isJobData.about_company}</p>
               </div>
             </div>
           </div>
 
-          {/* --- NEW: Form with Values and onChange --- */}
           <form onSubmit={handleSubmit} className="flex flex-col gap-2 p-8 border-t">
             <h1 className="text-lg md:text-xl font-semibold text-black">
               Apply Now

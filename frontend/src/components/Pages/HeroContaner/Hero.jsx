@@ -2,7 +2,6 @@
 import Button from "../../Components/buttons/ButtonComponents";
 import BarContainer from "../HeroContaner/BarContainer"
 import Services from "../HeroContaner/Services"
-import ContactContainer from "../HeroContaner/ContactContainer"
 import FooterContainer from "../HeroContaner/FooterContainer"
 import { useNavigate } from "react-router-dom";
 import CrauselContainer from "./CrauselContainer";
@@ -17,18 +16,16 @@ const Hero = () => {
       <div className="w-full max-w-[1800px] m-auto mainbackground noselect">
         <div className="w-full md:px-4 lg:px-12 py-28 md:py-10 px-4 text-center flex flex-col justify-center  lg:h-auto">
           <div className="flex flex-col items-center py-20">
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold pt-28">
+            <h1 className="text-3xl md:text-5xl font-semibold pt-20 leading-none">
              Get Your Job Now, <br />
-              <span className="text-secondary"> Your Journey Never end </span>
+              Your Journey Never end
             </h1>
-            <p className="text-sm md:text-[16px] py-6 text-textcolor2 max-w-[900px]">
-              The Placement Cell plays a vital role in shaping students’ careers
-              by acting as a bridge between students and recruiters. It
-              organizes campus recruitment drives, internships, skill
-              development programs, mock interviews, resume-building workshops,
-              and career counseling sessions to prepare students for the
-              professional world.
+            <p className="text-sm md:text-[14px]  text-textcolor max-w-[800px] pt-4">
+             The Placement Cell plays a vital role in shaping students’ careers by acting as a bridge between students and recruiters. It organizes campus recruitment drives, internships, skill development programs, mock interviews, resume-building <br /> workshops, and career counseling sessions to prepare students for the professional world.
             </p>
+            <div className="md:w-[600px] py-6">
+              <span className="border border-secondary rounded-sm overflow-hidden w-full flex"><input type="serach" id="searchbar" placeholder="Start your journey today..." className="w-full px-2 py-1.5 bg-transparent text-[14px] outline-none placeholder-[#6C6C6C] text-black" /><button className="bg-secondary px-6 text-white text-[14px] font-medium hover:bg-textcolor transition duration-200">Search</button></span>
+            </div>
             <div className="flex  gap-6 justify-center items-center">
             <Button text="Apply Now" 
             onClick={() => navigate("/job-page")}
@@ -42,7 +39,6 @@ const Hero = () => {
         <Services/>
         <StillThink/>
         <CrauselContainer/>
-        <ContactContainer/>
         <FooterContainer/>
     </>
   );

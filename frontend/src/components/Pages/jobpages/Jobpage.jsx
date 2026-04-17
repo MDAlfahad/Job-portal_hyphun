@@ -55,7 +55,7 @@ const JobPage = () => {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
-            <Search className="bg-secondary h-full w-10 p-2 text-white" />
+            <Search className=" h-full w-10 p-2 text-textcolor" />
           </div>
 
           <button
@@ -97,12 +97,12 @@ const JobPage = () => {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
-              <Search className="bg-secondary h-full w-10 p-2 text-white" />
+              <Search className=" h-full w-10 p-2 text-textcolor" />
             </div>
 
             <div className="w-full ">
               {/* PROFILE */}
-              <div className="flex flex-col">
+              <div className="flex flex-col text-[14px]">
                 <label htmlFor="position">Profile</label>
                 <select
                   className="border outline-none px-2 py-2 rounded-md"
@@ -120,7 +120,7 @@ const JobPage = () => {
               </div>
 
               {/* LOCATION */}
-              <div className="flex flex-col mt-3">
+              <div className="flex flex-col mt-3 text-[14px]">
                 <label htmlFor="location">Location</label>
                 <select
                   className="w-full px-2 py-2 outline-none border rounded-md"
@@ -137,7 +137,7 @@ const JobPage = () => {
 
               {/* SALARY */}
               <div className="flex flex-col py-4 gap-4">
-                <h1 className="text-lg font-semibold">
+                <h1 className="text-[16px] font-semibold">
                   Annual Salary (in lakhs)
                 </h1>
 
@@ -185,7 +185,7 @@ const JobPage = () => {
               <h1 className="text-2xl md:text-3xl font-semibold">
                 {filteredJobs.length}+ Jobs Posted
               </h1>
-              <p className="text-sm md:text-lg">
+              <p className="text-sm md:text-[16px]">
                 Search and Apply to Latest Job Vacancies & Openings in India
               </p>
             </div>
