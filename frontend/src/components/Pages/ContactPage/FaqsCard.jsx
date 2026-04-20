@@ -8,7 +8,7 @@ const FaqsCard = ({question, answer}) => {
     setShow(!show);
   };
   return (
-    <div className="flex flex-col gap-1 bg-gray-200 p-2 rounded-sm min-w-[400px]">
+    <div className="flex flex-col gap-1 bg-gray-200 p-2 rounded-sm min-w-[350px]">
       <h1 className="flex items-center justify-between" onClick={handleshow}>
        {question}
         {!show ? (

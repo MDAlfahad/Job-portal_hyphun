@@ -59,7 +59,8 @@ const Navbar = () => {
               LOGIN
             </button>
           )}
-          <div className="md:block bg-background p-2 rounded-full cursor-pointer border">
+          <div className="md:block bg-background p-2 rounded-full cursor-pointer border"
+          onClick={()=>navigate("/notification")}>
             <Bell strokeWidth={1.5} />
           </div>
           <div className="bg-background p-2 rounded-full cursor-pointer border">

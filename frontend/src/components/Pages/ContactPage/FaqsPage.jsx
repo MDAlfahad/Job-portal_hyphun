@@ -4,19 +4,19 @@ import FaqsCard from "./FaqsCard";
 
 const FaqsPage = () => {
   return (
-    <div className="max-w-[1800px] m-auto w-full px-6 md:px-12 py-6 md:py-12 noselect ">
-      <div className="flex flex-col py-4">
-        <h1 className="text-xl md:text-3xl font-medium">
+    <div className="max-w-[1800px] m-auto w-full px-6 md:px-12 py-6 md:py-28 noselect ">
+      <div className="flex flex-col">
+        <h1 className="text-xl md:text-4xl font-medium">
           Frequently asked question
         </h1>
-        <p className="text-[14px] font-light max-w-[500px]">
+        <p className="text-[14px] font-light md:max-w-[500px]">
           here's is everything you need to know to get started, manage your
           account, and troubleshoot the most frequent issues
         </p>
       </div>
 
-      <div className=" flex justify-between  w-full py-10">
-        <div className="flex flex-col   gap-4 w-[500px]">
+      <div className=" md:flex justify-between  w-full py-10">
+        <div className="flex flex-col py-4 gap-4  md:w-[500px] ">
           <FaqsCard
             question="Is it free to use?"
             answer="Yes, the job portal is completely free for job seekers. Recruiters may have separate plans depending on services."
@@ -30,7 +30,7 @@ const FaqsPage = () => {
             answer="Yes, your data is securely stored and only shared with recruiters when you apply for a job."
           />
         </div>
-        <div className="flex flex-col gap-4 w-[500px]  ">
+        <div className="flex flex-col gap-4 md:w-[500px]  ">
           <FaqsCard
             question="What types of jobs are available?"
             answer="The portal offers full-time jobs, part-time jobs, internships, and freelance opportunities across various industries."

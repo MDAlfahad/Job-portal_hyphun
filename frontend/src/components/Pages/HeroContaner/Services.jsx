@@ -5,35 +5,36 @@ import { AiOutlineMessage } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 
 const Services = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <>
       <div className=" w-full md:h-screen lg:h-auto max-w-[1800px] m-auto px-4 md:px-12 py-12 noselect">
-        <h1 className="text-4xl md:text-5xl text-textcolor font-semibold md:text-bold py-10 "><span >Services</span> Provide here</h1>
+        <h1
+          className={`text-4xl md:text-5xl text-textcolor font-semibold md:text-bold py-10`}
+        >
+          <span>Services</span> Provide here
+        </h1>
         <div className="w-full md:flex justify-between ">
           <Cards
-            logo={<HiClipboardList className="text-3xl text-secondary"/>}
+            logo={<HiClipboardList className="text-3xl text-secondary" />}
             h1="Verified Job Listings & Smart Job Matching"
             p="Access thousands of trusted job opportunities from top companies across various industries. Our intelligent matching system connects you with roles that fit your skills, experience, and career goals."
             text="Apply now"
-            open={()=>navigate("/jobpage")}
-            
-            
+            open={() => navigate("/jobpage")}
           />
           <Cards
-          logo={<VscServerProcess className="text-3xl text-secondary" />}
-          h1="Easy Application Process"
-          p="ACreate one comprehensive profile and use it to apply for multiple job opportunities quickly and effortlessly. Upload your resume, showcase your skills, experience, certifications, and achievements in one place, and avoid the hassle of filling out repetitive application forms."
-          text="Apply Now"
-          open={()=>navigate("/jobpage")}
-
+            logo={<VscServerProcess className="text-3xl text-secondary" />}
+            h1="Easy Application Process"
+            p="ACreate one comprehensive profile and use it to apply for multiple job opportunities quickly and effortlessly. Upload your resume, showcase your skills, experience, certifications, and achievements in one place, and avoid the hassle of filling out repetitive application forms."
+            text="Apply Now"
+            open={() => navigate("/jobpage")}
           />
-          <Cards 
-           logo={<AiOutlineMessage className="text-3xl text-secondary"/>}
-           h1="Job Alerts & Notifications"
-           p="Stay updated with personalized job alerts so you never miss an opportunity."
-           text="Apply Now"
-           open={()=>navigate("/jobpage")}
+          <Cards
+            logo={<AiOutlineMessage className="text-3xl text-secondary" />}
+            h1="Job Alerts & Notifications"
+            p="Stay updated with personalized job alerts so you never miss an opportunity."
+            text="Apply Now"
+            open={() => navigate("/jobpage")}
           />
         </div>
       </div>

@@ -14,6 +14,7 @@ import Button from "../buttons/ButtonComponents";
 import { formatDistanceStrict, formatDistanceToNow, isDate } from "date-fns";
 import useJobStore from "../../../Store/jobStore";
 import useAuthStore from "../../../Store/userAuth";
+import axios from "axios";
 
 const JobApplyForm = ({ className, onClose }) => {
   const API_CALL = `http://localhost:4000`;
@@ -29,7 +30,20 @@ const JobApplyForm = ({ className, onClose }) => {
   const [resume, setResume] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  
+  const apply = async ()=>{
+
+    try{
+      const res = await axios.post(`${API_CALL}/api/sendMail`, {
+        name: user?.user_name,
+        email:user?.user_email,
+        position:isJobData.job_desigination, 
+      })
+    }catch(error){
+      alert("apply falied")
+      return
+    }
+
+  }
 
   useEffect(() => {
     const cahched_job = jobs.find((job) => String(job.job_id || job.id) === String(id));
@@ -302,6 +316,7 @@ const JobApplyForm = ({ className, onClose }) => {
                   type="submit" 
                   disabled={isSubmitting}
                   className="px-6 py-2 bg-black text-white rounded-md disabled:bg-gray-400"
+                  onClick={apply}
                 >
                   {isSubmitting ? "Submitting..." : "Submit"}
                 </button>

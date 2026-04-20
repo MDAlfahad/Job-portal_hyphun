@@ -7,6 +7,7 @@ const cors = require("cors");
 const userauth = require("./routes/authRote");
 const applyForm = require("./routes/formApply");
 const path = require("path");
+const mailrouter = require("./routes/mailRoute");
 
 
 
@@ -24,6 +25,7 @@ app.use("/api", userRouter);
 app.use("/api", jobdata);
 app.use("/api", userauth);
 app.use("/api", applyForm);
+app.use("/api", mailrouter);
 
 
 module.exports = app;

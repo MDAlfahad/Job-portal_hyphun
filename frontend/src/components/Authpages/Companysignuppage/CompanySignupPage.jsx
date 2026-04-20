@@ -122,7 +122,7 @@ const CompanySignupPage = () => {
                   value={isSignup.password}
                   onChange={handleChange}
                 />
-                <p onClick={showPassword}>{!show ? <AiOutlineEyeInvisible size={22}/> : <AiTwotoneEye size={22}/>}</p>
+                <p onClick={showPassword}>{!show ?  <AiTwotoneEye size={22}/> : <AiOutlineEyeInvisible size={22}/> }</p>
                 </span>
 
                 <label htmlFor="number">Mobile number</label>

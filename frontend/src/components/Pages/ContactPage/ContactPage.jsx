@@ -1,11 +1,12 @@
 import FooterContainer from "../HeroContaner/FooterContainer";
+import ApplyPage from "./ApplyPage";
 import FaqsPage from "./FaqsPage";
 
 
 const ContactPage = () => {
   return (
     <>
-      <div className=" pt-9 md:pt-20 px-6 w-full md:px-12 md:flex justify-center items-center md:h-[100vh] max-w-[1800px] m-auto contactBackground relative">
+      <div className=" pt-9 md:pt-20 px-6 w-full md:px-12 md:flex justify-center items-center ] max-w-[1800px] m-auto contactBackground relative">
         <div className="md:flex md:ml-52 py-10 md:0 w-full justify-between items-center">
           <div className="flex flex-col gap-1 bg-white py-5">
             <span className="font-medium text-[12px] flex items-center">
@@ -43,6 +44,7 @@ const ContactPage = () => {
         </div>
       </div>
       <FaqsPage/>
+      <ApplyPage/>
       <FooterContainer/>
     </>
   );

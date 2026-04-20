@@ -6,6 +6,7 @@ import axios from "axios";
 import useAuthStore from "../../../Store/userAuth";
 import { PiEye, PiEyeClosed } from "react-icons/pi";
 import { AiOutlineEyeInvisible, AiTwotoneEye } from "react-icons/ai";
+import Image from "../../images/authman.png";
 
 const UserLoginPage = () => {
   const API_CALL = `http://localhost:4000`;
@@ -15,18 +16,32 @@ const UserLoginPage = () => {
   const navigate = useNavigate();
   const setAuth = useAuthStore((state) => state.setAuth);
   const [show, setshow] = useState(false);
+   const[popup, setpopup] = useState({
+    show:false,
+    message:"",
+    type:"",
+  })
 
   const handlelogin = async (e) => {
     e.preventDefault();
     try {
+      if(email =="" || password==""){
+        setpopup({ 
+          show:true,
+          message: "Email and password Required",
+        })
+        return
+      }
+      
       const login = await axios.post(`${API_CALL}/api/login_users`, {
         email,
         password,
       });
-
+      
+      
       const { token, user } = login.data;
-
       setAuth(user, token);
+      
 
       if (user.auth_role === "admin") navigate("/admin-dashboard");
       else if (user.auth_role === "company") navigate("/Dashboard-Company");
@@ -45,53 +60,53 @@ const UserLoginPage = () => {
 
   return (
     <>
-      <div className="max-w-[1800px] m-auto md:py-20 px-4 md:px-12 py-6 noselect">
-        <div className="flex justify-center items-center h-[80vh]">
-          <form
-            className="shadow-xl p-6 w-auto gap- border flex flex-col rounded-xl"
-            onSubmit={handlelogin}
-          >
-            <div className="flex flex-col items-center">
-              <p className="flex gap-4 items-center border px-2 py-2 w-full justify-center rounded-md text-md font-semibold text-textcolor">
-                <FcGoogle className="text-2xl md:text-4xl" />
-                Login with Google
-              </p>
-              <span className="flex items-center justify-center py-2 w-full">
-                <hr className=" w-full  " />
-                <p className="px-4 ">or</p>
-                <hr className=" w-full " />
-              </span>
-            </div>
-
-            <div className="flex flex-col gap-2">
+      <div className="max-w-[1800px] m-auto md:py-[68px] px-4 md:px-12 authBg py-6 noselect">
+        <div className="flex justify-between items-center h-[80vh] w-full px-20 pt-20">
+          <form className="p-6 w-auto flex flex-col " onSubmit={handlelogin}>
+            <h1 className="text-center font-medium text-xl md:text-3xl text-textcolor py-4">
+             Welcome back!
+            </h1>
+            <div className="flex flex-col gap-2 text-[12px]">
               <label htmlFor="email">Email</label>
               <input
-                className="px-2 py-2 border rounded-md outline-none text-lg "
+                className="px-2 py-2 border rounded-full outline-none text-[14px] placeholder-textcolor "
                 type="email"
                 id="email"
                 value={email}
+                placeholder="e.g example@.com"
                 onChange={(e) => setEmail(e.target.value)}
-                required
+                
               />
               <label htmlFor="password">Password</label>
-              <span className="px-2 w-full border rounded-md outline-none flex items-center">
+              <span className=" px-2 w-full border rounded-full outline-none flex items-center ">
                 <input
-                  className="px-2 py-2  text-lg w-full outline-none "
+                  className="px-2 py-2  text-[14px] w-full outline-none placeholder-textcolor"
                   type={!show ? "password" : "text"}
                   id="password"
+                  placeholder="password@1234"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  required
+                  
                 />
-
                 <p onClick={showPassword}>
-                  {!show? <AiOutlineEyeInvisible size={22} /> : <AiTwotoneEye size={22}/>}
+                  {!show ? (
+                    <AiTwotoneEye size={22} />
+                  ) : (
+                    <AiOutlineEyeInvisible size={22} />
+                  )}
                 </p>
               </span>
-              <Button type="submit" text="Login" />
+              <p className="text-[red]">{popup.message}</p>
+            
+              <button
+                type="submit"
+                className="border rounded-full p-2 font-medium bg-secondary hover:bg-textcolor w-full text-white"
+              >
+                Login
+              </button>
             </div>
 
-            <p className="text-sm md:text-[16px] py-4">
+            <p className="text-sm md:text-[14px] py-4">
               Don't have an account? Create
               <span>
                 ({" "}
@@ -105,7 +120,21 @@ const UserLoginPage = () => {
                 )
               </span>
             </p>
+            <div className="flex flex-col items-center">
+              <span className="flex items-center justify-center py-2 w-full">
+                <hr className=" w-full  " />
+                <p className="px-4 ">or</p>
+                <hr className=" w-full " />
+              </span>
+              <p className="flex gap-4 items-center border px-2 py-2 w-full justify-center rounded-full  font-medium text-textcolor">
+                <FcGoogle className="text-2xl " />
+                Login with Google
+              </p>
+            </div>
           </form>
+          <div>
+            <img src={Image} width={300} alt="" className="mr-28" />
+          </div>
         </div>
       </div>
     </>
