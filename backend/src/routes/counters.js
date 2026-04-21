@@ -40,4 +40,30 @@ userauth.get("/user-count", async (req, res) => {
   }
 });
 
+// from count 
+
+userauth.get("/form_count", async (req, res) => {
+  try {
+    const [result] = await db.query(
+      `SELECT COUNT(*) AS count FROM job_applications`
+    );
+
+    const stats = {
+      applicationCount: result[0].count,
+    };
+
+    res.status(200).json({
+      success: true,
+      stats,
+    });
+
+  } catch (err) {
+    console.log("Application Count error:", err);
+
+    res.status(500).json({
+      success: false,
+      error: "Database error",
+    });
+  }
+});
 module.exports = userauth;

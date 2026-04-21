@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import useCompanyApplications from "../../../../Store/companyApplicationStore";
 import { CircleDot, ClockFading, ExternalLink, Trash2 } from "lucide-react";
 import Button from "../../../Components/buttons/ButtonComponents";
+import axios from "axios";
 
 const DashboardApplicantPage = () => {
   const [changevalue, setchangevalue] = useState(false);
   const { applications, fetchCompanyApplications } = useCompanyApplications();
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState({});
+  const API_CALL = `http://localhost:4000`;
   const value = () => {
     setchangevalue(!changevalue);
   };
@@ -14,7 +16,22 @@ const DashboardApplicantPage = () => {
     fetchCompanyApplications();
   }, []);
 
-  console.log(applications);
+  //sending the status value
+
+  const updateStatus = async (id, value) => {
+    try {
+      await axios.put(
+        `${API_CALL}/api/update-status/${id}`,
+        {
+          status: value,
+        },
+        
+      );
+      setStatus({ ...status, [id]: value });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
@@ -27,22 +44,17 @@ const DashboardApplicantPage = () => {
               Applicaitons
             </h1>
           </div>
-          <div className="w-full border rounded-xl overflow-hidden">
+          <div className="w-full border rounded-md text-sm overflow-hidden">
             <table className="w-full">
               <thead className="bg-gray-300 w-full ">
                 <tr>
-                  <th className="py-4 text-black font-semibold">
-                    Candidate Name
-                  </th>
-                  <th className="py-4 text-black font-semibold">
-                   email
-                  </th>
-                  <th className="py-4 text-black font-semibold">Designation</th>
-                  <th className="py-4 text-black font-semibold">Date</th>
-
-                  <th className="py-4 text-black font-semibold">Resume </th>  
-                  <th className="py-4 text-black font-semibold">Status </th>
-                  <th className="py-4 text-black font-semibold">Action</th>
+                  <th className="py-4 text- font-medium ">Candidate Name</th>
+                  <th className="py-4 text- font-medium ">email</th>
+                  <th className="py-4 text- font-medium ">Designation</th>
+                  <th className="py-4 text- font-medium ">Date</th>
+                  <th className="py-4 text- font-medium ">Resume </th>
+                  <th className="py-4 text- font-medium ">Status </th>
+                  <th className="py-4 text- font-medium ">Action</th>
                 </tr>
               </thead>
               {/* table body  */}
@@ -50,12 +62,12 @@ const DashboardApplicantPage = () => {
                 {applications.map((item, index) => (
                   <tr
                     key={item.id || index}
-                    className="text-center w-full bg-white border-b"
+                    className="text-center w-full bg-white border-b text-textcolor"
                   >
-                    <td className="py-4">{item.user_name}</td>
-                    <td className="py-4 ">{item.user_email}</td>
-                    <td className="py-4">{item.job_desigination}</td>
-                    <td className="py-4">
+                    <td className="py-2">{item.user_name}</td>
+                    <td className="py-2 ">{item.user_email}</td>
+                    <td className="py-2">{item.job_desigination}</td>
+                    <td className="py-2">
                       {item.applied_at
                         ? new Date(item.applied_at).toLocaleDateString()
                         : "N/A"}
@@ -66,43 +78,54 @@ const DashboardApplicantPage = () => {
                         target="_blank"
                         className="flex items-center gap-2 justify-center underline hover:bg-secondary hover:text-white border border-secondary py-1 rounded-lg text-secondary"
                       >
-                        Open{" "}
-                        <ExternalLink size={16}  />
+                        Open <ExternalLink size={16} />
                       </a>
                     </td>
-                    
-                    <td className="py-4">
+
+                    <td className="py-2">
                       <p
                         className={`border rounded-lg py-1 flex items-center gap-2 justify-center ${item.status == "pending" ? "border-red-500 text-red-500" : "border-green-500 text-green-500"}`}
                       >
-                       {item.status==="pending" ? <ClockFading size={14}/> : ""} {item.status}
+                        {item.status === "pending" ? (
+                          <ClockFading size={14} />
+                        ) : (
+                          ""
+                        )}
+                        {item.status}
                       </p>
                     </td>
 
-                    <td className="py-4 items-center flex justify-center gap-1">
-                      {status === "" && (
+                    <td className="py-2 items-center flex justify-center gap-1">
+                      {!status[item.application_id] && (
                         <span className="flex items-center gap-1">
                           <p
-                            onClick={() => setStatus("accepted")}
+                            onClick={() =>
+                              updateStatus(item.application_id, "accepted")
+                            }
                             className="border rounded-lg border-green-500 px-2 py-1 text-green-500 cursor-pointer"
                           >
                             Accept
                           </p>
+
                           <p
-                            onClick={() => setStatus("Rejected")}
+                            onClick={() =>
+                              updateStatus(item.application_id, "Rejected")
+                            }
                             className="border rounded-lg border-red-500 px-2 py-1 text-red-500 cursor-pointer"
                           >
                             Reject
                           </p>
                         </span>
                       )}
-                      {status === "accepted" && (
-                        <p className="border rounded-lg border-green-500 px-2 py-1 font-semibold text-green-500 cursor-pointer">
+
+                      {status[item.application_id] === "accepted" && (
+                        <p className="border rounded-lg border-green-500 px-2 py-1 font-semibold text-green-500">
                           Accepted
                         </p>
                       )}
-                      {status === "Rejected" && (
-                        <p className="border rounded-lg font-semibold border-red-500 px-2 py-1 text-red-500 cursor-pointer">
+
+                      {status[item.application_id] === "Rejected" && (
+                        <p className="border rounded-lg border-red-500 px-2 py-1 font-semibold text-red-500">
                           Rejected
                         </p>
                       )}

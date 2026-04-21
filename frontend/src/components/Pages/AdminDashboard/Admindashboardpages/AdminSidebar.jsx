@@ -87,14 +87,14 @@ const AdminSidebar = ({ setActivePage, activePage }) => {
             {show && <p>Forms</p>}
             
           </div>
-          <div className={menuClass("jobposted")}
+          {/* <div className={menuClass("jobposted")}
           onClick={()=>setActivePage("jobposted")}
           title={!show ? "forms" : ""}>
             
            <SiGoogleforms />
             {show && <p>Posted job</p>}
             
-          </div>
+          </div> */}
 
         </div>
 

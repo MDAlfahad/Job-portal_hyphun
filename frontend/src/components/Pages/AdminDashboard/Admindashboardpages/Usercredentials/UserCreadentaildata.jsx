@@ -10,82 +10,80 @@ const UserCredentialdata = () => {
     fetchUsers();
   }, []);
 
-  const value = () => {
-    setchangevalue(!changevalue);
+  const [statusMap, setStatusMap] = useState({});
+  const toggleStatus = (id) => {
+    setStatusMap((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
   };
-
-  const [active, setActive] = useState("green");
-
-  const changeto = () => {
-    setActive(active === "green" ? "red" : "green");
-  };
-
   return (
     <>
       <div className="mt-20 px-2 sm:px-4">
         <div>
-          <h1 className="text-lg sm:text-xl md:text-3xl font-semibold py-4 md:py-6 text-center sm:text-left">
+          <h1 className="text-lg sm:text-xl md:text-2xl text-textcolor font-semibold py-4 md:py-6 text-center sm:text-left">
             Applications
           </h1>
         </div>
 
-        <div className="w-full border rounded-xl overflow-x-auto">
+        <div className="w-full border rounded-md overflow-x-auto">
           <table className="w-full min-w-[600px]">
-            <thead className="bg-gray-300">
+            <thead className="bg-gray-200">
               <tr>
-                <th className="py-3 md:py-4 text-black font-semibold text-sm md:text-base">
+                <th className="ppy-2 text-textcolor font-semibold text-sm ">
                   Name
                 </th>
-                <th className="py-3 md:py-4 text-black font-semibold text-sm md:text-base">
+                <th className="py-2 text-textcolor font-semibold text-sm ">
                   Email
                 </th>
-                <th className="py-3 md:py-4 text-black font-semibold text-sm md:text-base">
+                <th className="py-2 text-textcolor font-semibold text-sm ">
                   Created at
                 </th>
-                <th className="py-3 md:py-4 text-black font-semibold text-sm md:text-base">
+                <th className="py-2 text-black font-semibold text-sm ">
                   Status
                 </th>
-                <th className="py-3 md:py-4 text-black font-semibold text-sm md:text-base">
+                <th className="py-2 text-textcolor font-semibold text-sm ">
                   Action
                 </th>
               </tr>
             </thead>
 
             <tbody>
-              {users.map((user)=>(
-                <tr className="text-center" key={user.user_id} >
-                <td className="py-3 md:py-4 text-sm md:text-base">
-                 {user.user_name}
-                </td>
+              {users.map((user) => {
+                const isActive = statusMap[user.user_id] ?? true;
+                return (
+                  <tr className="text-center" key={user.user_id}>
+                    <td className="py-2 text-sm ">{user.user_name}</td>
 
-                <td className="py-3 md:py-4 text-sm md:text-base break-words">
-                  {user.user_email}
-                </td>
+                    <td className="py-2 text-sm  break-words">
+                      {user.user_email}
+                    </td>
 
-                <td className="py-3 md:py-4 text-sm md:text-base">
-                 {new Date(user.created_at).toLocaleDateString()}
-                </td>
+                    <td className="py-2 text-sm">
+                      {new Date(user.created_at).toLocaleDateString()}
+                    </td>
 
-                <td
-                  className="py-3 md:py-4"
-                  onClick={changeto}
-                  style={{ color: active, borderColor: active }}
-                >
-                  <p
-                    className="border rounded-md py-1 md:py-2 px-2 flex items-center justify-center font-semibold text-sm md:text-base cursor-pointer"
-                    onClick={value}
-                  >
-                    {changevalue ? "Active" : "Deactive"}
-                  </p>
-                </td>
+                    <td className="py-2">
+                      <p
+                        className={`border rounded-md cursor-pointer font-medium ${
+                          isActive
+                            ? "text-green-600 border-green-600"
+                            : "text-red-600 border-red-600"
+                        }`}
+                        onClick={() => toggleStatus(user.user_id)}
+                      >
+                        {isActive ? "Active" : "Deactive"}
+                      </p>
+                    </td>
 
-                <td className="py-3 md:py-4">
-                  <p className="border rounded-md py-1 md:py-2 px-2 flex items-center justify-center font-semibold bg-secondary text-white text-sm md:text-base cursor-pointer">
-                    Delete
-                  </p>
-                </td>
-              </tr>
-              ))}
+                    <td className="py-2 ">
+                      <p className="border rounded-md py-1  px-2 flex items-center justify-center font-semibold bg-secondary text-white text-sm cursor-pointer">
+                        Delete
+                      </p>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>

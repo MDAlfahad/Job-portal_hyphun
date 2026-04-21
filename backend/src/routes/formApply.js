@@ -209,5 +209,27 @@ applyForm.get("/company-applications", authMiddleware, async (req, res) => {
     res.status(500).json({ message: "Failed to fetch company applications" });
   }
 });
+//update application stsus 
+applyForm.put("/update-status/:id", authMiddleware, async (req, res) => {
+  try {
+    const applicationId = req.params.id;
+    const { status } = req.body;
+
+    await db.execute(
+      "UPDATE job_applications SET status = ? WHERE applicaiton_id = ?",
+      [status, applicationId]
+    );
+
+    res.json({
+      success: true,
+      message: "Status updated successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
 
 module.exports = applyForm;

@@ -4,58 +4,63 @@ import useAuthStore from "../../../../Store/userAuth";
 import useJobStore from "../../../../Store/jobStore";
 import { useEffect } from "react";
 import useAdminStore from "../../../../Store/adminStore";
+import useApplication from "../../../../Store/applicationcountStore";
 
 const AdminProfilePage = () => {
   const { user, token } = useAuthStore();
   const { jobs, fetchJobs } = useJobStore();
-  const { adminStats, fetchAdminStats } = useAdminStore();
+  const { adminStats, fetchAdminStats,  } = useAdminStore();
+  const{application, fetchapplicaiton}= useApplication();
+
+
 
   useEffect(() => {
     if (token && user?.auth_role) {
       fetchJobs(token, user.auth_role);
     }
     fetchAdminStats();
-  }, [token, user?.auth_role, fetchJobs]);
+    fetchapplicaiton();
+  }, [token, user?.auth_role, fetchJobs, fetchAdminStats, fetchapplicaiton]);
+
 
   return (
     <>
-      {/* 🔥 responsive height + padding */}
+
       <div className="bg-gray-100 w-full min-h-[100vh] overflow-y-auto px-4 md:px-6 py-4 md:py-6">
         
         <div className="mt-16 md:mt-20 px-2 md:px-6 py-4 rounded-xl">
           
-          {/* 🔥 CARDS SECTION */}
+          
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             
             <AdminProfileCard
               heading="Total user"
-              number={adminStats?.user || 0}
-              text="Toal Active user"
+              number={adminStats.user  || 0}
+              text="Total Active user"
             />
 
             <AdminProfileCard
               heading="Total Companies"
-              number={adminStats.company || 0}
-              text="Toal Active Companies"
+              number={adminStats.company || "0"}
+              text="Total Active Companies"
             />
 
             <AdminProfileCard
               heading="Total forms"
-              number={0}
-              text="Toal forms"
+              number={application?.applicationCount || 0}
+              text="Total forms"
             />
 
             <AdminProfileCard
               heading="Total Job posted"
               number={jobs?.length > 0 ? jobs.length : "0"}
-              text="Toal posted job"
+              text="Total posted job"
             />
           </div>
 
-          {/* 🔥 PROFILE SECTION */}
+         
           <div className="my-4 border px-4 md:px-6 py-4 md:py-6 bg-white rounded-xl shadow-lg">
-            
-            {/* HEADER */}
+        
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 py-1">
               <h1 className="text-lg sm:text-xl md:text-3xl">Profile</h1>
 
@@ -65,26 +70,26 @@ const AdminProfilePage = () => {
               </span>
             </div>
 
-            {/* 🔥 USER INFO */}
+          
             <div className="flex flex-col md:flex-row gap-4 md:gap-20 px-2 mt-4">
               
               <div>
                 <p className="text-sm md:text-md text-textcolor2">Name</p>
-                <p className="text-base md:text-lg font-semibold p-1 break-words">
+                <p className="text-base md:text-[14px] font-medium p-1 break-words">
                   {user?.user_name || "Loading...."}
                 </p>
               </div>
 
               <div>
                 <p className="text-sm md:text-md text-textcolor2">Email</p>
-                <p className="text-base md:text-lg font-semibold p-1 break-words">
+                <p className="text-base md:text-[14px] font-medium p-1 break-words">
                   {user?.user_email || "Loading...."}
                 </p>
               </div>
 
               <div>
                 <p className="text-sm md:text-md text-textcolor2">Admin</p>
-                <p className="text-base md:text-lg font-semibold p-1 break-words">
+                <p className="text-base md:text-[14px] font-medium p-1 break-words">
                   {user?.auth_role || "Loading...."}
                 </p>
               </div>

@@ -22,6 +22,7 @@ const useCompanyApplications = create((set) => ({
             Authorization: `Bearer ${token}`,
           },
         }
+      
       );
 
 

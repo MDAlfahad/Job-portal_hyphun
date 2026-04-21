@@ -6,6 +6,7 @@ import FooterContainer from "../HeroContaner/FooterContainer"
 import { useNavigate } from "react-router-dom";
 import CrauselContainer from "./CrauselContainer";
 import StillThink from "./StillThink";
+import AnimatedCard from "./AnimatedCard";
 
 const Hero = () => {
   
@@ -39,6 +40,7 @@ const Hero = () => {
         <Services/>
         <StillThink/>
         <CrauselContainer/>
+        {/* <AnimatedCard/> */}
         <FooterContainer/>
     </>
   );

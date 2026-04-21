@@ -1,32 +1,43 @@
 import { UserRound, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "../../../../Components/buttons/ButtonComponents";
 import userDetaiilStore from "../../../../../Store/userDetailsStore";
-import { useEffect } from "react";
 
 const CompanyData = () => {
-  const [active, setActive] = useState("green");
   const [open, setOpen] = useState(false);
-  const { companies, fetchCompanies, Loading } = userDetaiilStore();
-  const [changevalue, setchangevalue] = useState(true);
+  const { companies, fetchCompanies } = userDetaiilStore();
+
+  const [statusMap, setStatusMap] = useState({});
+  const [companyList, setCompanyList] = useState([]);
 
   useEffect(() => {
     fetchCompanies();
   }, []);
 
-  const value = () => {
-    setchangevalue(!changevalue);
+  useEffect(() => {
+    setCompanyList(companies);
+  }, [companies]);
+
+  // Toggle active / deactive
+  const toggleStatus = (id) => {
+    setStatusMap((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
   };
 
-  const changeto = () => {
-    setActive(active === "green" ? "red" : "green");
+  // Delete UI only
+  const deleteCompany = (id) => {
+    const updated = companyList.filter((item) => item.user_id !== id);
+    setCompanyList(updated);
   };
 
   return (
     <>
       <div className="mt-16 px-6 py-4 relative w-full h-[90vh]">
+        {/* Popup */}
         {open && (
-          <div className="p-8 border shadow-lg rounded-xl absolute bg-white top-10 left-[25%]">
+          <div className="p-8 border shadow-lg rounded-xl absolute bg-white top-10 left-[25%] z-50">
             <div className="flex gap-6 items-center justify-between">
               <h1 className="text-xl md:text-2xl lg:text-4xl text-secondary font-bold">
                 Create Company Account
@@ -76,61 +87,87 @@ const CompanyData = () => {
           </div>
         )}
 
-        {/* Table start here */}
-
-        <div className=" overflow-y-auto px-4">
-          <div className="flex   justify-between items-center">
-            <h1 className="text-xl md:text-3xl font-semibold py-6">
-              Applicaitons
+        {/* Table */}
+        <div className="overflow-y-auto px-4">
+          <div className="flex justify-between items-center">
+            <h1 className="text-xl md:text-3xl text-textcolor font-medium py-6">
+              Companies
             </h1>
-            <div>
-              <h1
-                onClick={() => setOpen(true)}
-                className="flex gap-1 font-semibold px-3 py-2 bg-secondary rounded-md text-white cursor-pointer"
-              >
-                <UserRound strokeWidth={2.5} />
-                Add+
-              </h1>
-            </div>
+
+            <h1
+              onClick={() => setOpen(true)}
+              className="flex gap-1 font-semibold px-3 py-2 bg-secondary rounded-md text-white cursor-pointer"
+            >
+              <UserRound strokeWidth={2.5} />
+              Add+
+            </h1>
           </div>
-          <div className="w-full border rounded-xl overflow-hidden">
+
+          <div className="w-full border rounded-md overflow-hidden">
             <table className="w-full">
-              <thead className="bg-gray-300 ">
+              <thead className="bg-gray-200">
                 <tr>
-                  <th className="py-4 text-black font-semibold">Name</th>
-                  <th className="py-4 text-black font-semibold">Email</th>
-                  <th className="py-4 text-black font-semibold">Created at</th>
-                  <th className="py-4 text-black font-semibold">Status </th>
-                  <th className="py-4 text-black font-semibold">Action</th>
+                  <th className="py-2 text-sm">Name</th>
+                  <th className="py-2 text-sm">Email</th>
+                  <th className="py-2 text-sm">Created at</th>
+                  <th className="py-2 text-sm">Status</th>
+                  <th className="py-2 text-sm">Action</th>
                 </tr>
               </thead>
+
               <tbody>
-                {companies.map((company) => (
-                  <tr className="text-center w-full" key={company.user_id}>
-                    <td className="py-4">{company.user_name}</td>
-                    <td className="py-4">{company.user_email}</td>
-                    <td className="py-4">
-                      {new Date(company.created_at).toLocaleDateString()}
-                    </td>
-                    <td
-                      className="py-4"
-                      onClick={changeto}
-                      style={{ color: active, borderColor: active }}
+                {companyList.map((company) => {
+                  const isActive =
+                    statusMap[company.user_id] === undefined
+                      ? true
+                      : statusMap[company.user_id];
+
+                  return (
+                    <tr
+                      key={company.user_id}
+                      className="text-center text-sm"
                     >
-                      <p
-                        className="border rounded-md py-2 flex items-center justify-center font-semibold"
-                        onClick={value}
-                      >
-                        {changevalue ? "active" : "Deactive"}
-                      </p>
-                    </td>
-                    <td className="py-4">
-                      <p className="border rounded-md py-2 flex items-center justify-center font-semibold bg-secondary">
-                        Delete
-                      </p>
-                    </td>
-                  </tr>
-                ))}
+                      <td className="py-2 text-left pl-5">
+                        {company.user_name}
+                      </td>
+
+                      <td className="py-2">{company.user_email}</td>
+
+                      <td className="py-2">
+                        {new Date(
+                          company.created_at
+                        ).toLocaleDateString()}
+                      </td>
+
+                      {/* Status Button */}
+                      <td >
+                        <button
+                          onClick={() =>
+                            toggleStatus(company.user_id)
+                          }
+                          className={`border rounded-md px-3 py-1  cursor-pointer font-semibold ${
+                            isActive
+                              ? "text-green-600 border-green-600"
+                            : "text-red-600 border-red-600"
+                          }`}
+                        >
+                          {isActive ? "Active" : "Deactive"}
+                        </button>
+                      </td>
+
+                      <td className="py-2 px-2">
+                        <button
+                          onClick={() =>
+                            deleteCompany(company.user_id)
+                          }
+                          className="px-3 py-1 rounded-md text-white font-semibold bg-secondary w-full"
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
