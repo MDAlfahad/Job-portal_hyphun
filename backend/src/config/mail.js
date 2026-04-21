@@ -10,7 +10,7 @@ const transporter = nodemailer.createTransport({
 
 const sendEmail = async (to, subject, html) => {
   await transporter.sendMail({
-    from: `"Job Portal" <${process.env.EMAIL_USER}>`,
+    from: `JOB PORTAL <${process.env.EMAIL_USER}>`,
     to,
     subject,
     html,

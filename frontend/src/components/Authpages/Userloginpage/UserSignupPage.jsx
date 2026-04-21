@@ -53,13 +53,13 @@ const UserLSignupPage = () => {
   return (
     <>
       <div className="max-w-[1800px] m-auto py-6 md:py-[68px] px-4 authBg md:px-12  authbg noselect">
-        <div className="flex justify-between items-center h-[80vh] px-20  pt-20">
+        <div className="flex justify-between items-center h-[80vh] lg:px-20  pt-20">
          
          
      
      {/* login form */}
           <form className="p-6 w-[400px]  flex flex-col " onSubmit={handlEvent}>
-            <h1 className="text-center font-medium text-xl md:text-3xl text-textcolor py-4">
+            <h1 className="text-center font-medium text-xl md:text-3xl text-textcolor py-6">
               Get Registerd Here!
             </h1>
 
@@ -144,8 +144,8 @@ const UserLSignupPage = () => {
               </p>
             </div>
           </form>
-          <div>
-            <img src={Image} width={300} alt="" className="mr-28" />
+          <div className="hidden md:block">
+            <img src={Image}  alt="" className="lg:mr-28 md:w-[250px] lg:w-[300px]" />
           </div>
         </div>
       </div>

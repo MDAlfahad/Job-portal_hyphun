@@ -15,6 +15,7 @@ postjob.post("/postjob", jobpostauth, async (req, res) => {
     const {
       desigination,
       companyname,
+      companyEmail,
       locationtype,
       worktype,
       location,
@@ -37,6 +38,7 @@ postjob.post("/postjob", jobpostauth, async (req, res) => {
       (
         job_id,
         job_desigination,
+        company_email,
         company_name,
         job_location,
         location_type,
@@ -55,12 +57,13 @@ postjob.post("/postjob", jobpostauth, async (req, res) => {
         about_company,
         user_id
       ) 
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)
     `;
 
     const values = [
       job_id,
       desigination,
+      companyEmail,
       companyname,
       location,
       locationtype,

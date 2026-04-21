@@ -30,23 +30,10 @@ const JobApplyForm = ({ className, onClose }) => {
   const [resume, setResume] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const apply = async ()=>{
-
-    try{
-      const res = await axios.post(`${API_CALL}/api/sendMail`, {
-        name: user?.user_name,
-        email:user?.user_email,
-        position:isJobData.job_desigination, 
-      })
-    }catch(error){
-      alert("apply falied")
-      return
-    }
-
-  }
-
   useEffect(() => {
-    const cahched_job = jobs.find((job) => String(job.job_id || job.id) === String(id));
+    const cahched_job = jobs.find(
+      (job) => String(job.job_id || job.id) === String(id),
+    );
 
     if (cahched_job) {
       setIsJobData(cahched_job);
@@ -66,24 +53,25 @@ const JobApplyForm = ({ className, onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!resume) return alert("Please upload your resume!");
-    if (!availability || !travel || !experience) return alert("Please fill all fields!");
+    if (!availability || !travel || !experience)
+      return alert("Please fill all fields!");
 
     setIsSubmitting(true);
 
     const formData = new FormData();
     formData.append("jobId", id);
-    formData.append("username", user?.user_name || "")
-    formData.append("useremail", user?.user_email || "")
+    formData.append("username", user?.user_name || "");
+    formData.append("useremail", user?.user_email || "");
     formData.append("userId", user?.user_id || "");
-    formData.append("companyId", isJobData.user_id || "") 
-    formData.append("companyname", isJobData.company_name || "")
-    formData.append("jobdesigination", isJobData.job_desigination || "")
+    formData.append("companyId", isJobData.user_id || "");
+    formData.append("companyname", isJobData.company_name || "");
+    formData.append("jobdesigination", isJobData.job_desigination || "");
     formData.append("availability", availability);
     formData.append("travel", travel);
     formData.append("experience", experience);
     formData.append("resume", resume);
 
-    console.log(isJobData.company_id)
+    console.log(isJobData.company_id);
 
     try {
       const response = await fetch(`${API_CALL}/api/apply-form`, {
@@ -91,14 +79,13 @@ const JobApplyForm = ({ className, onClose }) => {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-        body: formData, 
+        body: formData,
       });
 
       if (response.ok) {
         alert("Application submitted successfully!");
         onClose();
       } else {
-       
         alert("Failed to submit application.");
       }
     } catch (error) {
@@ -116,6 +103,23 @@ const JobApplyForm = ({ className, onClose }) => {
     { addSuffix: true },
   );
 
+  // Send  Mail
+  const apply = async () => {
+    try {
+      const res = await axios.post(`${API_CALL}/api/sendMail`, {
+        name: user?.user_name,
+        email: user?.user_email,
+        position: isJobData.job_desigination,
+        companyName: isJobData.company_name,
+        companyEmail: isJobData.company_email,
+        file: isJobData?.resume_path,
+      });
+    } catch (error) {
+      alert("apply falied");
+      return;
+    }
+  };
+
   return (
     <div className="fixed top-0 left-0 w-full h-full bg-black/40 backdrop-blur-sm overflow-y-auto z-50">
       <div className="min-h-full flex justify-center items-start pt-10 pb-10 ">
@@ -126,14 +130,16 @@ const JobApplyForm = ({ className, onClose }) => {
             </h1>
             <X color="black" className="cursor-pointer" onClick={onClose} />
           </div>
-          
+
           <div className="flex flex-col gap-2 p-8">
             <div className="flex items-center justify-between">
               <div className="flex flex-col ">
                 <h1 className="text-gray-800 font-semibold text-xl ">
                   {isJobData.job_desigination}
                 </h1>
-                <p className="text-sm text-textcolor2">{isJobData.company_name}</p>
+                <p className="text-sm text-textcolor2">
+                  {isJobData.company_name}
+                </p>
               </div>
               <div>
                 <p>company logo</p>
@@ -153,23 +159,24 @@ const JobApplyForm = ({ className, onClose }) => {
               </span>
             </div>
             <div className="md:flex gap-6">
-             <div className="flex gap-6">
-               <span className="flex gap-2 rounded-full items-center px-2 bg-green-200 text-green-500 ">
-                <History size={16} strokeWidth={1.5} />{formattedDate}
-              </span>
-              <span className="flex text-sm items-center gap-2 px-2 bg-orange-200 text-orange-800 rounded-full">
-                <FaSuitcase size={16} strokeWidth={1.5} />
-                Job Offring upto 6LPA
-              </span>
-             </div>
-             <div className="flex gap-6  mt-4">
-               <span className="flex  text-sm items-center px-2  rounded-full border  bg-gray-100 border-0.5">
-                {isJobData.job_type}
-              </span>
-              <span className="flex text-sm items-center px-2  rounded-full border bg-gray-100 border-0.5">
-                vacancies
-              </span>
-             </div>
+              <div className="flex gap-6">
+                <span className="flex gap-2 rounded-full items-center px-2 bg-green-200 text-green-500 ">
+                  <History size={16} strokeWidth={1.5} />
+                  {formattedDate}
+                </span>
+                <span className="flex text-sm items-center gap-2 px-2 bg-orange-200 text-orange-800 rounded-full">
+                  <FaSuitcase size={16} strokeWidth={1.5} />
+                  Job Offring upto 6LPA
+                </span>
+              </div>
+              <div className="flex gap-6  mt-4">
+                <span className="flex  text-sm items-center px-2  rounded-full border  bg-gray-100 border-0.5">
+                  {isJobData.job_type}
+                </span>
+                <span className="flex text-sm items-center px-2  rounded-full border bg-gray-100 border-0.5">
+                  vacancies
+                </span>
+              </div>
             </div>
 
             <div className="flex flex-col gap-4 py-4">
@@ -204,12 +211,17 @@ const JobApplyForm = ({ className, onClose }) => {
                 <h1 className="text-md md:text-xl font-semibold text-black">
                   About {isJobData.company_name}
                 </h1>
-                <p className="text-textcolor2 text-[14px]" >{isJobData.about_company}</p>
+                <p className="text-textcolor2 text-[14px]">
+                  {isJobData.about_company}
+                </p>
               </div>
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="flex flex-col gap-2 p-8 border-t">
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-2 p-8 border-t"
+          >
             <h1 className="text-lg md:text-xl font-semibold text-black">
               Apply Now
             </h1>
@@ -218,34 +230,34 @@ const JobApplyForm = ({ className, onClose }) => {
             </h1>
             <div className="flex flex-col gap-2 border py-4 px-2 rounded-xl bg-gray-200">
               <label className="flex gap-2 items-center text-[16px] cursor-pointer">
-                <input 
-                  type="radio" 
-                  name="availability" 
-                  value="immediate" 
-                  onChange={(e) => setAvailability(e.target.value)} 
+                <input
+                  type="radio"
+                  name="availability"
+                  value="immediate"
+                  onChange={(e) => setAvailability(e.target.value)}
                 />
                 <p>Yes, I am available to join immediately</p>
               </label>
               <label className="flex gap-2 items-center text-[16px] cursor-pointer">
-                <input 
-                  type="radio" 
-                  name="availability" 
-                  value="later" 
-                  onChange={(e) => setAvailability(e.target.value)} 
+                <input
+                  type="radio"
+                  name="availability"
+                  value="later"
+                  onChange={(e) => setAvailability(e.target.value)}
                 />
                 <p>No, talk and select the date of joining</p>
               </label>
               <label className="flex gap-2 items-center text-[16px] cursor-pointer">
-                <input 
-                  type="radio" 
-                  name="availability" 
-                  value="other" 
-                  onChange={(e) => setAvailability(e.target.value)} 
+                <input
+                  type="radio"
+                  name="availability"
+                  value="other"
+                  onChange={(e) => setAvailability(e.target.value)}
                 />
                 <p>Other, please specify your availability</p>
               </label>
             </div>
-            
+
             <div className="flex flex-col gap-2 mt-4">
               <h1 className="text-sm md:text-[16px] font-semibold text-black">
                 Additional questions
@@ -256,20 +268,22 @@ const JobApplyForm = ({ className, onClose }) => {
               </p>
               <div className="flex flex-col border bg-gray-200 py-4 px-2 rounded-xl">
                 <label className="flex gap-2 items-center cursor-pointer">
-                  <input 
-                    type="radio" 
-                    name="travel" 
-                    value="yes" 
-                    onChange={(e) => setTravel(e.target.value)} 
-                  /> Yes
+                  <input
+                    type="radio"
+                    name="travel"
+                    value="yes"
+                    onChange={(e) => setTravel(e.target.value)}
+                  />{" "}
+                  Yes
                 </label>
                 <label className="flex gap-2 items-center cursor-pointer">
-                  <input 
-                    type="radio" 
-                    name="travel" 
-                    value="no" 
-                    onChange={(e) => setTravel(e.target.value)} 
-                  /> No
+                  <input
+                    type="radio"
+                    name="travel"
+                    value="no"
+                    onChange={(e) => setTravel(e.target.value)}
+                  />{" "}
+                  No
                 </label>
               </div>
               <div className="flex flex-col gap-2 py-2">
@@ -299,27 +313,29 @@ const JobApplyForm = ({ className, onClose }) => {
                   <FiUpload />
                   {resume ? "File Selected" : "Upload file"}
                 </label>
-                <input 
-                  type="file" 
-                  id="file" 
+                <input
+                  type="file"
+                  id="file"
                   accept=".pdf,.doc,.docx"
-                  onChange={(e) => setResume(e.target.files[0])} 
-                  hidden 
+                  onChange={(e) => setResume(e.target.files[0])}
+                  hidden
                 />
-                {resume && <p className="text-sm mt-2 text-green-600">{resume.name}</p>}
+                {resume && (
+                  <p className="text-sm mt-2 text-green-600">{resume.name}</p>
+                )}
               </div>
             </div>
 
             <div className="flex py-4 justify-center">
-                {/* Changed to use native button to pass the onSubmit, or you can adjust your Button component to accept type="submit" */}
-                <button 
-                  type="submit" 
-                  disabled={isSubmitting}
-                  className="px-6 py-2 bg-black text-white rounded-md disabled:bg-gray-400"
-                  onClick={apply}
-                >
-                  {isSubmitting ? "Submitting..." : "Submit"}
-                </button>
+              {/* Changed to use native button to pass the onSubmit, or you can adjust your Button component to accept type="submit" */}
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="px-6 py-2 bg-black text-white rounded-md disabled:bg-gray-400"
+                onClick={apply}
+              >
+                {isSubmitting ? "Submitting..." : "Submit"}
+              </button>
             </div>
           </form>
         </div>

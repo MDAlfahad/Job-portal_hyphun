@@ -13,6 +13,7 @@ const CompanyForm3 = () => {
   const [isForm, setIsForm] = useState({
     desigination: "",
     companyname: "",
+    companyEmail: user.user_email,
     jobtype: "",
     locationtype: "",
     worktype: "",

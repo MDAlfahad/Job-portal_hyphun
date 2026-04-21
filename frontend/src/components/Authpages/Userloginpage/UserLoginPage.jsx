@@ -61,7 +61,7 @@ const UserLoginPage = () => {
   return (
     <>
       <div className="max-w-[1800px] m-auto md:py-[68px] px-4 md:px-12 authBg py-6 noselect">
-        <div className="flex justify-between items-center h-[80vh] w-full px-20 pt-20">
+        <div className="flex justify-between items-center h-[80vh] w-full lg:px-20 pt-20">
           <form className="p-6 w-auto flex flex-col " onSubmit={handlelogin}>
             <h1 className="text-center font-medium text-xl md:text-3xl text-textcolor py-4">
              Welcome back!
@@ -106,7 +106,7 @@ const UserLoginPage = () => {
               </button>
             </div>
 
-            <p className="text-sm md:text-[14px] py-4">
+            <p className="text-[12px] md:text-[14px] py-4">
               Don't have an account? Create
               <span>
                 ({" "}
@@ -132,8 +132,8 @@ const UserLoginPage = () => {
               </p>
             </div>
           </form>
-          <div>
-            <img src={Image} width={300} alt="" className="mr-28" />
+          <div className="hidden md:block">
+            <img src={Image}  alt="" className="lg:mr-28 md:w-[250px] lg:w-[300px]" />
           </div>
         </div>
       </div>
