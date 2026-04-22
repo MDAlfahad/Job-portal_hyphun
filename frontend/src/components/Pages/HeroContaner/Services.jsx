@@ -9,11 +9,15 @@ const Services = () => {
   return (
     <>
       <div className=" w-full md:h-screen lg:h-auto max-w-[1800px] m-auto px-4 md:px-12 py-12 noselect">
-        <h1
-          className={`text-4xl md:text-5xl text-textcolor font-semibold md:text-bold py-10`}
-        >
-          <span>Services</span> Provide here
-        </h1>
+        <div className="flex flex-col gap-0 py-10">
+          <h1
+            className={` md:text-4xl text-textcolor text-center font-semibold md:text-bold`}
+          >
+            Services Provide here
+          </h1>
+          <p className="text-[14px] font-normal text-center">Career Services
+Connecting Talent with the Right Opportunities</p>
+        </div>
         <div className="w-full md:flex justify-between ">
           <Cards
             logo={<HiClipboardList className="text-3xl text-secondary" />}

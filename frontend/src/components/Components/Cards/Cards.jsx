@@ -6,11 +6,9 @@ const Cards =(props)=>{
     return(
         <>
             <div className="flex  flex-col gap-6 w-auto md:w-96 border relative bg-white shadow-lg px-6 py-6 rounded-lg my-10">
-                <div>
+                <div className="flex gap-2 ">
                     {props.logo}
-                </div>
-                <div>
-                    <h1 className="text-xl md:text-xl md:font-bold font-semibold ">{props.h1}</h1>
+                     <h1 className="text-xl md:text-xl md:font-semibold font-medium ">{props.h1}</h1>
                 </div>
                 <div>
                     <p className="text-sm md:text-[14px] text-textcolor">

@@ -1,13 +1,26 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { UserRound, Bell } from "lucide-react";
 import { HiOutlineBars3BottomRight } from "react-icons/hi2";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useAuthStore from "../../../Store/userAuth";
 
-const Navbar = () => {
+const Navbar = ({}) => {
   const navigate = useNavigate();
   // ------ toggle button
   const [isClick, setIsClick] = useState(false);
+  const [scroll, SetScroll] = useState(false);
+
+  useEffect(() => {
+    const handlescroll = () => {
+      if (window.scrollY > 200) {
+        SetScroll(true);
+      } else {
+        SetScroll(false);
+      }
+    };
+    window.addEventListener("scroll", handlescroll);
+    return () => window.removeEventListener("scroll", handlescroll);
+  }, []);
   const toggle = () => {
     setIsClick((prev) => !prev);
   };
@@ -23,44 +36,70 @@ const Navbar = () => {
   const role = user?.auth_role;
 
   return (
-    <div className="w-full fixed bg-white border z-50">
+    <div
+      className={`w-full fixed z-50 transition-all duration-300 ${scroll ? "bg-white border" : "bg-transparent border border-transparent"}`}
+    >
       <div className="max-w-[1800px] m-auto px-6 md:px-12 py-4 text-textcolor flex justify-between items-center relative">
         <div className="flex gap-5 lg:gap-20 items-center">
-          <h1 className="text-2xl lg:text-3xl font-bold">JOB PORTAL</h1>
+          <h1
+            className="text-2xl lg:text-3xl font-bold cursor-pointer"
+            onClick={() => navigate("/")}
+          >
+            JOB PORTAL
+          </h1>
+        
           <div className="hidden md:flex gap-5 lg:gap-10">
-            <Link
-              className="text-textcolor hover:text-secondary md:text-sm lg:text-[16px] transition-all duration-300 active:text-textcolor"
+            <NavLink
+              className={({ isActive }) =>
+                `relative px-2  ${
+                  isActive ? "text-secondary after:w-full" : "after:w-0"
+                } after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-secondary after:transition-all `
+              }
               to="/"
             >
               Home
-            </Link>
-            <Link
-              className="text-textcolor hover:text-secondary md:text-sm lg:text-[16px] transition-all duration-300 active:text-textcolor"
+            </NavLink>
+            <NavLink
+              className={({ isActive }) =>
+                `relative px-2  ${
+                  isActive
+                    ? "text-secondary after:w-full duration-300"
+                    : "after:w-0"
+                } after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-secondary after:transition-all `
+              }
               to="/job-page"
             >
               Job
-            </Link>
+            </NavLink>
 
-            <Link
-              className="text-textcolor hover:text-secondary md:text-sm lg:text-[16px] transition-all duration-300 active:text-textcolor"
+            <NavLink
+              className={({ isActive }) =>
+                `relative px-2 ${
+                  isActive
+                    ? "text-secondary after:w-full transition-all duration-300"
+                    : "after:w-0 "
+                } after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-secondary after:transition-all duration-300`
+              }
               to="/contact"
             >
               Contact
-            </Link>
+            </NavLink>
           </div>
         </div>
 
         <div className="flex items-center gap-6">
           {!isAuthenticated && (
-            <button
-              onClick={() => navigate("/login-page")}
+            <NavLink
+              to={"/login-page"}
               className="hidden md:flex items-center gap-1 px-6 py-2 bg-secondary rounded-md text-md font-bold text-white"
             >
               LOGIN
-            </button>
+            </NavLink>
           )}
-          <div className="md:block bg-background p-2 rounded-full cursor-pointer border"
-          onClick={()=>navigate("/notification")}>
+          <div
+            className="md:block bg-background p-2 rounded-full cursor-pointer border"
+            onClick={() => navigate("/notification")}
+          >
             <Bell strokeWidth={1.5} />
           </div>
           <div className="bg-background p-2 rounded-full cursor-pointer border">
@@ -78,13 +117,7 @@ const Navbar = () => {
         >
           <div className=" flex flex-col bg-white">
             {!isAuthenticated ? (
-              <Link
-                to="/login-page"
-                className="px-4 py-2 hover:bg-secondary hover:text-white"
-                onClick={() => setIsUser(false)}
-              >
-                Login
-              </Link>
+              ""
             ) : (
               <Link
                 to={
@@ -108,22 +141,28 @@ const Navbar = () => {
     ${isClick ? "max-h-96 opacity-100 translate-y-0" : "max-h-0 opacity-0 -translate-y-2"}`}
         >
           <Link
-            className="text-textcolor font-semibold hover:text-white transition-all duration-300 hover:bg-secondary px-4 py-2"
+            className="text-textcolor font-medium hover:text-white transition-all duration-300 hover:bg-secondary px-4 py-2"
             to="/"
           >
             Home
           </Link>
           <Link
-            className="text-textcolor font-semibold hover:text-white transition-all duration-300 hover:bg-secondary px-4 py-2"
-            to="/internships"
-          >
-            Get placement
-          </Link>
-          <Link
-            className="text-textcolor font-semibold hover:text-white transition-all duration-300 hover:bg-secondary px-4 py-2"
+            className="text-textcolor font-medium hover:text-white transition-all duration-300 hover:bg-secondary px-4 py-2"
             to="/job-page"
           >
-            Job
+            job
+          </Link>
+          <Link
+            className="text-textcolor font-medium hover:text-white transition-all duration-300 hover:bg-secondary px-4 py-2"
+            to="/contact"
+          >
+            Contact
+          </Link>
+          <Link
+            className="text-textcolor font-medium hover:text-white transition-all duration-300 hover:bg-secondary px-4 py-2"
+            to={"/login-page"}
+          >
+            Login
           </Link>
         </div>
       </div>

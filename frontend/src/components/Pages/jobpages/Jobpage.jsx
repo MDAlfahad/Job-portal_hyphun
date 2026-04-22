@@ -14,7 +14,7 @@ const JobPage = () => {
   const [search, setSearch] = useState("");
   const [profile, setProfile] = useState("");
   const [location, setLocation] = useState("");
-  const [salary, setSalary] = useState(0);
+  const [salary, setSalary] = useState(1);
 
   useEffect(() => {
     fetchJobs();
@@ -51,6 +51,7 @@ const JobPage = () => {
             <input
               className="w-full px-2 py-2 outline-none"
               type="search"
+              name="jobsearch"
               placeholder="Search jobs..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -93,6 +94,7 @@ const JobPage = () => {
               <input
                 className="w-full px-2 py-2 outline-none"
                 type="search"
+                name="desigination"
                 placeholder="e.g Frontend Developer, Bhilai"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
@@ -105,6 +107,7 @@ const JobPage = () => {
               <div className="flex flex-col text-[14px]">
                 <label htmlFor="position">Profile</label>
                 <select
+                id="position"
                   className="border outline-none px-2 py-2 rounded-md"
                   onChange={(e) => setProfile(e.target.value)}
                 >
@@ -123,6 +126,7 @@ const JobPage = () => {
               <div className="flex flex-col mt-3 text-[14px]">
                 <label htmlFor="location">Location</label>
                 <select
+                id="location"
                   className="w-full px-2 py-2 outline-none border rounded-md"
                   onChange={(e) => setLocation(e.target.value)}
                 >
@@ -141,21 +145,35 @@ const JobPage = () => {
                   Annual Salary (in lakhs)
                 </h1>
 
-                <div className="flex w-full justify-between">
-                  <p>0</p>
-                  <p>2</p>
-                  <p>5</p>
-                  <p>8</p>
-                  <p>10</p>
-                </div>
+                <div className="relative w-full px-2">
+                  
+                  <div
+                    className="absolute -top-10 bg-secondary text-white text-md px-2 py-1 rounded-sm transition-all duration-200"
+                    style={{
+                      left: `calc(${(salary / 10) * 100}% - 16px)`,
+                    }}
+                  >
+                    {salary}
+                  </div>
 
-                <input
-                  type="range"
-                  min="0"
-                  max="10"
-                  value={salary}
-                  onChange={(e) => setSalary(Number(e.target.value))}
-                />
+                  
+                  <input
+                    type="range"
+                    min="1"
+                    max="10"
+                    step="1"
+                    value={salary}
+                    onChange={(e) => setSalary(Number(e.target.value))}
+                    className="w-full cursor-pointer accent-blue-500"
+                  />
+
+                 
+                  <div className="flex justify-between mt-2 text-sm">
+                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
+                      <span key={num}>{num}</span>
+                    ))}
+                  </div>
+                </div>
               </div>
 
               <div className="mt-auto">
@@ -202,10 +220,8 @@ const JobPage = () => {
           </div>
         </div>
       </div>
-
       <FooterContainer />
     </>
   );
 };
-
 export default JobPage;

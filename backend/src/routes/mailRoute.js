@@ -65,4 +65,38 @@ mailrouter.post("/sendMail", async (req, res) => {
   }
 });
 
+// subscribe route
+
+mailrouter.post("/subscribe", async (req,res)=>{
+  try{
+    const{email} = req.body
+    if(!email){
+      return res.status(400).json({
+        success: false,
+        message: "Email Required",
+      });
+    };
+    await sendEmail(
+      email,
+      "Thankyou for subscribing—JOB PORTAL",
+
+      `
+      <h3>Subscribed for Job Alerts</h3>
+      <p>Get the latest job openings and career updates directly in your inbox.</p>
+
+      <div><h4>JOB PORTAL</h4>
+      <p><b>jobportal.com</b></p>
+      </div>
+      `
+
+    )
+    res.status(200).json({
+      success: true,
+      message: "Sucessfully Subscribed !"
+    })
+  }catch(error){
+    console.log("Subscribed Failed !", error)
+  }
+})
+
 module.exports = mailrouter;

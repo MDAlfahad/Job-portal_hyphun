@@ -17,11 +17,14 @@ import NotFound404 from "../404NotFound/NotFound404";
 import ContactPage from "../Pages/ContactPage/ContactPage";
 import Notificationpage from "../Pages/Notification/Notificationpage";
 
+import { useEffect } from "react";
+
 const MainRoute = () => {
   return (
     <Router>
       <ScrollTopTop />
       <Navbar />
+
       <Routes>
         {/* --- Public Routes --- */}
         <Route path="/" element={<Hero />} />
@@ -31,7 +34,7 @@ const MainRoute = () => {
         <Route path="/user-signup" element={<UserSignupPage />} />
         <Route path="/company-signup" element={<CompanySignupPage />} />
         <Route path="/job-page-route/:id" element={<JobPageRoute />} />
-        <Route path="/notification" element = {<Notificationpage/>}/>
+        <Route path="/notification" element={<Notificationpage />} />
         {/* ---  Student Dashboard Protection --*/}
         {/* Fixed: wrapped "user" in an array to match ProtectedRoute logic */}
         <Route element={<ProtectedRoute allowedRoles={["user"]} />}>
@@ -54,7 +57,7 @@ const MainRoute = () => {
         </Route>
 
         {/* Catch-all for 404 (Optional but recommended) */}
-        <Route path="*" element={<NotFound404/>} />
+        <Route path="*" element={<NotFound404 />} />
       </Routes>
     </Router>
   );

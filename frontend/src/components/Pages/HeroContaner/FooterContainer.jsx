@@ -1,57 +1,93 @@
-import { useEffect } from "react";
-import {
-  FaFacebook,
-  FaInstagram,
-  FaLinkedin,
-  FaTwitter,
-} from "react-icons/fa";
+import axios from "axios";
+import { Mail } from "lucide-react";
+import { useState } from "react";
+import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const FooterContainer = () => {
-  
+  const [email, setEmail] = useState("");
+
+  const apply = async (e) => {
+    e.preventDefault();
+
+    if (!email) {
+      alert("Email Required");
+      return;
+    }
+
+    try {
+      const res = await axios.post("http://localhost:4000/api/subscribe", {
+        email,
+      });
+
+      alert(res.data.message || "Subscribed Successfully");
+      setEmail("");
+    } catch (error) {
+      alert(error.response?.data?.message || "Something went wrong");
+    }
+  };
 
   return (
     <>
       <div className="w-full shadow-2xl border noselect capitalize">
         <div className="w-full max-w-[1800px] m-auto px-4 md:px-12 py-12 md:flex justify-between">
-          <div className="flex flex-col gap-1">
-            <h1 className="text-4xl font-semibold md:text-4xl">JOB PORTAL</h1>
-            <a
-              className="text-sm md:text-[14px] lowercase"
-              href="mailto:alfahadkhan715@gmail.com"
-            >
-              alfahadkhan715@gmail.com
-            </a>
-            <div className=" flex gap-2 py-2">
+          <div className="flex flex-col gap-1 text-center md:text-start">
+            <h1 className="text-3xl font-semibold md:text-4xl">JOB PORTAL</h1>
+
+            <div className=" flex items-center md:gap-2 py-2 px-6 md:px-0 justify-between md:justify-start">
+              <a
+                className="p-1.5 rounded-full hover:text-secondary text-textcolor  transition duration-300"
+                href="mailto:alfahadkhan715@gmail.com"
+              >
+                <Mail size={30} />
+              </a>
               <span
-              title="instagram"
-               className="p-1.5 rounded-full text-xl hover:scale-105 hover:text-secondary text-textcolor  transition duration-500">
-                <FaInstagram />
+                title="instagram"
+                className="p-1.5 rounded-full text-3xl  hover:text-secondary text-textcolor  transition duration-300"
+              >
+                <a
+                  href="https://www.instagram.com/al_fahad_2401"
+                  target="_blank"
+                >
+                  <FaInstagram />
+                </a>
               </span>
               <span
-              title="facebook"
-               className="p-1.5 rounded-full text-xl hover:scale-105 hover:text-secondary text-textcolor transition duration-500">
-                <FaFacebook />
+                title="facebook"
+                className="p-1.5 rounded-full text-3xl hover:scale-105 hover:text-secondary text-textcolor transition duration-300"
+              >
+                <a href="#" target="_blank">
+                  <FaFacebook />
+                </a>
               </span>
               <span
-              title="linkedin"
-              className="p-1.5 rounded-full text-xl hover:scale-105 hover:text-secondary text-textcolor  transition duration-500">
-                <FaLinkedin />
+                title="linkedin"
+                className="p-1.5 rounded-full text-3xl hover:scale-105 hover:text-secondary text-textcolor  transition duration-300"
+              >
+                <a href="https://www.linkedin.com/MDAlfahad" target="_blank">
+                  <FaLinkedin />
+                </a>
               </span>
               <span
-              title="twitter"
-               className="p-1.5 rounded-full text-xl hover:scale-105 hover:text-secondary text-textcolor  transition duration-500">
-                <FaTwitter />
+                title="twitter"
+                className="p-1.5 rounded-full text-3xl hover:scale-105 hover:text-secondary text-textcolor  transition duration-300"
+              >
+                <a href="https://www.X.com/alfahad khan" target="_blank">
+                  <FaTwitter />
+                </a>
               </span>
             </div>
             <div className="flex border rounded-sm items-center overflow-hidden">
               <input
                 className="px-4 py-2 outline-none w-full"
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email"
               />
               <a
                 href="#"
+                onClick={apply}
                 title="click to subscribe!"
                 className="px-4 py-2 bg-secondary text-white hover:bg-textcolor  transition duration-300"
               >
@@ -59,9 +95,9 @@ const FooterContainer = () => {
               </a>
             </div>
           </div>
-          <div className="flex gap-20">
+          <div className="flex gap-20 py-2 md:py-0">
             <div className="flex flex-col gap-4">
-              <h1 className="text-xl font-semibold text-textcolor">About</h1>
+              <h1 className="text-md md:text-xl font-semibold text-textcolor">About</h1>
               <Link
                 className="hover:text-secondary text-[14px] transition duration-300"
                 to="/"
@@ -70,13 +106,13 @@ const FooterContainer = () => {
               </Link>
               <Link
                 className="hover:text-secondary text-[14px] transition duration-300"
-                to="/jobpage"
+                to="/job-page"
               >
                 Jobs
               </Link>
               <Link
                 className="hover:text-secondary text-[14px] transition duration-300"
-                to="/companySigup"
+                to="/Dashboard-Company"
               >
                 Company
               </Link>
@@ -88,7 +124,7 @@ const FooterContainer = () => {
               </Link>
             </div>
             <div className="flex flex-col gap-4">
-              <h1 className="text-xl font-semibold text-textcolor">LInks</h1>
+              <h1 className="text-md md:text-xl font-semibold text-textcolor">LInks</h1>
               <Link
                 className="hover:text-secondary text-[14px] transition duration-300"
                 to="/login-page"
@@ -109,13 +145,13 @@ const FooterContainer = () => {
               </Link>
               <Link
                 className="hover:text-secondary text-[14px] transition duration-300"
-                to="/contact"
+                to="/contact-page"
               >
                 Blogs
               </Link>
             </div>
             <div className="flex flex-col gap-4">
-              <h1 className="text-xl font-semibold text-textcolor">Products</h1>
+              <h1 className="text-md md:text-xl font-semibold text-textcolor">Products</h1>
               <Link
                 className="hover:text-secondary text-[14px] transition duration-300"
                 to="/"
@@ -130,7 +166,7 @@ const FooterContainer = () => {
               </Link>
               <Link
                 className="hover:text-secondary text-[14px] transition duration-300"
-                to="/signup"
+                to="/login-page"
               >
                 Login
               </Link>

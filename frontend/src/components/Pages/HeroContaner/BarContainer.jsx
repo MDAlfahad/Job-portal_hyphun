@@ -4,9 +4,9 @@ import Image from "../../images/company.webp";
 const BarContainer = () => {
   return (
     <>
-      <div className="w-full max-w-[1800px] m-auto bg-secondary shadow-xl noselect">
-        <div className="w-full md:h-auto md:px-12 px-4 py-2  md:flex items-center md:gap-20 justify-between text-white">
-          <div className=" flex items-center gap-12 justify-between bg-white rounded-full px-6 py-2 text-black md:text-white md:bg-transparent">
+      <div className="w-full max-w-[1800px] m-auto bg-secondary shadow-xl noselect ">
+        <div className="w-full md:h-auto md:px-12 px-4 py-2 md:py-10 md:flex items-center  justify-between text-white">
+          <div className=" flex items-center gap-12 justify-between bg-white rounded-full px-6 py-4 md:py-2 text-black md:text-white md:bg-transparent">
             <div className="relative flex  ">
               <img
                 className="absolute left-5  rounded-full h-12 w-12 border border-white border-spacing"
@@ -20,18 +20,18 @@ const BarContainer = () => {
               />
             </div>
             <div>
-              <h1 className="text-2xl md:text-3xl  font-semibold ">
+              <h1 className="text-2xl md:text-4xl  font-semibold ">
                 100+
               </h1>
               <p className="text-xs md:text-[16px]">Applicant per day</p>
             </div>
           </div>
-          <div className="flex gap-5 items-center px-3 py-2 my-10 md:my-0 justify-between">
+          <div className="flex gap-5 items-center px-6 md:px-3 py-4  md:py-2 bg-white md:bg-transparent rounded-full  text-black md:text-white  justify-between my-4 md:my-0">
             <div>
-              <h1 className="text-2xl md:text-3xl font-semibold text-white">
+              <h1 className="text-2xl md:text-4xl font-semibold ">
                 Features
               </h1>
-              <p className="text-xs md:text-[16px]  text-white">Apply Easily</p>
+              <p className="text-xs md:text-[16px]">Apply Easily</p>
             </div>
             <div>
               <img
@@ -41,9 +41,9 @@ const BarContainer = () => {
               />
             </div>
           </div>
-          <div className="flex gap-5 items-center justify-between md:text-white text-black bg-white rounded-md px-6 py-2 md:bg-transparent">
+          <div className="flex gap-5 items-center justify-between md:text-white text-black bg-white rounded-full px-6 py-2 md:bg-transparent">
             <div>
-              <h1 className="text-2xl md:text-3xl  font-semibold">
+              <h1 className="text-2xl md:text-4xl  font-semibold">
                 What we do
               </h1>
               <p className="text-xs md:text-[16px]">

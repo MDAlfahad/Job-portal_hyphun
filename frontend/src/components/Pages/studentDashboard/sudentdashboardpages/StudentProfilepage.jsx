@@ -133,7 +133,7 @@ const StudentProfilePage = () => {
             <div>
               <input type="file" id="file" hidden />
               <label
-                className="text-md font-medium border border-black px-2 py-1 rounded-md"
+                className="text-md font-light border border-secondary text-secondary  px-2 py-1 rounded-md"
                 htmlFor="file"
               >
                 Upload new photo

@@ -14,8 +14,10 @@ const CrauselContainer = () => {
   // 🔥 Responsive logic
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 640) setVisibleCards(1); // mobile
-      else if (window.innerWidth < 1024) setVisibleCards(2); // tablet
+      if (window.innerWidth < 640)
+        setVisibleCards(1); // mobile
+      else if (window.innerWidth < 1024)
+        setVisibleCards(2); // tablet
       else setVisibleCards(3); // desktop
     };
 
@@ -44,15 +46,17 @@ const CrauselContainer = () => {
   }, []);
 
   return (
-    <div className="max-w-[1800px] m-auto px-4 md:px-12  md:py-4">
-      
+    <div className="max-w-[1800px] m-auto px-4 md:px-12  md:py-20">
       {/* Heading */}
-      <h1 className="text-2xl md:text-5xl font-semibold text-center py-20">
-        <span className="text-secondary ">Apply now,</span> to start your career
-      </h1>
+      <div className="pb-20">
+        <h1 className="text-2xl md:text-4xl font-semibold text-center ">
+          Apply Now to Start
+          <span className="text-secondary "> Your Career</span>
+        </h1>
+        <p className="text-center text-[14px]">Take the first step toward a successful future. </p>
+      </div>
 
       <div className="flex items-center justify-center w-full max-w-7xl mx-auto">
-        
         {/* LEFT BUTTON */}
         <button
           onClick={prevSlide}
@@ -66,9 +70,7 @@ const CrauselContainer = () => {
           <div
             className="flex transition-transform duration-500 ease-in-out gap-4"
             style={{
-              transform: `translateX(-${
-                currentIndex * (100 / visibleCards)
-              }%)`,
+              transform: `translateX(-${currentIndex * (100 / visibleCards)}%)`,
             }}
           >
             {data.map((item) => (
