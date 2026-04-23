@@ -11,9 +11,8 @@ const StudentProfilePage = () => {
   const [EditShow, EditSetShow] = useState(false);
   const [editbio, seteditbio] = useState(false);
   const { user } = useAuthStore();
-
   const [showData, setShowData] = useState([]);
-
+  const [image, setImage] = useState(null);
   const [isData, setIsData] = useState({
     name: "",
     contact: "",
@@ -33,6 +32,34 @@ const StudentProfilePage = () => {
       const res = await axios.post(`${API_CALL}/api/user-details`, isData);
     } catch (err) {
       console.log(err);
+    }
+  };
+  // show and uplaod image
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+
+    if (file) {
+      setImage(file);
+    }
+  };
+  const handleUpload = async () => {
+    if (!image) return alert("Select Image ");
+
+    const formData = new FormData();
+    formData.append("image", image);
+    formData.append("userId", user?.user_id);
+
+    try {
+      const res = await axios.post(`${API_CALL}/api/upload_photo`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      alert("Photo Uploaded");
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -128,23 +155,39 @@ const StudentProfilePage = () => {
           <div className="w-full md:flex px-6 py-2 md:p-12 bg-white rounded-md md:rounded-xl justify-around ">
             <div className="flex flex-col items-center gap-2 ">
               <div className=" w-[150px] h-[150px] overflow-hidden bg-gray-200 rounded-lg object-cover">
-              <img width={200} height={200} src={Logo} alt="" />
-            </div>
-            <div>
-              <input type="file" id="file" hidden />
-              <label
-                className="text-md font-light border border-secondary text-secondary  px-2 py-1 rounded-md"
-                htmlFor="file"
-              >
-                Upload new photo
-              </label>
-            </div>
+                <img
+                  className="w-full h-full object-cover"
+                  src={`${API_CALL}/uploads/${user?.user_image}`}
+                  alt="profile"
+                />
+              </div>
+              <div>
+                <input
+                  type="file"
+                  id="file"
+                  hidden
+                  accept="image/*"
+                  onChange={handleImageChange}
+                />
+                <label
+                  className="text-md font-light border border-secondary text-secondary  px-2 py-1 rounded-md mr-2"
+                  htmlFor="file"
+                >
+                  Choose
+                </label>
+                <button
+                  onClick={handleUpload}
+                  className="mt-2 bg-secondary text-white px-2 py-1 rounded-md"
+                >
+                  Upload
+                </button>
+              </div>
             </div>
             <div>
               {/* profile  */}
               <div className=" flex items-center justify-between mt-4 md:mt-12 mb-2 md:mb-6">
                 <h1 className="text-xl font-semibold">Personal Info</h1>
-                
+
                 <span
                   className="flex items-center gap-2 border rounded-md p-1 cursor-pointer "
                   onClick={() => EditSetShow(!EditShow)}

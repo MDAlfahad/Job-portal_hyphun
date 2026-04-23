@@ -66,7 +66,7 @@ const UserLSignupPage = () => {
             <div className="flex flex-col gap-2 text-[12px]">
               <label htmlFor="name">Name</label>
               <input
-                className="text-[14px] px-2 py-2 border rounded-full outline-none placeholder-textcolor "
+                className="text-[14px] px-2 py-2 border rounded-full outline-none placeholder-textcolor2 "
                 type="text"
                 placeholder="Name"
                 name="name"
@@ -77,7 +77,7 @@ const UserLSignupPage = () => {
               />
               <label htmlFor="email">Email</label>
               <input
-                className=" text-[14px] px-2 py-2 border rounded-full outline-none placeholder-textcolor"
+                className=" text-[14px] px-2 py-2 border rounded-full outline-none placeholder-textcolor2"
                 type="email"
                 id="email"
                 name="email"
@@ -89,7 +89,7 @@ const UserLSignupPage = () => {
               <label htmlFor="password">Password</label>
               <span className=" text-[14px] px-2 border rounded-full flex items-center ">
                 <input
-                  className="px-2 py-2  outline-none  w-full placeholder-textcolor"
+                  className="px-2 py-2  outline-none  w-full placeholder-textcolor2"
                   type={!show ? "password" : "text"}
                   id="password"
                   placeholder="password contain atleast 6 digits"

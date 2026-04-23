@@ -27,11 +27,11 @@ const StudentSideBar = ({ setActivePage, activePage }) => {
 
   return (
     <div
-      className={`mt-14 bg-white border  transition-all duration-300 ${
+      className={` bg-white border  transition-all duration-300 ${
         show ? "w-[250px]" : "w-[50px]"
       }`}
     >
-      <div className="flex items-center gap-3 px-4 py-5">
+      <div className="flex items-center gap-3 px-4 py-5 mt-20">
         <TextAlignJustify
           strokeWidth={1.5}
           className="cursor-pointer"
@@ -51,7 +51,7 @@ const StudentSideBar = ({ setActivePage, activePage }) => {
             onClick={() => setActivePage("profile")}
             title={!show ? "Profile" : ""}
           >
-            <UserRound size={22} strokeWidth={1}/>
+            <UserRound size={22} strokeWidth={1} />
             {show && <p>Profile</p>}
           </div>
 
@@ -60,7 +60,7 @@ const StudentSideBar = ({ setActivePage, activePage }) => {
             onClick={() => setActivePage("application")}
             title={!show ? "applicaton" : ""}
           >
-            <ClipboardList size={22} strokeWidth={1}/>
+            <ClipboardList size={22} strokeWidth={1} />
             {show && <p>Application</p>}
           </div>
 
@@ -69,7 +69,7 @@ const StudentSideBar = ({ setActivePage, activePage }) => {
             onClick={() => setActivePage("savedform")}
             title={!show ? "Saved Forms" : ""}
           >
-            <Bookmark size={22} strokeWidth={1}/>
+            <Bookmark size={22} strokeWidth={1} />
             {show && <p>Saved</p>}
           </div>
         </div>
@@ -79,8 +79,8 @@ const StudentSideBar = ({ setActivePage, activePage }) => {
           title={!show ? "Logout" : ""}
           onClick={handlelogout}
         >
-          <LogOut size={22} strokeWidth={1}/>
-          {show && <p >Logout</p>}
+          <LogOut size={22} strokeWidth={1} />
+          {show && <p>Logout</p>}
         </div>
       </div>
     </div>

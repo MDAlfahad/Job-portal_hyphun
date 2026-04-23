@@ -2,7 +2,6 @@ import FooterContainer from "../HeroContaner/FooterContainer";
 import ApplyPage from "./ApplyPage";
 import FaqsPage from "./FaqsPage";
 
-
 const ContactPage = () => {
   return (
     <>
@@ -26,26 +25,56 @@ const ContactPage = () => {
           </div>
           <div className=" flex flex-col md:w-[450px] bg-white py-10">
             <div className="leading-6 ">
-                <h1 className="text-[30px]">Need help ?</h1>
-            <p className="text-[14px] font-light">Contact us for further assistance </p>
+              <h1 className="text-[30px]">Need help ?</h1>
+              <p className="text-[14px] font-light">
+                Contact us for further assistance{" "}
+              </p>
             </div>
-            <form action="submit" className="flex flex-col gap-2 py-4 w-full text-[14px]">
+            <form
+              action="submit"
+              className="flex flex-col gap-2 py-4 w-full text-[14px]"
+            >
               <label htmlFor="name">Name</label>
-              <input className="border border-textcolor rounded-sm px-2 py-2 outline-none w-full" type="text" id="name" />
+              <input
+                className="border border-textcolor rounded-sm px-2 py-2 outline-none w-full"
+                type="text"
+                id="name"
+                placeholder="name"
+              />
               <label htmlFor="email">Email</label>
-              <input className="border border-textcolor rounded-sm px-2 py-2 outline-none" type="email" id="email" />
+              <input
+                className="border border-textcolor rounded-sm px-2 py-2 outline-none"
+                type="email"
+                id="email"
+                placeholder="e.g example.com"
+              />
               <label htmlFor="contact">Contact Number</label>
-              <input className="border border-textcolor rounded-sm px-2 py-2 outline-none" type="tel" id="contact" />
+              <input
+                className="border border-textcolor rounded-sm px-2 py-2 outline-none"
+                type="tel"
+                id="contact"
+                placeholder="62XXXXXXXX00"
+              />
               <label htmlFor="message">Your Message</label>
-              <textarea className="md:min-w-[450px] min-h-28 max-h-48 border border-textcolor outline-none rounded-sm p-2" name="message" id="message"></textarea>
-              <button className="p-2  bg-secondary hover:bg-textcolor text-white rounded-sm transition duration-300" type="submit">Submit</button>
+              <textarea
+                className="md:min-w-[450px] min-h-28 max-h-48 border border-textcolor outline-none rounded-sm p-2"
+                name="message"
+                id="message"
+                placeholder="Your message here..."
+              ></textarea>
+              <button
+                className="p-2  bg-secondary hover:bg-textcolor text-white rounded-sm transition duration-300"
+                type="submit"
+              >
+                Submit
+              </button>
             </form>
           </div>
         </div>
       </div>
-      <FaqsPage/>
-      <ApplyPage/>
-      <FooterContainer/>
+      <FaqsPage />
+      <ApplyPage />
+      <FooterContainer />
     </>
   );
 };

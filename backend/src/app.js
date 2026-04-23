@@ -8,6 +8,7 @@ const userauth = require("./routes/counters");
 const applyForm = require("./routes/formApply");
 const path = require("path");
 const mailrouter = require("./routes/mailRoute");
+const uploadImage = require("./routes/photoUploadRoute");
 
 
 
@@ -26,6 +27,7 @@ app.use("/api", jobdata);
 app.use("/api", userauth);
 app.use("/api", applyForm);
 app.use("/api", mailrouter);
+app.use("/api", uploadImage);
 
 
 module.exports = app;

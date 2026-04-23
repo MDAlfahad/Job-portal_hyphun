@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaMinus, FaPlus } from "react-icons/fa";
+import { LuPlus, LuMinus } from "react-icons/lu";
 
 const FaqsCard = ({question, answer}) => {
   const [show, setShow] = useState(false);
@@ -8,17 +8,17 @@ const FaqsCard = ({question, answer}) => {
     setShow(!show);
   };
   return (
-    <div className="flex flex-col gap-1 bg-gray-200 p-2 rounded-sm min-w-[350px]">
+    <div className="flex flex-col gap-1 bg-gray-200 p-2 rounded-sm min-w-[350px] transition-all duration-300">
       <h1 className="flex items-center justify-between" onClick={handleshow}>
        {question}
         {!show ? (
-          <FaPlus className="font-medium transition duration-200" />
+          <LuPlus />
         ) : (
-          <FaMinus className="font-medium transition duration-300"/>
+          <LuMinus />
         )}
       </h1>
       {show && (
-        <p className="text-[14px] font-light max-w-96 transition duration-300">
+        <p className="text-[14px] font-light max-w-96 ">
           {answer}
         </p>
       )}

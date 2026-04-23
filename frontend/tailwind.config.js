@@ -7,7 +7,7 @@ export default {
       colors: {
         primary: "#08D9D6",
         secondary: "#44ACFF",
-        lightpink: "#ff97b1",
+        lightblue: "#C0E8FB",
         textcolor: "#252A34",
         textcolor2: "#808080",
         background: "#EAEAEA",

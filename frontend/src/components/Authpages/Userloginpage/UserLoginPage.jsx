@@ -69,7 +69,7 @@ const UserLoginPage = () => {
             <div className="flex flex-col gap-2 text-[12px]">
               <label htmlFor="email">Email</label>
               <input
-                className="px-2 py-2 border rounded-full outline-none text-[14px] placeholder-textcolor "
+                className="px-2 py-2 border rounded-full outline-none text-[14px] placeholder-textcolor2 "
                 type="email"
                 id="email"
                 value={email}
@@ -80,7 +80,7 @@ const UserLoginPage = () => {
               <label htmlFor="password">Password</label>
               <span className=" px-2 w-full border rounded-full outline-none flex items-center ">
                 <input
-                  className="px-2 py-2  text-[14px] w-full outline-none placeholder-textcolor"
+                  className="px-2 py-2  text-[14px] w-full outline-none placeholder-textcolor2"
                   type={!show ? "password" : "text"}
                   id="password"
                   placeholder="password@1234"

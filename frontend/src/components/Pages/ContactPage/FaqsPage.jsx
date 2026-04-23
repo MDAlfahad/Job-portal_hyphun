@@ -1,12 +1,23 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import FaqsCard from "./FaqsCard";
-
+import useAnimate from "../../../Store/animation"
 const FaqsPage = () => {
+  const ref = {
+    head: useRef(),
+    box: useRef(),
+  };
+
+  useAnimate(ref.head);
+  useAnimate(ref.box, { y: 90 });
   return (
     <div className="max-w-[1800px] m-auto w-full px-6 md:px-12 py-6 md:py-28 noselect ">
-      <div className="flex flex-col">
-        <h1 className="text-xl md:text-4xl font-medium">
+      <div 
+        ref={ref.head}
+      className="flex flex-col">
+        <h1 
+      
+        className="text-xl md:text-4xl font-medium">
           Frequently asked question
         </h1>
         <p className="text-[14px] font-light md:max-w-[500px]">
@@ -15,7 +26,9 @@ const FaqsPage = () => {
         </p>
       </div>
 
-      <div className=" md:flex justify-between  w-full py-10">
+      <div 
+      ref={ref.box}
+      className=" md:flex justify-between  w-full py-10">
         <div className="flex flex-col py-4 gap-4  md:w-[500px] ">
           <FaqsCard
             question="Is it free to use?"
@@ -43,7 +56,6 @@ const FaqsPage = () => {
             question="Can I apply for multiple jobs?"
             answer="Yes, you can apply for as many jobs as you want based on your qualifications and interests."
           />
-          
         </div>
       </div>
     </div>

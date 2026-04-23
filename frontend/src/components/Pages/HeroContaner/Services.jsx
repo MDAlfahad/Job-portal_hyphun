@@ -3,22 +3,45 @@ import { HiClipboardList } from "react-icons/hi";
 import { VscServerProcess } from "react-icons/vsc";
 import { AiOutlineMessage } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import { useRef } from "react";
+import useAnimate from "../../../Store/animation";
 
 const Services = () => {
   const navigate = useNavigate();
+  const ref = {
+    head: useRef(),
+    para: useRef(),
+    card: useRef(),
+  }
+  useAnimate(ref.head);
+  useAnimate(ref.para, {y: 70});
+  useAnimate(ref.card, {y:90});
+ 
+
+
   return (
     <>
-      <div className=" w-full md:h-screen lg:h-auto max-w-[1800px] m-auto px-4 md:px-12 py-12 noselect">
-        <div className="flex flex-col gap-0 py-10">
+      <div
+        className="w-full md:h-screen lg:h-auto max-w-[1800px] m-auto px-4 md:px-12 py-12 noselect"
+      
+      >
+        <div className="animate flex flex-col gap-0 py-10">
           <h1
-            className={` md:text-4xl text-textcolor text-center font-semibold md:text-bold`}
-          >
+            ref={ref.head}
+          className="md:text-4xl text-textcolor text-center font-semibold md:text-bold">
             Services Provide here
           </h1>
-          <p className="text-[14px] font-normal text-center">Career Services
-Connecting Talent with the Right Opportunities</p>
+
+          <p
+          ref={ref.para}
+          className="text-[14px] font-normal text-center">
+            Career Services Connecting Talent with the Right Opportunities
+          </p>
         </div>
-        <div className="w-full md:flex justify-between ">
+
+        <div
+        ref={ref.card}
+        className="w-full md:flex justify-between">
           <Cards
             logo={<HiClipboardList className="text-3xl text-secondary" />}
             h1="Verified Job Listings & Smart Job Matching"
@@ -26,13 +49,15 @@ Connecting Talent with the Right Opportunities</p>
             text="Apply now"
             open={() => navigate("/jobpage")}
           />
+
           <Cards
             logo={<VscServerProcess className="text-3xl text-secondary" />}
             h1="Easy Application Process"
-            p="ACreate one comprehensive profile and use it to apply for multiple job opportunities quickly and effortlessly. Upload your resume, showcase your skills, experience, certifications, and achievements in one place, and avoid the hassle of filling out repetitive application forms."
+            p="Create one comprehensive profile and use it to apply for multiple job opportunities quickly and effortlessly. Upload your resume, showcase your skills, experience, certifications, and achievements in one place, and avoid the hassle of filling out repetitive application forms."
             text="Apply Now"
             open={() => navigate("/jobpage")}
           />
+
           <Cards
             logo={<AiOutlineMessage className="text-3xl text-secondary" />}
             h1="Job Alerts & Notifications"

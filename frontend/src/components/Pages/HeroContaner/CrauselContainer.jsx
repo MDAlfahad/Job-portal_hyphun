@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { MoveLeft, MoveRight } from "lucide-react";
 import CrauselCard from "../../Components/Cards/CrauselCard";
+import useAnimate from "../../../Store/animation";
 
 const CrauselContainer = () => {
   const API_CALL = `http://localhost:4000`;
@@ -44,11 +45,24 @@ const CrauselContainer = () => {
       .then((result) => setData(result))
       .catch((err) => console.error(err));
   }, []);
+  //animation
+
+  const ref ={
+    head: useRef(),
+    box: useRef(),
+  }
+  useAnimate(ref.head);
+  useAnimate(ref.box, {y: 100});
+
 
   return (
-    <div className="max-w-[1800px] m-auto px-4 md:px-12  md:py-20">
+    <div 
+   
+    className="max-w-[1800px] m-auto px-4 md:px-12  md:py-20">
       {/* Heading */}
-      <div className="pb-20">
+      <div
+      ref={ref.head}
+      className="pb-20">
         <h1 className="text-2xl md:text-4xl font-semibold text-center ">
           Apply Now to Start
           <span className="text-secondary "> Your Career</span>
@@ -56,7 +70,9 @@ const CrauselContainer = () => {
         <p className="text-center text-[14px]">Take the first step toward a successful future. </p>
       </div>
 
-      <div className="flex items-center justify-center w-full max-w-7xl mx-auto">
+      <div 
+      ref={ref.box}
+      className="flex items-center justify-center w-full max-w-7xl mx-auto">
         {/* LEFT BUTTON */}
         <button
           onClick={prevSlide}
@@ -76,7 +92,7 @@ const CrauselContainer = () => {
             {data.map((item) => (
               <div
                 key={item.id}
-                className="flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 "
+                className="flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 mx-4 "
               >
                 <CrauselCard {...item} />
               </div>

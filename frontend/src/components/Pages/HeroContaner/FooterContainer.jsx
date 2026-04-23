@@ -1,7 +1,13 @@
 import axios from "axios";
 import { Mail } from "lucide-react";
 import { useState } from "react";
-import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { PiInstagramLogoLight } from "react-icons/pi";
+import {
+  SlSocialFacebook,
+  SlSocialLinkedin,
+  SlSocialTwitter,
+} from "react-icons/sl";
+import { IoMailOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
 const FooterContainer = () => {
@@ -33,47 +39,51 @@ const FooterContainer = () => {
         <div className="w-full max-w-[1800px] m-auto px-4 md:px-12 py-12 md:flex justify-between">
           <div className="flex flex-col gap-1 text-center md:text-start">
             <h1 className="text-3xl font-semibold md:text-4xl">JOB PORTAL</h1>
+            <p className="text-xs text-textcolor2 leading-3">
+              Connect with skilled students, freshers, <br /> and experienced
+              candidates in one place.
+            </p>
 
-            <div className=" flex items-center md:gap-2 py-2 px-6 md:px-0 justify-between md:justify-start">
+            <div className=" flex items-center md:gap-2 py-4 px-6 md:px-0 justify-between md:justify-start">
               <a
-                className="p-1.5 rounded-full hover:text-secondary text-textcolor  transition duration-300"
+                className="p-2 rounded-full border text-xl border-textcolor2 hover:border-secondary hover:bg-gray-200  hover:text-secondary text-textcolor2  transition duration-300"
                 href="mailto:alfahadkhan715@gmail.com"
               >
-                <Mail size={30} />
+                <IoMailOutline />
               </a>
               <span
                 title="instagram"
-                className="p-1.5 rounded-full text-3xl  hover:text-secondary text-textcolor  transition duration-300"
+                className="p-2 rounded-full border text-xl border-textcolor2 hover:border-secondary hover:bg-gray-200  hover:text-secondary text-textcolor2  transition duration-300"
               >
                 <a
                   href="https://www.instagram.com/al_fahad_2401"
                   target="_blank"
                 >
-                  <FaInstagram />
+                  <PiInstagramLogoLight />
                 </a>
               </span>
               <span
                 title="facebook"
-                className="p-1.5 rounded-full text-3xl hover:scale-105 hover:text-secondary text-textcolor transition duration-300"
+                className="p-2 rounded-full border text-xl border-textcolor2 hover:border-secondary hover:bg-gray-200  hover:text-secondary text-textcolor2  transition duration-300"
               >
                 <a href="#" target="_blank">
-                  <FaFacebook />
+                  <SlSocialFacebook />
                 </a>
               </span>
               <span
                 title="linkedin"
-                className="p-1.5 rounded-full text-3xl hover:scale-105 hover:text-secondary text-textcolor  transition duration-300"
+                className="p-2 rounded-full border text-xl border-textcolor2 hover:border-secondary hover:bg-gray-200  hover:text-secondary text-textcolor2  transition duration-300"
               >
                 <a href="https://www.linkedin.com/MDAlfahad" target="_blank">
-                  <FaLinkedin />
+                  <SlSocialLinkedin />
                 </a>
               </span>
               <span
                 title="twitter"
-                className="p-1.5 rounded-full text-3xl hover:scale-105 hover:text-secondary text-textcolor  transition duration-300"
+                className="p-2 rounded-full border text-xl border-textcolor2 hover:border-secondary hover:bg-gray-200  hover:text-secondary text-textcolor2  transition duration-300"
               >
                 <a href="https://www.X.com/alfahad khan" target="_blank">
-                  <FaTwitter />
+                  <SlSocialTwitter />
                 </a>
               </span>
             </div>
@@ -97,7 +107,9 @@ const FooterContainer = () => {
           </div>
           <div className="flex gap-20 py-2 md:py-0">
             <div className="flex flex-col gap-4">
-              <h1 className="text-md md:text-xl font-semibold text-textcolor">About</h1>
+              <h1 className="text-md md:text-xl font-semibold text-textcolor">
+                About
+              </h1>
               <Link
                 className="hover:text-secondary text-[14px] transition duration-300"
                 to="/"
@@ -124,7 +136,9 @@ const FooterContainer = () => {
               </Link>
             </div>
             <div className="flex flex-col gap-4">
-              <h1 className="text-md md:text-xl font-semibold text-textcolor">LInks</h1>
+              <h1 className="text-md md:text-xl font-semibold text-textcolor">
+                LInks
+              </h1>
               <Link
                 className="hover:text-secondary text-[14px] transition duration-300"
                 to="/login-page"
@@ -151,7 +165,9 @@ const FooterContainer = () => {
               </Link>
             </div>
             <div className="flex flex-col gap-4">
-              <h1 className="text-md md:text-xl font-semibold text-textcolor">Products</h1>
+              <h1 className="text-md md:text-xl font-semibold text-textcolor">
+                Products
+              </h1>
               <Link
                 className="hover:text-secondary text-[14px] transition duration-300"
                 to="/"

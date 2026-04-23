@@ -97,12 +97,12 @@ const Navbar = ({}) => {
             </NavLink>
           )}
           <div
-            className="md:block bg-background p-2 rounded-full cursor-pointer border"
+            className="md:block bg-lightblue p-2 text-textcolor rounded-full cursor-pointer hover:bg-white hover:text-secondary"
             onClick={() => navigate("/notification")}
           >
             <Bell strokeWidth={1.5} />
           </div>
-          <div className="bg-background p-2 rounded-full cursor-pointer border">
+          <div className="md:block bg-lightblue p-2 text-textcolor rounded-full cursor-pointer hover:bg-white hover:text-secondary">
             <UserRound onClick={userclick} strokeWidth={1.5} />
           </div>
           <div className="flex md:hidden">
