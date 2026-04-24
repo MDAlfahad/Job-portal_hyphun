@@ -69,7 +69,7 @@ const UserLoginPage = () => {
             <div className="flex flex-col gap-2 text-[12px]">
               <label htmlFor="email">Email</label>
               <input
-                className="px-2 py-2 border rounded-full outline-none text-[14px] placeholder-textcolor2 "
+                className="px-2 py-2 border rounded-sm outline-none text-[14px] placeholder-textcolor2 "
                 type="email"
                 id="email"
                 value={email}
@@ -78,7 +78,7 @@ const UserLoginPage = () => {
                 
               />
               <label htmlFor="password">Password</label>
-              <span className=" px-2 w-full border rounded-full outline-none flex items-center ">
+              <span className=" px-2 w-full border rounded-sm outline-none flex items-center ">
                 <input
                   className="px-2 py-2  text-[14px] w-full outline-none placeholder-textcolor2"
                   type={!show ? "password" : "text"}
@@ -100,7 +100,7 @@ const UserLoginPage = () => {
             
               <button
                 type="submit"
-                className="border rounded-full p-2 font-medium bg-secondary hover:bg-textcolor w-full text-white"
+                className="border rounded-sm p-2 font-medium bg-secondary hover:bg-textcolor w-full text-white"
               >
                 Login
               </button>
@@ -126,7 +126,7 @@ const UserLoginPage = () => {
                 <p className="px-4 ">or</p>
                 <hr className=" w-full " />
               </span>
-              <p className="flex gap-4 items-center border px-2 py-2 w-full justify-center rounded-full  font-medium text-textcolor">
+              <p className="flex gap-4 items-center border px-2 py-2 w-full justify-center rounded-s font-medium text-textcolor">
                 <FcGoogle className="text-2xl " />
                 Login with Google
               </p>

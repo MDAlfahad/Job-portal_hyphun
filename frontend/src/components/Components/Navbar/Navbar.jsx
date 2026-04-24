@@ -1,10 +1,11 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { UserRound, Bell } from "lucide-react";
+import { UserRound, Bell, User } from "lucide-react";
 import { HiOutlineBars3BottomRight } from "react-icons/hi2";
 import { useEffect, useState } from "react";
 import useAuthStore from "../../../Store/userAuth";
 
 const Navbar = ({}) => {
+  const API_CALL = `http://localhost:4000`
   const navigate = useNavigate();
   // ------ toggle button
   const [isClick, setIsClick] = useState(false);
@@ -97,13 +98,16 @@ const Navbar = ({}) => {
             </NavLink>
           )}
           <div
-            className="md:block bg-lightblue p-2 text-textcolor rounded-full cursor-pointer hover:bg-white hover:text-secondary"
+            className="md:block bg-lightblue p-2 text-textcolor rounded-full cursor-pointer hover:bg-white hover:text-secondary transition duration-300"
             onClick={() => navigate("/notification")}
           >
             <Bell strokeWidth={1.5} />
           </div>
-          <div className="md:block bg-lightblue p-2 text-textcolor rounded-full cursor-pointer hover:bg-white hover:text-secondary">
-            <UserRound onClick={userclick} strokeWidth={1.5} />
+          <div 
+          onClick={userclick}
+          className={!role ? "md:block bg-lightblue p-2  text-textcolor rounded-full cursor-pointer hover:bg-white hover:text-secondary transition overflow-hidden" : "md:block bg-lightblue  text-textcolor rounded-full cursor-pointer hover:bg-white hover:text-secondary transition overflow-hidden"}
+          >
+         {!role?    <UserRound  strokeWidth={1.5} /> : <img src={`${API_CALL}/uploads/${user?.user_image}`} alt="" className="w-10 h-10 object-cover"/>}
           </div>
           <div className="flex md:hidden">
             <HiOutlineBars3BottomRight

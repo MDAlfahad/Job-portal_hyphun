@@ -106,12 +106,12 @@ const CompanyData = () => {
           <div className="w-full border rounded-md overflow-hidden">
             <table className="w-full">
               <thead className="bg-gray-200">
-                <tr>
-                  <th className="py-2 text-sm">Name</th>
-                  <th className="py-2 text-sm">Email</th>
-                  <th className="py-2 text-sm">Created at</th>
-                  <th className="py-2 text-sm">Status</th>
-                  <th className="py-2 text-sm">Action</th>
+                <tr >
+                  <th className="py-2 text-sm font-medium">Name</th>
+                  <th className="py-2 text-sm font-medium">Email</th>
+                  <th className="py-2 text-sm font-medium">Created at</th>
+                  <th className="py-2 text-sm font-medium">Status</th>
+                  <th className="py-2 text-sm font-medium">Action</th>
                 </tr>
               </thead>
 

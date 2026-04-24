@@ -4,10 +4,13 @@ import WorkingMen from "../../../images/workingman.png";
 import useAuthStore from "../../../../Store/userAuth";
 import useJobStore from "../../../../Store/jobStore";
 import userJobApplicaiton from "../../../../Store/userJobApplicaiton";
+import Button from "../../../Components/buttons/ButtonComponents"
+import { useNavigate } from "react-router-dom";
 
 const DashboardProfilePage = () => {
   const { user, token } = useAuthStore();
   const { jobs, fetchJobs } = useJobStore();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (token) {
@@ -21,16 +24,22 @@ const DashboardProfilePage = () => {
       <div className="mt-16 px-4 md:px-6 py-4 relative w-full min-h-[90vh] overflow-y-auto">
         
         {/* HEADER */}
-        <div className="border-b-2">
+        <div className="border-b-2 flex justify-between items-center">
           <h1 className="text-xl sm:text-2xl md:text-4xl font-semibold py-2 text-center md:text-left">
             Job and Placement Details
           </h1>
+          <div>
+          <Button
+          text="Profile"
+          onClick={()=>navigate("/handlenavigate")}
+          />
+          </div>
         </div>
 
         {/* 🔥 CARD SECTION */}
         <div className="flex flex-col md:flex-row justify-center md:justify-around my-6 gap-4">
           
-          <div className="w-full bg-secondary rounded-xl text-white px-4 md:px-12 py-4">
+          <div className="w-full bg-secondary rounded-sm text-white px-4 md:px-12 py-4">
             
             {/* 🔥 FLEX FIX */}
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">

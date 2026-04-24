@@ -11,7 +11,7 @@ const CompanyDashboard = () => {
     const navigate = useNavigate()
   const [step, setStep] = useState(1);
 
-  const steps = ["Personal Info", "Company Details", "intership/Job post"];
+  const steps = ["Company Details"];
 
   const nextStep = () => {
     if (step < steps.length) setStep(step + 1);
@@ -30,15 +30,10 @@ const CompanyDashboard = () => {
           >
             Dashboard
           </p>
-          <p 
-          className="text-md font-semibold hover:text-secondary cursor-pointer"
-          onClick={()=> navigate("/job-post-page")}
-          >
-            Job & intership Post
-          </p>
+          
         </div>
 
-        <div className="flex items-center justify-center mb-10 w-full max-w-2xl pt-10 ">
+        <div className="flex  mt-10">
           {steps.map((label, index) => {
             const stepNumber = index + 1;
 
@@ -70,17 +65,16 @@ const CompanyDashboard = () => {
         </div>
 
         {step === 1 && <CompanyFrom />}
-        {step === 2 && <CompanyForm2 />}
-        {step === 3 && <CompanyForm3 />}
+        {/* {step === 2 && <CompanyForm2 />} */}
 
         <div className="flex justify-between items-center gap-10 my-10 ">
           {step > 1 && <Button text="Back" onClick={prevStep} />}
 
           {step < steps.length && <Button text="Next" onClick={nextStep} />}
 
-          {step === steps.length && (
-            <Button text="Submit" onClick={() => alert("Form Submitted")} />
-          )}
+          {/* {step === steps.length && (
+            // <Button text="Submit" onClick={() => alert("Form Submitted")} />
+          )} */}
         </div>
       </div>
       <FooterContainer />

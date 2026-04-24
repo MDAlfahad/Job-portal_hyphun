@@ -16,7 +16,6 @@ import ProtectedRoute from "../../protectetroutes/ProtectedRoute";
 import NotFound404 from "../404NotFound/NotFound404";
 import ContactPage from "../Pages/ContactPage/ContactPage";
 import Notificationpage from "../Pages/Notification/Notificationpage";
-
 import { useEffect } from "react";
 
 const MainRoute = () => {
@@ -51,6 +50,7 @@ const MainRoute = () => {
           {/* Moved /Dashboard-Company inside here! 
             Previously it was public, now it's protected.
           */}
+
           <Route path="/Dashboard-Company" element={<Dashboard />} />
           <Route path="/handlenavigate" element={<CompanyDashboard />} />
           <Route path="/job-post-page" element={<JobPostPage />} />

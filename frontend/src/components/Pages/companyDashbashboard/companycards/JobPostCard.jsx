@@ -44,10 +44,10 @@ const JobPostCard = ({
               </div>
               <div className="flex  items-center md:gap-12">
                 <div className="flex flex-col gap-2">
-                  <p className="text-[10px] md:text-[16px] font-semibold">
+                  <p className="text-[10px] md:text-[14px] font-medium">
                     Start Date: {job_startdate}
                   </p>
-                  <p className="text-[10px] md:text-[16px] font-semibold">
+                  <p className="text-[10px] md:text-[14px] font-medium">
                     Apply By: {Job_lastdate}
                   </p>
                 </div>
@@ -64,41 +64,44 @@ const JobPostCard = ({
 
           {isShow && (
             <div className=" text-textcolor text-[12px] md:text-[16px] px-4 md:px-12 py-4 w-full flex flex-col gap-2 bg-white">
-              <span className=" flex py-4">
-                <h1 className="font-semibold pr-1"> Company:</h1> {company_name}
+              <span className=" flex py-4 text-[16px] font-medium">
+                Company:
+                <h1 className="text-[14px] font-normal pr-1">
+                  {company_name}{" "}
+                </h1>
               </span>
               <div className="md:flex justify-between md:justify-around border py-4 bg-gray-100 rounded-lg  ">
                 <div className="flex justify-center gap-6 items-center md:gap-20">
-                  <span className=" bg-gray-100 rounded-md flex flex-col text-center">
-                    <h1 className="font-semibold">Job Type</h1>{" "}
+                  <span className=" bg-gray-100 rounded-md flex text-[14px] font-light flex-col text-center">
+                    <h1 className="font-medium text-[16px]">Job Type</h1>{" "}
                     {job_workingtype}
                   </span>
-                  <span className=" bg-gray-100 rounded-md  flex flex-col gap-2 text-center">
-                    <h1 className="font-semibold">Annual CTC</h1> {job_ctc}
+                  <span className=" bg-gray-100 rounded-md flex text-[14px] font-light flex-col text-center">
+                    <h1 className="font-medium text-[16px]">Annual CTC</h1> {job_ctc}
                   </span>
                 </div>
                 <hr className="md:none " />
                 <div className="flex justify-center gap-6 items-center md:gap-20">
-                  <span className=" bg-gray-100 rounded-md  flex flex-col gap-2 text-center">
-                    <h1 className="font-semibold">Experience</h1>{" "}
+                  <span className=" bg-gray-100 rounded-md flex text-[14px] font-light flex-col text-center">
+                    <h1 className="font-medium text-[16px]">Experience</h1>{" "}
                     {job_experience}
                   </span>
-                  <span className=" bg-gray-100 rounded-md  flex flex-col gap-2 text-center">
-                    <h1 className="font-semibold">Last Date</h1> {Job_lastdate}
+                  <span className=" bg-gray-100 rounded-md flex text-[14px] font-light flex-col text-center">
+                    <h1 className="font-medium text-[16px]">Last Date</h1> {Job_lastdate}
                   </span>
                 </div>
               </div>
 
-              <span className="px-2 py-2 rounded-md">
-                <h1 className="font-semibold">About Job</h1>
+              <span className="px-2 py-2 rounded-md text-sm">
+                <h1 className="font-medium text-[16px]">About Job</h1>
                 {job_description}
               </span>
-              <span className="px-2 py-2 rounded-md">
-                <h1 className="font-semibold">Skills</h1>
+              <span className="px-2 py-2 rounded-md text-sm">
+                <h1 className="font-medium text-[16px]">Skills</h1>
                 {job_skills}
               </span>
-              <span className="px-2 py-2 rounded-md">
-                <h1 className="font-semibold">About Company</h1>
+              <span className="px-2 py-2 rounded-md text-sm">
+                <h1 className="font-medium text-[16px]">About Company</h1>
                 {about_company}
               </span>
             </div>

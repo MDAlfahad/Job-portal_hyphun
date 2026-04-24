@@ -62,12 +62,12 @@ const AdminProfilePage = () => {
           <div className="my-4 border px-4 md:px-6 py-4 md:py-6 bg-white rounded-xl shadow-lg">
         
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 py-1">
-              <h1 className="text-lg sm:text-xl md:text-3xl">Profile</h1>
+              <h1 className="text-lg sm:text-xl md:text-3xl font-medium">Profile</h1>
 
-              <span className="flex items-center gap-2 border px-2 py-1 rounded-lg cursor-pointer">
+              {/* <span className="flex items-center gap-2 border px-2 py-1 rounded-lg cursor-pointer">
                 <UserRoundPen strokeWidth={1.5} />
                 <p>Edit</p>
-              </span>
+              </span> */}
             </div>
 
           

@@ -66,7 +66,7 @@ const UserLSignupPage = () => {
             <div className="flex flex-col gap-2 text-[12px]">
               <label htmlFor="name">Name</label>
               <input
-                className="text-[14px] px-2 py-2 border rounded-full outline-none placeholder-textcolor2 "
+                className="text-[14px] px-2 py-2 border rounded-sm outline-none placeholder-textcolor2 "
                 type="text"
                 placeholder="Name"
                 name="name"
@@ -77,7 +77,7 @@ const UserLSignupPage = () => {
               />
               <label htmlFor="email">Email</label>
               <input
-                className=" text-[14px] px-2 py-2 border rounded-full outline-none placeholder-textcolor2"
+                className=" text-[14px] px-2 py-2 border rounded-sm outline-none placeholder-textcolor2"
                 type="email"
                 id="email"
                 name="email"
@@ -87,7 +87,7 @@ const UserLSignupPage = () => {
                 
               />
               <label htmlFor="password">Password</label>
-              <span className=" text-[14px] px-2 border rounded-full flex items-center ">
+              <span className=" text-[14px] px-2 border rounded-sm flex items-center ">
                 <input
                   className="px-2 py-2  outline-none  w-full placeholder-textcolor2"
                   type={!show ? "password" : "text"}
@@ -119,11 +119,11 @@ const UserLSignupPage = () => {
                 </p>
               </span>
               <p className="text-[red]">{popup.message}</p>
-              <button className="w-full p-2 border rounded-full my-2 bg-secondary hover:bg-textcolor text-white font-medium">
+              <button className="w-full p-2 border rounded-sm my-2 bg-secondary hover:bg-textcolor text-white font-medium">
                 Sign up
               </button>
             </div>
-            <p className="text-sm md:text-[14px] py-4 text-center">
+            <p className="text-sm md:text-[12px] py-2 text-center">
               Already have Account?
               <span>
                 <Link to="/login-page" className="text-secondary">
@@ -138,7 +138,7 @@ const UserLSignupPage = () => {
                 <p className="px-4">or</p>
                 <hr className=" w-full " />
               </span>
-              <p className="flex gap-4 items-center border px-2 py-2 w-full justify-center rounded-full font-medium  text-textcolor">
+              <p className="flex gap-4 items-center border px-2 py-2 w-full justify-center rounded-sm font-medium  text-textcolor cursor-pointer">
                 <FcGoogle className="text-2xl" />
                 Login with google
               </p>

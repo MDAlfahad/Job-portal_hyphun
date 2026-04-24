@@ -1,14 +1,8 @@
-import {
-  Bookmark,
-  ClipboardList,
-  LogOut,
-  Send,
-  TextAlignJustify,
-  UserRound,
-} from "lucide-react";
+import { ClipboardList, LogOut, TextAlignJustify } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { TbFilePencil } from "react-icons/tb";
+import { AiOutlineForm } from "react-icons/ai";
+import { CiLocationArrow1,CiSquarePlus  } from "react-icons/ci";
 import useAuthStore from "../../../../Store/userAuth";
 
 const CompanySidebar = ({ setActivePage, activePage }) => {
@@ -28,9 +22,9 @@ const CompanySidebar = ({ setActivePage, activePage }) => {
   };
 
   // handle for logout
-   const logout = useAuthStore((state)=> state.logout);
+  const logout = useAuthStore((state) => state.logout);
   const handlelogout = () => {
-    logout()
+    logout();
     navigate("/login-page");
   };
 
@@ -60,7 +54,7 @@ const CompanySidebar = ({ setActivePage, activePage }) => {
             onClick={() => setActivePage("profile")}
             title={!show ? "Profile" : ""}
           >
-            <Send strokeWidth={1.5} />
+            <CiLocationArrow1 size={24} />
             {show && <p>Total posts</p>}
           </div>
 
@@ -69,28 +63,27 @@ const CompanySidebar = ({ setActivePage, activePage }) => {
             onClick={() => setActivePage("application")}
             title={!show ? "applicaton" : ""}
           >
-            <ClipboardList size={22} />
+            <ClipboardList strokeWidth={1} size={22} />
             {show && <p>Application</p>}
           </div>
 
           <div
             className={menuClass("jobpost")}
-            title={!show ? "jobpost":""}
+            title={!show ? "jobpost" : ""}
             onClick={() => setActivePage("jobpost")}
           >
-            <TbFilePencil className="text-2xl text-textcolor" />
-            {show && <p>Post job & internship</p>}
+            <CiSquarePlus  className="text-2xl text-textcolor" />
+            {show && <p>Create post</p>}
           </div>
-
         </div>
 
         <div
-        onClick={handlelogout}
+          onClick={handlelogout}
           className="flex items-center gap-3 px-4 py-3 cursor-pointer hover:bg-gray-200 rounded-md"
           title={!show ? "Logout" : ""}
         >
-          <LogOut size={22} />  
-          {show && <p >Logout</p>}
+          <LogOut size={22} />
+          {show && <p>Logout</p>}
         </div>
       </div>
     </div>

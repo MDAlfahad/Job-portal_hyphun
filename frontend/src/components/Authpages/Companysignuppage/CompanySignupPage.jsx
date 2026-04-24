@@ -77,7 +77,7 @@ const CompanySignupPage = () => {
               className=" p-6 w-[400px] flex flex-col text-[14px] text-textcolor bg-white rounded-md "
             >
               <div className="flex flex-col items-center">
-                <p className="flex gap-4 items-center border px-2 py-2 w-full justify-center rounded-full text-md font-semibold ">
+                <p className="flex gap-4 items-center border px-2 py-2 w-full justify-center rounded-sm text-md font-semibold cursor-pointer ">
                   <FcGoogle className="text-2xl md:text-4xl" />
                   Login with google
                 </p>
@@ -91,7 +91,7 @@ const CompanySignupPage = () => {
               <div className="flex flex-col gap-2">
                 <label htmlFor="name" className="text-[12px] font-medium">Name</label>
                 <input
-                  className="px-2 py-2 border rounded-full bg-transparent outline-none text-[14px] placeholder "
+                  className="px-2 py-2 border rounded-sm bg-transparent outline-none text-[14px] placeholder "
                   type="text"
                   name="name"
                   onChange={handleChange}
@@ -101,7 +101,7 @@ const CompanySignupPage = () => {
                 />
                 <label htmlFor="email"  className="text-[12px] font-medium">Offical email</label>
                 <input
-                  className="px-2 py-2 border rounded-full outline-none "
+                  className="px-2 py-2 border rounded-sm outline-none "
                   type="email"
                   id="email"
                   name="email"
@@ -111,7 +111,7 @@ const CompanySignupPage = () => {
                   required
                 />
                 <label htmlFor="password"  className="text-[12px] font-medium">Password</label>
-                <span className="flex px-2 border rounded-full items-center">
+                <span className="flex px-2 border rounded-sm items-center">
                   <input
                   className="px-2 py-2 outline-none bg-transparent w-full"
                   type={!show ? "password": "text"}
@@ -127,7 +127,7 @@ const CompanySignupPage = () => {
 
                 <label htmlFor="number"  className="text-[12px] font-medium">Mobile number</label>
                 <input
-                  className="px-2 py-2 border rounded-full outline-none  "
+                  className="px-2 py-2 border rounded-sm outline-none  "
                   type="tel"
                   name="mobilenumber"
                   value={isSignup.mobilenumber}

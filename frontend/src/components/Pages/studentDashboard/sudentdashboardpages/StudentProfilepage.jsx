@@ -13,6 +13,7 @@ const StudentProfilePage = () => {
   const { user } = useAuthStore();
   const [showData, setShowData] = useState([]);
   const [image, setImage] = useState(null);
+
   const [isData, setIsData] = useState({
     name: "",
     contact: "",
@@ -57,7 +58,6 @@ const StudentProfilePage = () => {
       });
 
       alert("Photo Uploaded");
-      console.log(res.data);
     } catch (error) {
       console.log(error);
     }

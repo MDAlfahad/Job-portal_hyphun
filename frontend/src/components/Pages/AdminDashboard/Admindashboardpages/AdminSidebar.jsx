@@ -34,11 +34,11 @@ const AdminSidebar = ({ setActivePage, activePage }) => {
 
   return (
     <div
-      className={`mt-14 bg-white border  transition-all duration-300 ${
+      className={` bg-white border  transition-all duration-300 ${
         show ? "w-[250px]" : "w-[50px]"
       }`}
     >
-      <div className="flex items-center gap-3 px-4 py-5">
+      <div className="flex items-center gap-3 px-4 py-5 mt-14 ">
         <TextAlignJustify
           strokeWidth={1.5}
           className="cursor-pointer"
@@ -77,7 +77,7 @@ const AdminSidebar = ({ setActivePage, activePage }) => {
             title={!show ? "Saved Forms" : ""}
           >
            <HiBuildingOffice />
-            {show && <p>Companies Credentials</p>}
+            {show && <p>company Credentials</p>}
           </div>
           <div className={menuClass("form")}
           onClick={()=>setActivePage("form")}

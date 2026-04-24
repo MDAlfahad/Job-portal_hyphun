@@ -12,13 +12,12 @@ const storage = multer.diskStorage({
 
   filename: (req, file, cb) => {
     cb(null, Date.now() + path.extname(file.originalname));
-  }
+  },
 });
 
 const upload = multer({ storage });
 
 uploadImage.post("/upload_photo", upload.single("image"), (req, res) => {
-  
   const filename = req.file.filename;
   const userId = req.body.userId;
 
@@ -30,11 +29,28 @@ uploadImage.post("/upload_photo", upload.single("image"), (req, res) => {
 
       res.json({
         message: "Uploaded Successfully",
-        file: filename
+        file: filename,
       });
-    }
+    },
   );
 });
 
+uploadImage.post("/companyDetails", upload.single("image"), (req, res) => {
+  const { address, number, userId } = req.body;
+
+  const filename = req.file.filename;
+  db.query(
+    "UPDATE user_logindata SET user_address=?, user_phone=?, user_image=? WHERE user_id=?",
+    [address, number, filename, userId],
+    (err, result)=>{
+      if(err) return res.status(500).json(err);
+
+      res.json({
+        message: "uploaded sucessfuly",
+        
+      });
+    },
+  );
+});
 
 module.exports = uploadImage;
