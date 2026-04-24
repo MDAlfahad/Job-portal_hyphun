@@ -3,29 +3,33 @@ import useCompanyApplications from "../../../../Store/companyApplicationStore";
 import { CircleDot, ClockFading, ExternalLink, Trash2 } from "lucide-react";
 import Button from "../../../Components/buttons/ButtonComponents";
 import axios from "axios";
+import useAuthStore from "../../../../Store/userAuth";
 
 const DashboardApplicantPage = () => {
   const [changevalue, setchangevalue] = useState(false);
   const { applications, fetchCompanyApplications } = useCompanyApplications();
   const [status, setStatus] = useState({});
   const API_CALL = `http://localhost:4000`;
+  const { token, isAuthenticated } = useAuthStore();
+
+  
   const value = () => {
     setchangevalue(!changevalue);
   };
   useEffect(() => {
     fetchCompanyApplications();
   }, []);
-
   //sending the status value
-
   const updateStatus = async (id, value) => {
     try {
       await axios.put(
         `${API_CALL}/api/update-status/${id}`,
+        { status: value },
         {
-          status: value,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-        
       );
       setStatus({ ...status, [id]: value });
     } catch (err) {

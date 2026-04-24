@@ -216,11 +216,11 @@ applyForm.get("/company-applications", authMiddleware, async (req, res) => {
 //update application status
 applyForm.put("/update-status/:id", authMiddleware, async (req, res) => {
   try {
-    const applicationId = req.params.appliationId;
+    const applicationId = req.params.id;
     const { status } = req.body;
 
     await db.execute(
-      "UPDATE job_applications SET status = ? WHERE applicaiton_id = ?",
+      "UPDATE job_applications SET status = ? WHERE application_id = ?",
       [status, applicationId],
     );
 
