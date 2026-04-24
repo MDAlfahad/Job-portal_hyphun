@@ -97,12 +97,12 @@ const Navbar = ({}) => {
               LOGIN
             </NavLink>
           )}
-          <div
+          {/* <div
             className="md:block bg-lightblue p-2 text-textcolor rounded-full cursor-pointer hover:bg-white hover:text-secondary transition duration-300"
             onClick={() => navigate("/notification")}
           >
             <Bell strokeWidth={1.5} />
-          </div>
+          </div> */}
           <div 
           onClick={userclick}
           className={!role ? "md:block bg-lightblue p-2  text-textcolor rounded-full cursor-pointer hover:bg-white hover:text-secondary transition overflow-hidden" : "md:block bg-lightblue  text-textcolor rounded-full cursor-pointer hover:bg-white hover:text-secondary transition overflow-hidden"}

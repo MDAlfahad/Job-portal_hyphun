@@ -23,7 +23,7 @@ const JobPage = () => {
   const filteredJobs = jobs.filter((job) => {
     const title = job.job_desigination || "";
     const loc = job.job_location || "";
-    const sal = job.job_ctc || 0;
+    const sal = job.job_ctc || "";
 
     const matchesSearch =
       title.toLowerCase().includes(search.toLowerCase()) ||
@@ -150,7 +150,7 @@ const JobPage = () => {
                   <div
                     className="absolute -top-10 bg-secondary text-white text-md px-2 py-1 rounded-sm transition-all duration-200"
                     style={{
-                      left: `calc(${(salary / 10) * 100}% - 16px)`,
+                      left: `calc(${(salary / 10) * 100}% -16px)`,
                     }}
                   >
                     {salary}
