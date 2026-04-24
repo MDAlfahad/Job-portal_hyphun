@@ -65,6 +65,7 @@ const JobApplyForm = ({ className, onClose }) => {
     formData.append("userId", user?.user_id || "");
     formData.append("companyId", isJobData.user_id || "");
     formData.append("companyname", isJobData.company_name || "");
+    formData.append("number", user?.user_phone || "")
     formData.append("jobdesigination", isJobData.job_desigination || "");
     formData.append("availability", availability);
     formData.append("travel", travel);

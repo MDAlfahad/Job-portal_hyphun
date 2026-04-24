@@ -4,6 +4,7 @@ const path = require("path");
 const fs = require("fs");
 const db = require("../config/db");
 const authMiddleware = require("../middleware/jobpostMiddleware");
+const { v4: uuidv4 } = require("uuid");
 
 const applyForm = express.Router();
 
@@ -73,6 +74,7 @@ const uploadMiddleware = (req, res, next) => {
 applyForm.post("/apply-form", uploadMiddleware, async (req, res) => {
   try {
     const {
+      number,
       jobId,
       userId,
       username,
@@ -94,18 +96,20 @@ applyForm.post("/apply-form", uploadMiddleware, async (req, res) => {
       return res.status(400).json({ message: "Please upload a resume." });
     }
     const resumePath = req.file.filename;
-
+    const appliationId = uuidv4();
     const sqlQuery = `
-        INSERT INTO job_applications (job_id, company_name, user_name,company_id, user_email, job_desigination, student_id, availability, travel, experience, resume_path) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO job_applications (application_id,job_id, company_name, user_name,company_id, user_email, user_contact, job_desigination, student_id, availability, travel, experience, resume_path) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)
       `;
 
     const values = [
+      appliationId,
       jobId,
       companyname,
       username,
       companyId,
       useremail,
+      number,
       jobdesigination,
       userId,
       availability,
@@ -209,15 +213,15 @@ applyForm.get("/company-applications", authMiddleware, async (req, res) => {
     res.status(500).json({ message: "Failed to fetch company applications" });
   }
 });
-//update application stsus 
+//update application status
 applyForm.put("/update-status/:id", authMiddleware, async (req, res) => {
   try {
-    const applicationId = req.params.id;
+    const applicationId = req.params.appliationId;
     const { status } = req.body;
 
     await db.execute(
       "UPDATE job_applications SET status = ? WHERE applicaiton_id = ?",
-      [status, applicationId]
+      [status, applicationId],
     );
 
     res.json({

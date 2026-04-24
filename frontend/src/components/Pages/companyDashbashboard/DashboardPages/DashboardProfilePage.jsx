@@ -36,12 +36,12 @@ const DashboardProfilePage = () => {
           </div>
         </div>
 
-        {/* 🔥 CARD SECTION */}
+        {/*  CARD SECTION */}
         <div className="flex flex-col md:flex-row justify-center md:justify-around my-6 gap-4">
           
           <div className="w-full bg-secondary rounded-sm text-white px-4 md:px-12 py-4">
             
-            {/* 🔥 FLEX FIX */}
+            {/*  FLEX FIX */}
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               
               {/* LEFT */}
@@ -61,7 +61,7 @@ const DashboardProfilePage = () => {
                 </div>
               </div>
 
-              {/* 🔥 IMAGE FIX */}
+              {/*  IMAGE FIX */}
               <div className="flex justify-center">
                 <img
                   src={WorkingMen}
@@ -79,7 +79,7 @@ const DashboardProfilePage = () => {
             Job posted details
           </h1>
 
-          {/* 🔥 CARD LIST FIX */}
+          {/*  CARD LIST FIX */}
           <div className="border rounded-xl mt-4 p-4 flex flex-col gap-4">
             {jobs.length > 0 ? (
               jobs.map((item) => {
